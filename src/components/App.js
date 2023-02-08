@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import  NavbarComp from "./ NavbarComp";
+import NavbarComp from "./NavbarComp";
+import Login from "./Login";
+import { UserProvider } from "../context/user";
 function App() {
   // const [count, setCount] = useState(0);
 
@@ -11,9 +13,10 @@ function App() {
 
   return (
     <div className="App">
-      < NavbarComp/>
-
-     
+      <NavbarComp />
+      <UserProvider>
+      <Login/>
+      </UserProvider>
     </div>
   );
 }
