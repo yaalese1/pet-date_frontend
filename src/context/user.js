@@ -5,7 +5,7 @@ const UserContext = React.createContext();
 
 function UserProvider({children}){
     useEffect(() => {
-        fetch("/login").then((r) => {
+        fetch("/user").then((r) => {
             if (r.ok) {
                 r.json().then((userInfo) => {
                     setUser(userInfo)});
