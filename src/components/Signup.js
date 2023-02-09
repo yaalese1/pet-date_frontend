@@ -59,15 +59,18 @@ function Signup (){
 
  return(
     <Form onSubmit={handleSubmit}>  
-        <h3 className="slogan">Where tinder meets pet pal </h3>
-        <h1>Sign Up Below </h1>
+      <h3 className="slogan">Where tinder meets pet pal </h3>
+      <h1>Sign Up Below </h1>
 
       <Form.Group>
         <Form.Label>First Name</Form.Label>
-                        <Form.Control type="name" placeholder="First Name"
-                                value={first_name}
-                                onChange={(e) =>setFirst_name(e.target.value)}/>
-                                 </Form.Group>
+        <Form.Control 
+          type="name" 
+          placeholder="First Name"
+          value={first_name}
+          onChange={(e) =>setFirst_name(e.target.value)}
+        />
+      </Form.Group>
      
 
       <Form.Group>
@@ -127,7 +130,7 @@ function Signup (){
                 <Form.Check type="checkbox" 
                     label="Seeking Relationship"
                         value={seeking_relationship}
-                            onChange={(e) =>setSeeking_Relationship(e.target.value)} />
+                            onChange={(e) =>setSeeking_Relationship(true)} />
       </Form.Group>
       
       <Button 
