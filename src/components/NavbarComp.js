@@ -1,11 +1,23 @@
-import React from "react";
+import React, {useContext} from "react";
 // import { Link } from 'react-router-dom';
 import Container from "react-bootstrap/Container";
 import { Nav, Navbar, NavDropdown, Form, Button } from "react-bootstrap";
+import { UserContext } from "../context/user";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function NavbarComp() {
+  const {user} = useContext(UserContext)
+  
+  
+  function handleLogoutClick() {
+    fetch("/logout", { method: "DELETE" }).then((r) => {
+      if (r.ok) {
+        user(null);
+      }
+    });
+    
+  }
   return (
    
     <Navbar bg="light" expand="lg">
@@ -19,15 +31,15 @@ function NavbarComp() {
             navbarScroll
           >
             <Nav.Link href="HomePage">Home</Nav.Link>
-            <Nav.Link href="Login">Login</Nav.Link>
+            <Nav.Link href="Login"> Login</Nav.Link>
             <NavDropdown title="UserInfo" id="navbarScrollingDropdown">
               <NavDropdown.Item href="Dates">Schedule</NavDropdown.Item>
               <NavDropdown.Item href="Pets">
                 Pets
-                {/* </NavDropdown.Item>
+                 </NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="Logout">
-            logout */}
+            <NavDropdown.Item  onClick={handleLogoutClick} href="Logout">
+            Logout 
                 {/* YOU CAN USE disabled in the nav.link tab to turn the link off but display text on page  */}
               </NavDropdown.Item>
             </NavDropdown>
