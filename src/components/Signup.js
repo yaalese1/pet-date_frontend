@@ -22,7 +22,7 @@ function Signup (){
    const {setUser} = useContext(UserContext)
 
 
-    function handleSubmit(e) {
+    function handleUserSubmit(e) {
       e.preventDefault();
       setIsLoading(true)
       fetch("/signup", {
@@ -50,7 +50,7 @@ function Signup (){
     }
 
 
-
+    // setUser(user)
 
 
 
@@ -58,7 +58,7 @@ function Signup (){
 
 
  return(
-    <Form onSubmit={handleSubmit}>  
+    <Form onSubmit={handleUserSubmit}>  
       <h3 className="slogan">Where tinder meets pet pal </h3>
       <h1>Sign Up Below </h1>
 

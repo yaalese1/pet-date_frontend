@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
   function Login (){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [userAvatar, setUserAvatar] = useState({})
 
     function handleSubmit(e) {
       e.preventDefault();
@@ -17,12 +18,14 @@ import Form from 'react-bootstrap/Form';
         body: JSON.stringify({ email, password }),
       }).then((r) => {
         if (r.ok) {
-          r.json().then((user) => setEmail(user));
+         
+          r.json().then ((user) => setEmail(user));
+         
         }
       });
     }
 
-   
+ 
     
     return (
         <Form onSubmit ={handleSubmit}>
