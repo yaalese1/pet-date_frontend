@@ -1,0 +1,51 @@
+/* .card-body{
+background-color: #eee;
+width: 60%;
+
+
+justify-content: flex-end;
+
+border-style: s rounded
+
+} */
+
+.card-image{
+    /* vertical-align: middle; */
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    margin-left: 40px;
+   align-items: baseline;
+    background-color: rgb(188, 153, 153);
+
+    
+    
+    }
+
+    .image-card{
+        background-color: rgb(30, 49, 66);
+        justify-content: baseline
+    }
+
+    .ripple {
+        margin-left: 15%;
+    }
+    .card{
+        overflow: scroll;
+        width: 450px;
+         height: 500px;
+         margin-left: 110%;
+         
+    }
+
+    .card-text {
+        justify-content:center;
+
+    }
+
+    .pets{
+        background-color: blueviolet;
+        justify-content:relative
+    }
+
+
