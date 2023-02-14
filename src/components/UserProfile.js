@@ -26,9 +26,9 @@ import '../UserProfile.css';
 
 function UserProfile(){
 
-function handlePetDisplay(){
+// function handlePetDisplay(){
 
-}
+// }
 
 
 
@@ -63,7 +63,7 @@ function handlePetDisplay(){
 
             <img className= 'card-image' 
             src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-                  alt="avatar"
+                  alt=""
             />
             </div>
 

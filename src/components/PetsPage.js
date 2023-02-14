@@ -2,9 +2,9 @@ import React from 'react';
 // import PetsCard from './PetsCard'
 import { useState, useEffect } from "react";
 
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button'
+// import Card from 'react-bootstrap/Card';
+// import ListGroup from 'react-bootstrap/ListGroup';
+// import Button from 'react-bootstrap/Button'
 import PetsCard from './PetsCard';
 
 
@@ -21,21 +21,22 @@ function PetsPage () {
     },[]) 
 
 
-    const [petReview, setPetReview] = useState("")
-    useEffect (()=>{
-        fetch('/pets_review')
-        .then((resp) => resp.json())
-        .then ((pets_review) => setPetReview(pets_review))
+    // const [petReview, setPetReview] = useState("")
+    // useEffect (()=>{
+    //     fetch('/pets_review')
+    //     .then((resp) => resp.json())
+    //     .then ((pets_review) => setPetReview(pets_review))
     
          
     
-    },[]) 
+    // },[]) 
 
  const eachPet = pets.map((pet) =>{
     return( <PetsCard 
     pet={pet}
     key={pet.id}
-    id= {pet.id}/>
+    id= {pet.id}
+    reviews={pet.pet_reviews}/>
     )
    
  })
