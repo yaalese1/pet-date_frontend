@@ -2,9 +2,18 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
+// import StarRatingComponent from 'react-simple-rating-component';
 
 
-  function PetsCard ({pet}){
+
+
+  function PetsCard ({pet, reviews}){
+console.log(reviews)
+
+// const eachReview = reviews.map((review) =>{
+   
+// })
+
     return (
         <>
   
@@ -19,14 +28,25 @@ import ListGroup from 'react-bootstrap/ListGroup';
             <ul>{pet.size}</ul>
             {/* <ul>{String(petrained)}</ul> */}
             <ul>{pet.diet}</ul>
-            {/* <ul>{String(pet.trained)}</ul> */}
-            
-     
+            <ui>{pet.comments}</ui>
+            {reviews.map((review)=> {
+                return(
+                    <ListGroup.Item 
+                        key= {review.id}>  
+                        {review.comments} 
+                       <br></br>
+                       ⭐️{review.star_rating} 
+                           </ListGroup.Item> 
+                )
+    
+            }
+            )}
         </Card.Text>
       </Card.Body>
       <ListGroup className="list-group-flush">
-        <ListGroup.Item>pet review</ListGroup.Item>
-        <ListGroup.Item>pet review in</ListGroup.Item>
+        
+        <ListGroup.Item></ListGroup.Item>
+        <ListGroup.Item></ListGroup.Item>
         <ListGroup.Item>pet review</ListGroup.Item>
       </ListGroup>
       <Card.Body>
