@@ -73,13 +73,14 @@ function UserProfile(){
                     <br></br>
             <MDBCol md="6">
                     <MDBCard className="mb-4 mb-md-0">
-                      <MDBCardBody>
+                      <MDBCardBody className='UserProfileCard'>
                         <h1 className= 'pets'>PETS</h1>
                         <MDBCardText className="mb-4"><span className= 'pet-text'></span> PETS 
                         <img src='https://cdn.pixabay.com/photo/2017/09/25/13/12/puppy-2785074__340.jpg'
-                        alt ="avatar"/>
+                        alt= "avatar"
+                        />
                         <br></br>
-                        <img src= 'http://cdn.akc.org/content/hero/cute_puppies_hero.jpg'/>
+                        <img src= 'http://cdn.akc.org/content/hero/cute_puppies_hero.jpg'  alt= "avatar"/>
                         </MDBCardText>
                       
                         {/* <MDBProgress className="rounded"> */}

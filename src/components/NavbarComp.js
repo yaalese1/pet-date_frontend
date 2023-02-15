@@ -1,13 +1,16 @@
 import React, {useContext} from "react";
-// import { Link } from 'react-router-dom';
 import Container from "react-bootstrap/Container";
 import { Nav, Navbar, NavDropdown, Form, Button } from "react-bootstrap";
 import { UserContext } from "../context/user";
-
 import "bootstrap/dist/css/bootstrap.min.css";
+
+
 
 function NavbarComp() {
   const {user} = useContext(UserContext)
+ 
+
+
   
   
   function handleLogoutClick() {
@@ -19,6 +22,9 @@ function NavbarComp() {
     
   }
   return (
+  
+    
+ 
    
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -58,6 +64,7 @@ function NavbarComp() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+
   );
 }
 
