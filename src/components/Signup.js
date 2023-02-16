@@ -59,7 +59,8 @@ function Signup (){
 
  return(
     <Form onSubmit={handleUserSubmit}>  
-      <h3 className="slogan">Where tinder meets pet pal </h3>
+    
+      {/* <h3 className="slogan">Where tinder meets pet pal </h3>
       <h1>Sign Up Below </h1>
 
       <Form.Group>
@@ -137,7 +138,7 @@ function Signup (){
        type="submit" variant="primary" >
       {isLoading ? "Loading..." : "Sign Up"}
 
-      </Button>
+      </Button> */}
 
 
 

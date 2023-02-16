@@ -10,8 +10,8 @@ function UserPetCard ({id,userPet}){
     return(
 
         <div className='user'>
-            <div className ='userpet-cardImage'>
-                <img src ='http://cdn.akc.org/content/hero/cute_puppies_hero.jpg' alt ="avtar"/>
+            <div >
+                <img className ='userpet-cardImage' src ='http://cdn.akc.org/content/hero/cute_puppies_hero.jpg' alt ="avtar"/>
 
             </div>
             <div className="UserInfo">

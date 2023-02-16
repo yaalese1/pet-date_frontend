@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 // import UserProfile from './UserProfile';
-
+import "../PetCard.css"
 
 
 
