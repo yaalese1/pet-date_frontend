@@ -1,0 +1,35 @@
+    .homepage{
+          display: flex;
+    justify-content: center;
+    justify-content: baseline;
+    padding: 425px;
+   
+ 
+    }
+
+    .homepagecard{
+        width: 30vw;
+    height: 20vw;
+    border: 2px groove rgb(68, 65, 66); 
+    box-shadow: rgb(55, 54, 55);
+    border-radius: 10px; 
+    background-color: deeppink; 
+    box-shadow: rgb(190, 25, 151);
+   
+
+    }
+    .hometext{
+        align-items: center;
+        font: bold;
+        padding: 80px;
+
+        color: rgb(25, 3, 15);  
+    }
+/* 
+    p{
+        align-items: center;
+        font: bold;
+        padding: 80px;
+
+        color: rgb(25, 3, 15);
+    }  */

@@ -5,8 +5,10 @@ import Signup from "./Signup";
 import PetsPage from "./PetsPage";
 import BookingPage from "./BookingPage"
 import UserProfile from "./UserProfile"
+import HomePage from "./HomePage"
 import { UserProvider } from "../context/user";
 import {Routes, Route} from "react-router-dom"
+
 
 function App() {
 
@@ -22,8 +24,9 @@ function App() {
       <Route exact path= "/BookingPet" element = {<BookingPage/>}/>
       <Route exact path= "/Pets" element = {<PetsPage/>}/>
       <Route exact path= "/Login" element = {<Login/>}/>
-      <Route exact path= "/HomePage" element = {<Signup/>}/>
+      <Route exact path= "/Signup" element = {<Signup/>}/>
       <Route exact path= "/UserProfile" element ={<UserProfile/>}/>
+      <Route exact path= "/HomePage" element ={<HomePage/>}/>
      
 
       </Routes>
