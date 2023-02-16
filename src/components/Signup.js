@@ -30,17 +30,17 @@ function Signup (){
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
+        body: JSON.stringify(
             
           first_name,
           last_name,
           email,
           password,
-          password_confirmation: passwordConfirmation,
+          passwordConfirmation,
           age,
           address,
           seeking_relationship,
-            }),
+            ),
       }).then((r) => {
         setIsLoading(false)
         if (r.ok) {

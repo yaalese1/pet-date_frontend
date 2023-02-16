@@ -1,11 +1,13 @@
 import React from 'react';
 // import PetsCard from './PetsCard'
-import { useState, useEffect } from "react";
+import { useState, useEffect , useContext} from "react";
+
 
 // import Card from 'react-bootstrap/Card';
 // import ListGroup from 'react-bootstrap/ListGroup';
 // import Button from 'react-bootstrap/Button'
 import PetsCard from './PetsCard'
+
 
 
 function PetsPage () {
@@ -37,13 +39,16 @@ function PetsPage () {
     key={pet.id}
     id= {pet.id}
     reviews={pet.pet_reviews}/>
+   
     )
    
  })
  console.log (eachPet)
 
 
-    // const eachPet = pets.map((pet) =>{
+
+
+  
         return (
 
 
@@ -51,18 +56,12 @@ function PetsPage () {
     
             {eachPet}
             
-            
+         
             
             </div>
-            // <PetsCard
-            // pet={pet}
-            // // petName= {pet.name}
-            // key={pet.id}
-            // id = {pet.id}
-           
-            // />
+      
         )
-    // })
+   
 
 
 

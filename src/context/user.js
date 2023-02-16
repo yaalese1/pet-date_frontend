@@ -4,6 +4,8 @@ import {useEffect, useState} from "react"
 const UserContext = React.createContext();
 
 function UserProvider({children}){
+    const [user, setUser] = useState(null)
+
     useEffect(() => {
         fetch("/user").then((r) => {
             if (r.ok) {
@@ -19,7 +21,7 @@ function UserProvider({children}){
     }, [])
 
      
-    const [user, setUser] = useState(null)
+
 
 
 
