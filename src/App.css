@@ -1,41 +1,4 @@
-/* .App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
 
 .pets-page {
   /* overflow: auto; */
@@ -48,14 +11,11 @@
 
 .Petcard {
   width: 30vw;
-  /* background-color: blue; */
   margin-top: 20px;
-  border: 2px solid black;
+  border: 2px solid rgb(16, 31, 93);
   border-radius: 20px;
 
-  /* display: flex; */
-  /* width: 10vw; */
-  /* margin: 100px !important;  */
+  
 }
 
 .pet-cardImage {
@@ -78,6 +38,7 @@ img {
   display: flex;
   flex-direction: row;
   margin: 10px;
+  
 }
 
 .line-item h3 {
@@ -105,3 +66,39 @@ img {
   flex-wrap: wrap;
   overflow: scroll;
 }
+
+
+.petbutton-container{
+  padding: 20px;
+  align-items:baseline;
+  flex-direction: row;
+  margin-left: 10px;
+  justify-content: space-between;
+}
+.pet-button{
+
+  display: flex;
+  
+  background-color: rgb(130, 118, 124);
+  justify-content: space-between;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+  margin-top: 20px;
+  
+
+}
+
+
+.UserProfile-card-image{
+  /* vertical-align: middle; */
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  margin-left: 40px;
+ align-items: baseline;
+  background-color: rgb(188, 153, 153);
+
+  
+  
+  }

@@ -14,6 +14,7 @@ function NavbarComp() {
   
   
   function handleLogoutClick() {
+    console.log('handleLogoutClick')
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
         user(null);

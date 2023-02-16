@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
+import { UserContext } from "../context/user";
 
   function Login (){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [userAvatar, setUserAvatar] = useState({})
+    const {setUser} = useContext(UserContext)
 
     function handleSubmit(e) {
       e.preventDefault();
@@ -15,17 +16,18 @@ import Form from 'react-bootstrap/Form';
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({email, password} ),
       }).then((r) => {
         if (r.ok) {
          
-          r.json().then ((user) => setEmail(user));
+          r.json().then ((user) => setUser(user));
+         
          
         }
       });
     }
 
- 
+
     
     return (
         <Form onSubmit ={handleSubmit}>
