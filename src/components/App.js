@@ -21,7 +21,7 @@ function App() {
       <NavbarComp/>
       <Routes>
 
-      <Route exact path= "/BookingPet" element = {<BookingPage/>}/>
+      <Route exact path= "/schedule" element = {<BookingPage/>}/>
       <Route exact path= "/Pets" element = {<PetsPage/>}/>
       <Route exact path= "/Login" element = {<Login/>}/>
       <Route exact path= "/Signup" element = {<Signup/>}/>
