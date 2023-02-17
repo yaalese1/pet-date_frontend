@@ -1,12 +1,92 @@
-import React from "react";
+import React, { useContext,useState }  from "react";
+import { UserContext } from "../context/user";
 import '../UserProfile.css'
 import Button from 'react-bootstrap/Button';
+import { useNavigate , useParams} from "react-router-dom";
+
+
+
+
+function UserPetCard ({userPet}){
+     const navigate = useNavigate()
+     const {user, setUser} = useContext(UserContext)
+     const { id } = useParams()
+     const [ errors, setErrors ] = useState(null)
+console.log(userPet)
+
+
+// fetch(`pets/${pet.id}`, {
+// 	headers: {
+// 	Accept: "application/json",
+// 	"Content-Type": "application/json"
+// 	},
+// 	method: "PATCH",	
+
+// 	// Fields that to be updated are passed
+// 	body: JSON.stringify({
+//           name: petname,
+//                 species: species,
+//                 age: age,
+//                 mental_disorder: mental_disorder,
+//                 active: active,
+//                 trained: trained,
+//                 diet: diet,
+//                 size: size
+// 	})
+// })
+// const pets = userPet
+
+     const petEdit = userPet?.id
+     console.log(petEdit)
+         const [ updatedPet, setUpdatePet ] = useState({
+           name: petEdit.name,
+           species: petEdit.species,
+           age: petEdit.age,
+           mental_disorder: petEdit.mental_disorder,
+           active: petEdit.active,
+           trained: petEdit.trained,
+           diet: petEdit.diet,
+           size: petEdit.size
+     })
+        function handleSubmit(e) {
+              e.preventDefault()
+              setErrors([])
+              console.log(updatedPet)
+              fetch(`/pets/${petEdit}`, {
+                  method: "PATCH",
+                  headers: {
+                      "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(updatedPet),
+              }).then((r) => {
+                  if (r.ok) {
+                      r.json().then((updatedAnimal) => {
+                          const updatedPetInfo = user && user.petEdit.map((info) => info.id === petEdit.id ? updatedAnimal: info)
+                          const updatedUser = {...user, petEdit: updatedPetInfo}
+                          setUser(updatedUser)
+                          alert("Your pet has been updated")
+                         navigate("/Pets")
+                      })
+                  } else {
+                      r.json().then((err) => (setErrors(err.errors)))
+                  }
+              })
+          }
 
 
 
 
 
-function UserPetCard ({id,userPet}){
+
+
+
+
+
+     function handleClick(){
+          navigate("/PetEditForm")
+        }
+
+
     return(
 
         <div className='user'>
@@ -40,7 +120,7 @@ function UserPetCard ({id,userPet}){
            <p>{userPet.diet}</p> 
            </div>
            <div className= "petbutton-container">
-               <Button variant="dark">click to Edit</Button>
+               <Button onClick={handleClick} variant="dark">click to Edit</Button>
                <Button variant="dark">click to delete</Button>
                 </div>
 

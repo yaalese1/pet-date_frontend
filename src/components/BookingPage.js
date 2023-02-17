@@ -24,9 +24,24 @@ const {user, setUser} = useContext(UserContext)
     },[])
 
 
+    
 
-    // const userDates = user && [user]
+    const displayBooking = bookings.filter((booking)=> {
+        const day = parseInt(booking.date.slice(8))
+        const month = parseInt(booking.date.slice(5, 7)) - 1
+        const year = parseInt(booking.date.slice(0, 4))
+        const date = new Date(year, month, day)
+        console.log(date.toDateString())
+    console.log(calender.toDateString())
+        return date.toDateString() === calender.toDateString()
+    }  )
+   
+console.log(displayBooking)
 
+
+// console.log(user)
+//     const userDates = user?.my_bookings
+//  console.log(userDates)
    
    
 
@@ -46,7 +61,7 @@ const {user, setUser} = useContext(UserContext)
     // ** MAP TO LOOK AT AFTER FETCHING 
     }
 
-  console.log (bookings)
+//   console.log (bookings)
 
     
     // const parseEvents = bookings.map(event =>{
@@ -74,7 +89,7 @@ const {user, setUser} = useContext(UserContext)
 
         // console.log(desiredOutput)
         
-    const eachBooking = bookings.map((booking)=>{
+    const eachBooking = displayBooking.map((booking)=>{
         return(
             <BookingCard
             key={booking.id}
@@ -83,39 +98,21 @@ const {user, setUser} = useContext(UserContext)
         )
 
     })
-   
+//    console.log(calender)
 
     return(
         <div className='bookingpage'>
 
             <div>
-                {eachBooking}
-                {/* { user && userDates.map(
-            ({events}) => 
-            Object.entries(events).filter(
-                ([key,{value}]) =>
-                key.startsWith('date')
-            )
-            .map(([key,{value}]) => value)
-        )
-        .flat()
-
-} */}
+                 {eachBooking}
+     
                 
-             {/* {bookings.map(events =>{
-                const from = new Date (events.date)
-                const to = new Date (events.date)
-                return {
-                    ...events, 
-                    from,
-                    to
-                }
-            })}  */}
+          
          
-            </div> 
-           
+             </div>   
+            
            <Calendar onChange={setCalender} value={calender}
-           onClickDay={handleGettingDates} onClickMonth={handleGettingDates}
+        //    onClickDay={handleGettingDates} 
             /> 
 
           

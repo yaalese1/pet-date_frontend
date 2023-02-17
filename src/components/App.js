@@ -6,6 +6,7 @@ import PetsPage from "./PetsPage";
 import BookingPage from "./BookingPage"
 import UserProfile from "./UserProfile"
 import HomePage from "./HomePage"
+import PetEditForm from "./PetEditForm";
 import { UserProvider } from "../context/user";
 import {Routes, Route} from "react-router-dom"
 
@@ -27,6 +28,7 @@ function App() {
       <Route exact path= "/Signup" element = {<Signup/>}/>
       <Route exact path= "/UserProfile" element ={<UserProfile/>}/>
       <Route exact path= "/HomePage" element ={<HomePage/>}/>
+      <Route exact path= "/ PetEditForm" element = {< PetEditForm/>}/>
      
 
       </Routes>

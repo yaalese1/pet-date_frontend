@@ -25,6 +25,11 @@
 
         color: rgb(25, 3, 15);  
     }
+    .lglink{
+        align-items: center; 
+        padding-bottom: 150px;
+        padding-left: 200px;
+    }
 /* 
     p{
         align-items: center;

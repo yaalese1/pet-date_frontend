@@ -5,6 +5,7 @@ import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 
+
 import {
   MDBCol,
   MDBdiv,
@@ -33,12 +34,27 @@ function UserProfile(){
   // document.body.style.backgroundImage = "url(https://media.giphy.com/media/12pJ8OxSWwO86Y/giphy.gif)"
   // document.body.backgroundRepeat = "no-repeat"
   // document.body.style.backgroundSize = "auto"// const [userInfo, setUserInfo] = useState =(null)backgroundSize = "auto|length|cover|contain|intial|inherit"
-
+ 
 const {user} = useContext(UserContext)
 const userPets = user && user.pets
 // console.log(user)
 const userReviews = user && user.user_reviews
-console.log(userReviews)
+// console.log(userPets)
+
+
+
+// function handleSubmit(e){
+//   e.preventDefault()
+//   setIsLoading(true)
+//   fetch(`/pets/${pet.id}`{
+//     method: "PATCH",
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify(updatedPet)
+//           }
+//   )
+// }
 
 
 
@@ -47,7 +63,6 @@ console.log(userReviews)
 // https://media.giphy.com/media/12pJ8OxSWwO86Y/giphy.gif
 
 //https://i.giphy.com/media/xTiTnp3zOLUGbBF4ME/giphy.webp
-
 
 
 
@@ -105,9 +120,9 @@ console.log(userReviews)
                 <div className="mb-9 ">
                   <h3>Reviews From Borrowers </h3>
                   <div className='boxreviewscontainer'  style={{ backgroundColor: '#f8f9fa' }}>
-                        {user && userReviews.map((userReview)=>{
+                        {userReviews?.map((userReview)=>{
                           
-                          return(
+                            return(
                             
                             <div className='line-item'
                             key={userReview.id}>
@@ -130,7 +145,7 @@ console.log(userReviews)
                 <MDBRow>
                   <MDBCol className="mb-2">
                   <div className='userpetscontainer'>
-                       {user && userPets.map( userPet=>{
+                       {userPets?.map( userPet=>{
                     return <UserPetCard
                       userPet={userPet}
                       key= {userPet.id}/>
