@@ -1,9 +1,12 @@
-import React,{useState} from 'react';
+import React,{useState,useContext} from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 // import UserProfile from './UserProfile';
 import "../PetCard.css"
+import { UserContext } from "../context/user";
+import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -11,18 +14,52 @@ import "../PetCard.css"
 
 
   function PetsCard ({id,pet, reviews}){
-    const [name, setName] = useState("");
-    const [age, setAge] = useState("")
-    const [mental_disorder, setMental_disorder] = useState ("")
-    const [active, setActive] = useState(true)
-    const [trained, setTrained] = useState(true)
-    const [diet, setDiet] = useState("")
-    const [size, setSize] = useState("")
-    function handleEditPet(e){
+    const {user,setUser} = useContext(UserContext)
+  
+    const navigate = useNavigate()
+    const [ errors, setErrors ] = useState(null)
+  
+    
 
 
-      
-    }
+
+//   function handleSubmit(e) {
+//     e.preventDefault()
+//     setErrors([])
+//     console.log(updatedPet)
+//     fetch(`/pets/${pet.id}`, {
+//         method: "PATCH",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(updatedPet),
+//     }).then((r) => {
+//         if (r.ok) {
+//             r.json().then((updatedAnimal) => {
+//                 const updatedPetInfo = user.petEdit.map((info) => info.id === petEdit.id ? updatedAnimal: info)
+//                 const updatedUser = {...user, petEdit: updatedPetInfo}
+//                 setUser(updatedUser)
+//                 alert("Your pet has been updated")
+//                navigate("/Pets")
+//             })
+//         } else {
+//             r.json().then((err) => (setErrors(err.errors)))
+//         }
+//     })
+// }
+
+// function handleOnClick(){
+//   navigate("/PetEditForm")
+// }
+
+
+
+
+
+
+
+
+
 console.log(pet)
 
     return (

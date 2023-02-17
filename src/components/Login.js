@@ -2,8 +2,10 @@ import React, { useState, useContext } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { UserContext } from "../context/user";
+import { useNavigate } from "react-router-dom";
 
   function Login (){
+    const navigate = useNavigate()
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [userAvatar, setUserAvatar] = useState({})
@@ -21,7 +23,7 @@ import { UserContext } from "../context/user";
         if (r.ok) {
          
           r.json().then ((user) => setUser(user));
-         
+          navigate("/UserProfile")
          
         }
       });

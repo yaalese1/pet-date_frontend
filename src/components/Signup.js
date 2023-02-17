@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {useState, useContext} from 'react'
 import { UserContext } from "../context/user";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -20,7 +21,7 @@ function Signup (){
 //    const [errors, setErrors] = useState([]);
    const [isLoading, setIsLoading] = useState(false);
    const {setUser} = useContext(UserContext)
-
+   const navigate = useNavigate()
 
     function handleUserSubmit(e) {
       e.preventDefault();
@@ -45,7 +46,9 @@ function Signup (){
         setIsLoading(false)
         if (r.ok) {
           r.json().then((user) => setUser(user));
+          // navigate("/HomePage")
         }
+
       });
     }
 
@@ -60,7 +63,7 @@ function Signup (){
  return(
     <Form onSubmit={handleUserSubmit}>  
     
-      {/* <h3 className="slogan">Where tinder meets pet pal </h3>
+      <h3 className="slogan">Where tinder meets pet pal </h3>
       <h1>Sign Up Below </h1>
 
       <Form.Group>
@@ -138,7 +141,7 @@ function Signup (){
        type="submit" variant="primary" >
       {isLoading ? "Loading..." : "Sign Up"}
 
-      </Button> */}
+      </Button>
 
 
 

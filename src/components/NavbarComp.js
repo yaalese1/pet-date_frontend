@@ -6,9 +6,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 
 
+
 function NavbarComp() {
   const {user} = useContext(UserContext)
- 
+
 
 
   
@@ -18,6 +19,7 @@ function NavbarComp() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
         user(null);
+       
       }
     });
     

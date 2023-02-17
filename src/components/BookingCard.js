@@ -14,18 +14,24 @@ function BookingCard ({  booking}){
       <Card>
    
       <Card.Body>
-          <Card.Title>Card title</Card.Title>
+          <Card.Title>{booking.date}</Card.Title>
           <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This content is a little bit longer.
+          PickUp: {booking.pickup_location}
           </Card.Text>
+          <Card.Text>
+          Dropoff: {booking.dropoff_location}
+          </Card.Text>
+          <Card.Text>
+            Booking Type: {booking.pet_only ? <> 🐩</> : <>❌</>}   
+            </Card.Text>
+
         </Card.Body>
         <Card.Footer>
           <small className="text-muted">Last updated 3 mins ago</small>
         </Card.Footer>
       </Card>
     
-    
+    {/* <ListGroup.Item>{booking.pet}</ListGroup.Item> */}
            {/* <Card style={{ width: '18em' , flex: '1'}}>
       <Card.Body>
             <Card.Title>{booking.date}</Card.Title>
@@ -42,7 +48,7 @@ function BookingCard ({  booking}){
         </div>
     )
 }
-{/* <ListGroup.Item>{booking.pet}</ListGroup.Item> */}
+
 
 export default BookingCard;
 
