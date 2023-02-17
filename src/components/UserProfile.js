@@ -38,7 +38,7 @@ const {user} = useContext(UserContext)
 const userPets = user && user.pets
 // console.log(user)
 const userReviews = user && user.user_reviews
-// console.log(userReviews)
+console.log(userReviews)
 
 
 
@@ -106,6 +106,7 @@ const userReviews = user && user.user_reviews
                   <h3>Reviews From Borrowers </h3>
                   <div className='boxreviewscontainer'  style={{ backgroundColor: '#f8f9fa' }}>
                         {user && userReviews.map((userReview)=>{
+                          
                           return(
                             
                             <div className='line-item'

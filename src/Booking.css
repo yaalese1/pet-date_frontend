@@ -1,0 +1,40 @@
+
+.bookingpage{
+    display: flex;
+    justify-content: center;
+    flex-direction: column-reverse;
+    
+    padding-left: 450px;
+    padding-top: 30px;
+   
+   
+
+}
+
+.bookingcards{
+   align-items: flex-end;
+    width: 30vw;
+    padding-top: 70px;
+    padding-left: 70px;
+  
+
+}
+.react-calendar{
+  width: 50vw;
+  height: 20vw;
+  background-color: pink;
+  
+
+}
+
+.react-calendar__navigation__arrow {
+    color: deeppink;
+}
+.react-calendar__month-view__weekdays{
+    color: deeppink
+}
+
+.react-calendar__navigation__label{
+    color: deeppink;
+} 
+

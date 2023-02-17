@@ -41,7 +41,7 @@ function NavbarComp() {
             <Nav.Link href="Login"> Login</Nav.Link>
             <Nav.Link href="UserProfile"> Profile</Nav.Link>
             <NavDropdown title="UserInfo" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="Dates">Schedule</NavDropdown.Item>
+              <NavDropdown.Item href="schedule">Schedule</NavDropdown.Item>
               <NavDropdown.Item href="Pets">
                 Pets
                  </NavDropdown.Item>
