@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
 import {useState, useContext} from 'react'
 import { UserContext } from "../context/user";
 import { useNavigate } from "react-router-dom";
@@ -22,16 +23,18 @@ function Signup (){
    const [isLoading, setIsLoading] = useState(false);
    const {setUser} = useContext(UserContext)
    const navigate = useNavigate()
+   const [ errors, setErrors ] = useState(null)
 
     function handleUserSubmit(e) {
       e.preventDefault();
       setIsLoading(true)
+      setErrors(null)
       fetch("/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(
+        body: JSON.stringify({
             
           first_name,
           last_name,
@@ -41,14 +44,16 @@ function Signup (){
           age,
           address,
           seeking_relationship,
-            ),
+        }),
+           
       }).then((r) => {
         setIsLoading(false)
         if (r.ok) {
           r.json().then((user) => setUser(user));
-          // navigate("/HomePage")
-        }
-
+          navigate("/HomePage")
+        } else {
+           r.json().then((err) => (setErrors(err.errors)))
+      }
       });
     }
 
@@ -61,7 +66,11 @@ function Signup (){
 
 
  return(
-    <Form onSubmit={handleUserSubmit}>  
+    <Form onSubmit={handleUserSubmit}> 
+       <div className='sign_up_errors'>
+              {errors ? errors.map((e) =>
+                  <Alert severity="error" >{e}</Alert>) : null}
+          </div> 
     
       <h3 className="slogan">Where tinder meets pet pal </h3>
       <h1>Sign Up Below </h1>
@@ -128,7 +137,7 @@ function Signup (){
                     onChange={(e) =>setAddress(e.target.value)}  />
       </Form.Group>
 
-       
+       <br></br>
        <Form.Group 
            className="mb-3" controlId="formBasicCheckbox">
                 <Form.Check type="checkbox" 
@@ -136,6 +145,16 @@ function Signup (){
                         value={seeking_relationship}
                             onChange={(e) =>setSeeking_Relationship(true)} />
       </Form.Group>
+
+      {/* <Form.Group>
+        <Form.Label>Upload Profile Image </Form.Label>
+             <Form.Control
+           input type="file" 
+      
+              // value={address}
+              // onChange={(e) =>setAddress(e.target.value)}/>
+              />
+      </Form.Group> */}
       
       <Button 
        type="submit" variant="primary" >

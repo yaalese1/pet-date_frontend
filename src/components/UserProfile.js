@@ -3,6 +3,7 @@ import React ,{useState, useEffect, useContext}from 'react';
 import { UserContext } from "../context/user";
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import PetEditForm from "./PetEditForm";
 
 
 
@@ -39,6 +40,7 @@ const {user} = useContext(UserContext)
 const userPets = user && user.pets
 // console.log(user)
 const userReviews = user && user.user_reviews
+
 // console.log(userPets)
 
 
@@ -70,9 +72,12 @@ const userReviews = user && user.user_reviews
 
 
 
+
     return (
 
-<>
+<div>
+
+  
 <div className="outterbackground" >
       <MDBContainer className="py-5 h-100">
         <MDBRow className="profilecontainer">
@@ -80,7 +85,7 @@ const userReviews = user && user.user_reviews
             <MDBCard>
               <div className="userimage ">
                 <div className=" imagesize" >
-                  <MDBCardImage  className= 'Image'src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                  <MDBCardImage  className= 'Image'src="https://static.vecteezy.com/system/resources/thumbnails/002/002/253/small/beautiful-woman-wearing-sunglasses-avatar-character-icon-free-vector.jpg"
                     alt="Generic placeholder image" />
                   
                 </div>
@@ -233,7 +238,7 @@ const userReviews = user && user.user_reviews
               {/* //can't read property of null fix &&double helps   */}
        
 
-              </>
+              </div>
     
     )
 }

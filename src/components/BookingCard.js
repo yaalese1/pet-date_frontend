@@ -22,7 +22,7 @@ function BookingCard ({  booking}){
           Dropoff: {booking.dropoff_location}
           </Card.Text>
           <Card.Text>
-            Booking Type: {booking.pet_only ? <> 🐩</> : <>❌</>}   
+            Pet Only : {booking.pet_only ? <> 🐩 Yes</> : <>❌ No</>}   
             </Card.Text>
 
         </Card.Body>
