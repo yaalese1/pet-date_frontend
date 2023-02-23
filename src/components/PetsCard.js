@@ -5,7 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 // import UserProfile from './UserProfile';
 import "../PetCard.css"
 import { UserContext } from "../context/user";
-import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
   function PetsCard ({id,pet, reviews}){
     const {user,setUser} = useContext(UserContext)
   
-    const navigate = useNavigate()
+  
     const [ errors, setErrors ] = useState(null)
   
     
@@ -48,9 +48,6 @@ import { useNavigate } from "react-router-dom";
 //     })
 // }
 
-// function handleOnClick(){
-//   navigate("/PetEditForm")
-// }
 
 
 
@@ -60,14 +57,14 @@ import { useNavigate } from "react-router-dom";
 
 
 
-console.log(pet)
+// console.log(pet)
 
     return (
   
     <div className='Petcard'>
       <div className='pet-cardImage'>
             <img src= 'http://cdn.akc.org/content/hero/cute_puppies_hero.jpg' 
-            alt ="avatar"/>
+            alt ="https://images.unsplash.com/photo-1579380656108-f98e4df8ea62?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZnJvZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"/>
           </div>
         <div className='PetInfo'>
             <div className='line-item'>
