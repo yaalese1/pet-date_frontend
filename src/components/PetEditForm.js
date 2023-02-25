@@ -7,7 +7,7 @@ import {PetContext} from "../context/pets"
 
 
 
-function PetEditForm({ pets}){
+function PetEditForm({ pets, handleModalClosing}){
     // const {pets , setPets} = useContext(PetContext)
     const {user, setUser} = useContext(UserContext)
     const { id } = useParams()
@@ -51,7 +51,7 @@ function PetEditForm({ pets}){
                       
                         const updatedUser = {...user , pets: updatedPetInfo}
                         setUser(updatedUser)
-                        // debugger
+                        
                         //  const updatedPetInfo = user.pets.map((info) => info.id 
                         
                         //  === petEdit.id ? updatedAnimal: info)
@@ -72,6 +72,11 @@ function PetEditForm({ pets}){
             setUpdatePet({...updatedPet, [e.target.name] :e.target.value})
 
          }
+
+
+
+
+    
 
 // console.log(pets?.id)
 
@@ -161,17 +166,26 @@ function PetEditForm({ pets}){
             </Form.Group>
         
         <Button 
+       
          type="submit" 
-         variant="primary" >
-                click to submit
+         variant="dark" >
+                save changes
   
         </Button>
+       
   
   
   
   
   
         </Form>
+        <Button 
+        onClick={handleModalClosing}
+       type="exit" 
+       variant="danger" >
+              click to exit
+
+      </Button>
       
 
         </div>
