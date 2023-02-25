@@ -181,3 +181,41 @@ img{
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
 }
+.editpetbutton{
+  width: 30%;
+  height: 10%;
+
+}
+
+.someContainer{
+  display: flex;
+  justify-content: end;
+}
+.addPet {
+  width: 10%;
+  
+  align-items: end
+}
+
+.newpet-formholder{
+  background-color: rgb(228, 190, 196);
+ 
+}
+
+.header{
+  font-family: 'Times New Roman', Times, serif;
+  padding-left: 4%;
+  padding-top: 10%;
+}
+.mb-3{
+  padding: 20px;
+  overflow: scroll;
+
+  justify-content: center;
+
+  /* display: flex; */
+}
+
+.form-control{
+  width: 80%
+}

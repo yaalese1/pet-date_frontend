@@ -2,9 +2,10 @@ import React, { useContext,useState }  from "react";
 import { UserContext } from "../context/user";
 import '../UserProfile.css'
 import Button from 'react-bootstrap/Button';
-import { useNavigate , useParams} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PetEditForm from "./PetEditForm"
 import Modal from 'react-bootstrap/Modal';
+
 
 
 
@@ -12,7 +13,7 @@ import Modal from 'react-bootstrap/Modal';
 function UserPetCard ({userPet}){
      const navigate = useNavigate()
      const {user, setUser} = useContext(UserContext)
-     const { id } = useParams()
+    //  const { id } = useParams()
      const [ errors, setErrors ] = useState(null)
      const [smShow, setSmShow] = useState(false);
 // console.log(userPet)
@@ -23,7 +24,6 @@ function handlePetEdit(){
     console.log(userPet.id)
     setSmShow(true)
   }
-
 
 
         // function handleSubmit(e) {
@@ -52,12 +52,71 @@ function handlePetEdit(){
         //   }
 
 
+  
+    // function handleUserPetDeleteClick(){
+    //         fetch(`pets/${userPet.id}`, {
+    //           method: "DELETE",
+    //         })
+    //           .then((r) => {
+    //             if (r.ok){
+    //                 r.json().then((deletedAnimal) => {
 
+    //                     console.log(deletedAnimal)
+    //                     // const deletedPetFromPage = user.userPet.map((pet) => pet.id === deletedAnimal.id ? deletedAnimal : pet)
+    //                     const deletedPetFromPage = user.userPet.filter((pet)=> pet.id !== deletedAnimal.id )
+    //                     const userDeletedPet = {...user, userPet: deletedPetFromPage}
+    //                     setUser(userDeletedPet)
+
+    //                     alert("Your pet has been Removed")
+    //                     navigate("/UserProfile")
+    //                 })
+    //             } else {
+    //                 // r.json().then((err) => (setErrors(err.errors)))
+    //             }
+            
+         
+          
+    //           })
+
+    //         }
+
+
+
+        function handleUserPetDelete(){
+           
+            fetch(`/pets/${userPet.id}`,{
+                method:"DELETE" ,
+                })
+               
+                .then(() =>{
+               
+                const userPetUpdatedArray = user.userPet?.filter((pet)=> pet.id !== userPet.id)
+                console.log(userPetUpdatedArray)
+                
+                // const userDeletedPet = {...user, userPet: userPetUpdatedArray}
+
+                // setUser(userPetUpdatedArray )
+          
+
+                alert("Your pet has been Removed please refresh to see your updated profile")
+                        navigate("/UserProfile")
+           
+            } )
+           
+        }
+
+
+
+            // const newUserPetsArray =(...)
+          
+         
 
 
 // console.log(userPet)
 
-
+function handleModalClosing (){
+    setSmShow(() => setSmShow(false))     
+}     
 
 
 
@@ -65,6 +124,7 @@ function handlePetEdit(){
     return(
 
         <div className='user'>
+            
             <div >
                 <img className ='userpet-cardImage' src ='http://cdn.akc.org/content/hero/cute_puppies_hero.jpg' alt ="avtar"/>
 
@@ -96,20 +156,28 @@ function handlePetEdit(){
            </div>
            <div className= "petbutton-container">
                <Button onClick={handlePetEdit} variant="dark">click to Edit</Button>
-               <Button variant="dark">click to delete</Button>
+              
+               <Button onClick={handleUserPetDelete} variant="dark">click to delete</Button>
                 </div>
               
 
            </div>
                       
            <Modal
+     
         size="sm"
         show={smShow}
         onHide={() => setSmShow(false)}
         aria-labelledby="example-modal-sizes-title-sm"
       >
-           <PetEditForm pets={userPet}/>
+              
+           <PetEditForm pets={userPet}
+           handleModalClosing=
+           {handleModalClosing}/>
+          
            </Modal>
+
+          
         </div>
     )
 }

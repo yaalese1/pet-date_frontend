@@ -4,6 +4,10 @@ import { UserContext } from "../context/user";
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import PetEditForm from "./PetEditForm";
+import Button from 'react-bootstrap/Button';
+import { useNavigate } from "react-router-dom";
+import Modal from 'react-bootstrap/Modal';
+
 
 
 
@@ -26,46 +30,27 @@ import {
 } from 'mdb-react-ui-kit';
 
 import '../UserProfile.css'
-import UserPetCard from './UserPetCard';
+import UserPetCard from './UserPetCard'
+import AddPetForm from './AddPetForm'
+
 
 
 
 
 function UserProfile(){
-  // document.body.style.backgroundImage = "url(https://media.giphy.com/media/12pJ8OxSWwO86Y/giphy.gif)"
-  // document.body.backgroundRepeat = "no-repeat"
-  // document.body.style.backgroundSize = "auto"// const [userInfo, setUserInfo] = useState =(null)backgroundSize = "auto|length|cover|contain|intial|inherit"
+  const navigate = useNavigate()
+
  
-const {user} = useContext(UserContext)
+const {user, setUser} = useContext(UserContext)
 const userPets = user && user.pets
+const  [smShow, setSmShow] = useState(false)
 // console.log(user)
 const userReviews = user && user.user_reviews
 
-// console.log(userPets)
 
-
-
-// function handleSubmit(e){
-//   e.preventDefault()
-//   setIsLoading(true)
-//   fetch(`/pets/${pet.id}`{
-//     method: "PATCH",
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify(updatedPet)
-//           }
-//   )
-// }
-
-
-
-
-
-// https://media.giphy.com/media/12pJ8OxSWwO86Y/giphy.gif
-
-//https://i.giphy.com/media/xTiTnp3zOLUGbBF4ME/giphy.webp
-
+function handlepetAddedPage(){
+  setSmShow(true)
+}
 
 
 
@@ -90,14 +75,14 @@ const userReviews = user && user.user_reviews
                   
                 </div>
                 <div className="ms-3">
-                  <MDBTypography tag="h5">{user && user.first_name}</MDBTypography>
+                  <MDBTypography tag="h5">{user .first_name}</MDBTypography>
                   <MDBCardText>New York</MDBCardText>
                 </div>
               </div>
               <div className="infoblockcontainer " style={{ backgroundColor: 'pink' }}>
                 <div className='infoblock text-center'>
                   <div>
-                    <MDBCardText className="mb-1 h5">{user && user.age}</MDBCardText>
+                    <MDBCardText className="mb-1 h5">{user.age}</MDBCardText>
                     <MDBCardText className="small  mb-0">Birthdate</MDBCardText>
                   </div>
                   <div className="px-3">
@@ -143,6 +128,9 @@ const userReviews = user && user.user_reviews
                    
                   </div>
                 </div>
+                <div className='someContainer'>
+                <Button onClick={handlepetAddedPage} className='addPet' variant="dark">Add Pet</Button>
+                </div>
                 <div className="align-items-center mb-4">
                   <MDBCardText className="lead ">My Pets </MDBCardText>
                   
@@ -171,72 +159,16 @@ const userReviews = user && user.user_reviews
         </MDBRow>
       </MDBContainer>
     </div>
-      {/* <div className='user-page'>
-          <div className='user-img-container' >
-            <img className ='user-carImage'
-            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-                  alt=""/>
-                  <br/>
-                  
-              
-
-          </div>
-
-         
-
-          <div className='user-card-container'>
-           <div className='User-card'>
-              <div className='userInfo'>
-                    <div className='line-item'>
-                        <h3>Name:</h3>
-                        <p>{user && user.first_name}</p>
-                      </div>
-                      <div className='line-item'>
-                        <h3>Birthdate:</h3>
-                        <p>{user && user.age}</p>
-                      </div>
-                      <div className='line-item'>
-                        <h3>Seeking Relationship:</h3>
-                       {user && user.seeking_relationship ? <p>💓</p> : <p>❌</p>} <br/>
-                  
-                      </div>
-                     
-                     
-                      
-                     
-                        
-                    </div>
-
-                </div>
-            
-            </div>
-           
-          </div>
-          
-         
-           
-          <div className='userpetscontainer'>
-                       {user && userPets.map( userPet=>{
-                    return <UserPetCard
-                      userPet={userPet}
-                      key= {userPet.id}/>
-                    
-                                     
-                  })}
-            </div> */}
       
-       
-            
-             
-           
-                {/* <div className='UserPetsContainer'> */}
-             
-                {/* </div> */}
-        
-           
-               {/* <div className='user-text'> {user && user.first_name}</div>  */}
-              {/* //can't read property of null fix &&double helps   */}
-       
+  <Modal
+     
+     size="sm"
+     show={smShow}
+     onHide={() => setSmShow(false)}
+     aria-labelledby="example-modal-sizes-title-sm"
+   >
+       <AddPetForm/>
+       </Modal>
 
               </div>
     
