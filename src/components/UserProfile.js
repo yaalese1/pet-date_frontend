@@ -7,10 +7,9 @@ import PetEditForm from "./PetEditForm";
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
-
-
-
-
+import '../UserProfile.css'
+import UserPetCard from './UserPetCard'
+import AddPetForm from './AddPetForm'
 import {
   MDBCol,
   MDBdiv,
@@ -29,28 +28,25 @@ import {
   MDBProgress
 } from 'mdb-react-ui-kit';
 
-import '../UserProfile.css'
-import UserPetCard from './UserPetCard'
-import AddPetForm from './AddPetForm'
-
-
 
 
 
 function UserProfile(){
-  const navigate = useNavigate()
+ const navigate = useNavigate()
+
 
  
-const {user, setUser} = useContext(UserContext)
-const userPets = user && user.pets
-const  [smShow, setSmShow] = useState(false)
-// console.log(user)
-const userReviews = user && user.user_reviews
+ const {user, setUser} = useContext(UserContext)
+ const userPets = user && user.pets
+ const  [smShow, setSmShow] = useState(false)
+// console.log(user.pets)
+ const userReviews = user && user.user_reviews
 
 
-function handlepetAddedPage(){
+
+ function handlepetAddedPage(){
   setSmShow(true)
-}
+  }
 
 
 
@@ -58,9 +54,9 @@ function handlepetAddedPage(){
 
 
 
-    return (
+return (
 
-<div>
+          <div>
 
   
 <div className="outterbackground" >
@@ -75,14 +71,14 @@ function handlepetAddedPage(){
                   
                 </div>
                 <div className="ms-3">
-                  <MDBTypography tag="h5">{user .first_name}</MDBTypography>
+                  <MDBTypography tag="h5">{user?.first_name}</MDBTypography>
                   <MDBCardText>New York</MDBCardText>
                 </div>
               </div>
               <div className="infoblockcontainer " style={{ backgroundColor: 'pink' }}>
                 <div className='infoblock text-center'>
                   <div>
-                    <MDBCardText className="mb-1 h5">{user.age}</MDBCardText>
+                    <MDBCardText className="mb-1 h5">{user?.age}</MDBCardText>
                     <MDBCardText className="small  mb-0">Birthdate</MDBCardText>
                   </div>
                   <div className="px-3">
@@ -138,7 +134,7 @@ function handlepetAddedPage(){
                 <MDBRow>
                   <MDBCol className="mb-2">
                   <div className='userpetscontainer'>
-                       {userPets?.map( userPet=>{
+                       {user?.pets.map( userPet=>{
                     return <UserPetCard
                       userPet={userPet}
                       key= {userPet.id}/>
@@ -167,7 +163,9 @@ function handlepetAddedPage(){
      onHide={() => setSmShow(false)}
      aria-labelledby="example-modal-sizes-title-sm"
    >
-       <AddPetForm/>
+   
+        <AddPetForm/>
+      
        </Modal>
 
               </div>

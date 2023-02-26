@@ -45,7 +45,7 @@ function PetEditForm({ pets, handleModalClosing}){
              }).then((r) => {
                  if (r.ok) {
                      r.json().then((updatedAnimal) => {
-                        // console.log(user.pets)
+                        console.log(updatedAnimal)
 
                         const  updatedPetInfo = user.pets.map((pet) => pet.id == updatedAnimal.id ? updatedAnimal: pet)
                       

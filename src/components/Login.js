@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [userAvatar, setUserAvatar] = useState({})
-    const {setUser} = useContext(UserContext)
+    const {user, setUser} = useContext(UserContext)
 
     function handleSubmit(e) {
       e.preventDefault();

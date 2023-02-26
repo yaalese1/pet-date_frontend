@@ -204,6 +204,7 @@ img{
 
 .header{
   font-family: 'Times New Roman', Times, serif;
+  color: black;
   padding-left: 4%;
   padding-top: 10%;
 }
@@ -217,5 +218,19 @@ img{
 }
 
 .form-control{
-  width: 80%
+  width: 80%;
+  border-color: black;
+}
+
+.form-label{
+  color: black;
+  font: bolder;
+}
+
+.form-check-input{
+  border-color: black;
+}
+
+.addpetbtn{
+ padding-top: 20px;
 }

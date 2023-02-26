@@ -4,7 +4,7 @@ import {useEffect, useState} from "react"
 const UserContext = React.createContext();
 
 function UserProvider({children}){
-    const [user, setUser] = useState([])
+   
 
     useEffect(() => {
         fetch("/user").then((r) => {
@@ -20,7 +20,7 @@ function UserProvider({children}){
         });
     }, [])
 
-     
+    const [user, setUser] = useState(null)
 
 
 
