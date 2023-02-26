@@ -21,89 +21,37 @@ function UserPetCard ({userPet}){
 
 function handlePetEdit(){
     // navigate(`/PetEditForm/${userPet.id}`)
-    console.log(userPet.id)
+    // console.log(userPet.id) 
     setSmShow(true)
   }
 
-
-        // function handleSubmit(e) {
-        //       e.preventDefault()
-        //       setErrors([])
-        //       console.log(updatedPet)
-        //       fetch(`/pets/${petEdit}`, {
-        //           method: "PATCH",
-        //           headers: {
-        //               "Content-Type": "application/json",
-        //           },
-        //           body: JSON.stringify(updatedPet),
-        //       }).then((r) => {
-        //           if (r.ok) {
-        //               r.json().then((updatedAnimal) => {
-        //                   const updatedPetInfo = user && user.petEdit.map((info) => info.id === petEdit.id ? updatedAnimal: info)
-        //                   const updatedUser = {...user, petEdit: updatedPetInfo}
-        //                   setUser(updatedUser)
-        //                   alert("Your pet has been updated")
-        //                  navigate("/Pets")
-        //               })
-        //           } else {
-        //               r.json().then((err) => (setErrors(err.errors)))
-        //           }
-        //       })
-        //   }
-
-
+//   console.log(userPet.id) 
   
-    // function handleUserPetDeleteClick(){
-    //         fetch(`pets/${userPet.id}`, {
-    //           method: "DELETE",
-    //         })
-    //           .then((r) => {
-    //             if (r.ok){
-    //                 r.json().then((deletedAnimal) => {
-
-    //                     console.log(deletedAnimal)
-    //                     // const deletedPetFromPage = user.userPet.map((pet) => pet.id === deletedAnimal.id ? deletedAnimal : pet)
-    //                     const deletedPetFromPage = user.userPet.filter((pet)=> pet.id !== deletedAnimal.id )
-    //                     const userDeletedPet = {...user, userPet: deletedPetFromPage}
-    //                     setUser(userDeletedPet)
-
-    //                     alert("Your pet has been Removed")
-    //                     navigate("/UserProfile")
-    //                 })
-    //             } else {
-    //                 // r.json().then((err) => (setErrors(err.errors)))
-    //             }
-            
-         
-          
-    //           })
-
-    //         }
 
 
 
-        function handleUserPetDelete(){
+        // function handleUserPetDelete(){
            
-            fetch(`/pets/${userPet.id}`,{
-                method:"DELETE" ,
-                })
+        //     fetch(`/pets/${userPet.id}`,{
+        //         method:"DELETE" ,
+        //         })
                
-                .then(() =>{
+        //         .then(() =>{
                
-                const userPetUpdatedArray = user.userPet?.filter((pet)=> pet.id !== userPet.id)
-                console.log(userPetUpdatedArray)
+        //         const userPetUpdatedArray = user.userPet?.filter((pet)=> pet.id !== userPet.id)
+        //         console.log(userPetUpdatedArray)
                 
-                // const userDeletedPet = {...user, userPet: userPetUpdatedArray}
+        //         // const userDeletedPet = {...user, userPet: userPetUpdatedArray}
 
-                // setUser(userPetUpdatedArray )
+        //         // setUser(userPetUpdatedArray )
           
 
-                alert("Your pet has been Removed please refresh to see your updated profile")
-                        navigate("/UserProfile")
+        //         alert("Your pet has been Removed please refresh to see your updated profile")
+        //                 navigate("/UserProfile")
            
-            } )
+        //     } )
            
-        }
+        // }
 
 
 
@@ -123,7 +71,7 @@ function handleModalClosing (){
 
     return(
 
-        <div className='user'>
+        <div className='user-petcard'>
             
             <div >
                 <img className ='userpet-cardImage' src ='http://cdn.akc.org/content/hero/cute_puppies_hero.jpg' alt ="avtar"/>
@@ -157,7 +105,7 @@ function handleModalClosing (){
            <div className= "petbutton-container">
                <Button onClick={handlePetEdit} variant="dark">click to Edit</Button>
               
-               <Button onClick={handleUserPetDelete} variant="dark">click to delete</Button>
+               {/* <Button onClick={handleUserPetDelete} variant="dark">click to delete</Button> */}
                 </div>
               
 
