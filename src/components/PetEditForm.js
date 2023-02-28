@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate , useParams} from "react-router-dom";
 import { UserContext } from "../context/user";
+import CloseButton from 'react-bootstrap/CloseButton';
 import {PetContext} from "../context/pets"
 
 
@@ -18,19 +19,23 @@ function PetEditForm({ pets, handleModalClosing}){
     
     // console.log(userPet)
 
-
+    // const handleModalClosing = handleModalClosing
     const petEdit = pets
     // console.log(petEdit)
         const [ updatedPet, setUpdatePet ] = useState({
           
           name: petEdit.name,
           species: petEdit.species,
+          breed: petEdit.breed,
           age: petEdit.age,
+          diet: petEdit.diet,
+          size: petEdit.size,
           mental_disorder: petEdit.mental_disorder,
+          open_to_breeding: petEdit.open_to_breeding,
           active: petEdit.active,
           trained: petEdit.trained,
-          diet: petEdit.diet,
-          size: petEdit.size
+          alteration: petEdit.alteration,
+        
     })
        function handleSubmit(e) {
              e.preventDefault()
@@ -68,8 +73,9 @@ function PetEditForm({ pets, handleModalClosing}){
          }
 
          function handleEditChange(e){
+            const {name, value, type, checked} = e.target
             
-            setUpdatePet({...updatedPet, [e.target.name] :e.target.value})
+            setUpdatePet({...updatedPet, [name]: type === "checkbox" ? checked : value})
 
          }
 
@@ -81,13 +87,13 @@ function PetEditForm({ pets, handleModalClosing}){
 // console.log(pets?.id)
 
     return(
-        <div>
-    
+        <div className='petedit-form'>
+      <CloseButton  onClick={handleModalClosing} />
         <Form onSubmit={handleSubmit}>  
     
         <h3 className="peteditheader">Edit Your Pet Below </h3>
   
-        <Form.Group>
+        <Form.Group className='edit-textarea'>
           <Form.Control 
             input= "text"
             name="name" 
@@ -98,8 +104,7 @@ function PetEditForm({ pets, handleModalClosing}){
         </Form.Group>
        
   
-        <Form.Group>
-        
+        <Form.Group className='edit-textarea'>
          <Form.Control 
             input= "text"
             name="species" 
@@ -108,63 +113,95 @@ function PetEditForm({ pets, handleModalClosing}){
             onChange={handleEditChange}
             />
         </Form.Group>
+        <Form.Group className='edit-textarea'>
+            <Form.Control 
+             name="breed" 
+            placeholder="Breed"
+            value={updatedPet.breed}
+            onChange={handleEditChange} />    
+        </Form.Group>
   
-           <Form.Group>
-                     <Form.Control 
-                     name="age" 
-                     placeholder="Age"
-                     value={updatedPet.age}
-                     onChange={handleEditChange} />    
-          </Form.Group>
-  
-            <Form.Group>
-                <Form.Control 
-                  input= "text"
-                name="mental_disorder" 
+        <Form.Group className='edit-textarea'>
+            <Form.Control 
+             name="age" 
+            placeholder="Age"
+            value={updatedPet.age}
+            onChange={handleEditChange} />    
+        </Form.Group>
 
-                placeholder="Mental Disorder"
-                value={updatedPet.mental_disorder}
-                onChange={handleEditChange} />
-            </Form.Group>
+        <Form.Group className='edit-textarea'>
+            <Form.Control 
+            input= "text"
+            name="diet" 
+            placeholder="Diet"
+            value={updatedPet.diet}
+            onChange={handleEditChange} 
+            />
+        </Form.Group>
 
-            <Form.Group>
-                <Form.Label> Is your pet active ? </Form.Label>
-                <Form.Check
+        <Form.Group className='edit-textarea'>
+            <Form.Control 
                 input= "text"
-               type="checkbox" 
-               name= 'active'
-               value={updatedPet.active}
-                onChange={(e) =>setUpdatePet(true)} />
-            </Form.Group>
-            <Form.Group>
-                <Form.Label> Is your trained ? </Form.Label>
-                <Form.Check
-                input= "text"
-               type="checkbox" 
-               name="trained"
-               value={updatedPet.trained}
-                onChange={handleEditChange} />
-            </Form.Group>
-
-            <Form.Group>
-                
-                <Form.Control 
-                  input= "text"
-                name="diet" 
-                placeholder="Diet"
-                value={updatedPet.diet}
-                onChange={handleEditChange} />
-            </Form.Group>
-
-            <Form.Group>
-                <Form.Control 
-                  input= "text"
                 name="size" 
                 placeholder="Size"
                 value={updatedPet.size}
+                onChange={handleEditChange}
+                 />
+        </Form.Group>
+
+        <Form.Group className='edit-textarea'>
+            <Form.Control 
+            input= "text"
+            name="mental_disorder" 
+            placeholder="Mental Disorder"
+            value={updatedPet.mental_disorder}
+            onChange={handleEditChange} 
+            />
+        </Form.Group>
+        <Form.Group className='edit-textarea'>
+                <Form.Label> Are you open to breeding this pet  ? </Form.Label>
+                <Form.Check
+                name= 'open_to_breeding'
+                type="checkbox" 
+                label= "yes"
+                checked={updatedPet.open_to_breeding}
                 onChange={handleEditChange} />
             </Form.Group>
-        
+
+            <Form.Group className='edit-textarea'>
+                <Form.Label> Is your pet active ? </Form.Label>
+                <Form.Check
+                name= 'active'
+                type="checkbox" 
+                label= "yes"
+                checked={updatedPet.active}
+                onChange={handleEditChange} />
+            </Form.Group>
+
+            <Form.Group className='edit-textarea'>
+                <Form.Label> Is your pet trained ? </Form.Label>
+                <Form.Check
+                 name="trained"
+               type="checkbox" 
+                label="yes"
+               checked={updatedPet.trained}
+                onChange={handleEditChange} />
+            </Form.Group>
+
+            <Form.Group className='edit-textarea'>
+                <Form.Label> Has your pet undergone alteration? </Form.Label>
+                <Form.Check
+                 name="alteration"
+               type="checkbox" 
+                label="yes"
+               checked={updatedPet.alteration}
+                onChange={handleEditChange} />
+            </Form.Group>
+
+         
+
+           
+        <div className='edit-textarea'> 
         <Button 
        
          type="submit" 
@@ -172,21 +209,12 @@ function PetEditForm({ pets, handleModalClosing}){
                 save changes
   
         </Button>
-       
-  
-  
-  
-  
-  
-        </Form>
-        <Button 
-        onClick={handleModalClosing}
-       type="exit" 
-       variant="danger" >
-              click to exit
-
-      </Button>
+        </div>
       
+      
+        </Form>
+       
+ 
 
         </div>
 

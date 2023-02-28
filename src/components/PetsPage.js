@@ -22,16 +22,7 @@ function PetsPage () {
     
     },[]) 
 
-
-    // const [petReview, setPetReview] = useState("")
-    // useEffect (()=>{
-    //     fetch('/pets_review')
-    //     .then((resp) => resp.json())
-    //     .then ((pets_review) => setPetReview(pets_review))
-    
-         
-    
-    // },[]) 
+console.log(pets)
 
  const eachPet = pets.map((pet) =>{
     return( <PetsCard 
@@ -43,7 +34,7 @@ function PetsPage () {
     )
    
  })
- console.log (eachPet)
+//  console.log (eachPet)
 
 
 

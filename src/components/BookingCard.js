@@ -8,21 +8,33 @@ import Row from 'react-bootstrap/Row';
 import '../Booking.css'
 
 function BookingCard ({  booking}){
+
+
+
+ console.log(booking.pet.name)
     return(
         <div className="bookingcards">
           
       <Card>
    
       <Card.Body>
-          <Card.Title>{booking.date}</Card.Title>
-          <Card.Text>
-          PickUp: {booking.pickup_location}
+      <Card.Text> Pick up information: {booking.start_date} - {booking.end_date}</Card.Text>
+      <Card.Text> Session Times :{booking.start_time} - {booking.end_time}</Card.Text>
+     
+         
+      
+
+          <Card.Text> Pet name: {booking.pet.name}</Card.Text>
+          <Card.Text></Card.Text>
+
+          <Card.Text> 
+          Pick Up: {booking.pickup_location}
           </Card.Text>
           <Card.Text>
           Dropoff: {booking.dropoff_location}
           </Card.Text>
           <Card.Text>
-            Pet Only : {booking.pet_only ? <> 🐩 Yes</> : <>❌ No</>}   
+            Pet Only : {booking.pet_only ? <> 🐩 Yes</> : <> 💓 No</>}   
             </Card.Text>
 
         </Card.Body>

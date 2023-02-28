@@ -3,10 +3,11 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { UserContext } from "../context/user";
 import { useNavigate } from "react-router-dom";
+import CloseButton from 'react-bootstrap/CloseButton';
 
 
 
-function AddPetForm(){
+function AddPetForm({handlePetAddFormClosing}){
 
     const {user, setUser} = useContext(UserContext)
 //     const [ errors, setErrors ] = useState(null)
@@ -47,16 +48,16 @@ function handleSubmit(e) {
     .then((newPet) => {
 
   
-   const newPetAdded = [...user.pets, newPet]
+    const newPetAdded = [...user.pets, newPet]
  
 
-console.log(newPetAdded)
+    console.log(newPetAdded)
  
    
 
     const addPetToUser = {...user, pets: newPetAdded}
     setUser(addPetToUser)
-    // console.log(addPetToUser)
+    console.log(addPetToUser)
 
     alert("Your pet has been Removed please refresh to see your updated profile")
     navigate("/UserProfile")
@@ -65,12 +66,12 @@ console.log(newPetAdded)
 
 
 
-const handleChange = (e) => {
+    const handleChange = (e) => {
     const { name, value , type , checked } = e.target
     setFormData({ ...formData, [name]: type === "checkbox" ? checked : value })
 
     //if type equal to check box use shecked prop if not use value
-  }
+    }
 
 
 
@@ -78,7 +79,7 @@ const handleChange = (e) => {
 
     return (
 <div className="newpet-formholder">
-    hello
+<CloseButton  onClick={handlePetAddFormClosing} />
     <h3 className="header"> Add Your New Pet Here</h3>
     <Form onSubmit={handleSubmit}>
     <Form.Group className="mb-3">
@@ -145,7 +146,29 @@ const handleChange = (e) => {
         onChange={handleChange}
         />
     </Form.Group>
-       
+
+    <Form.Group className="mb-3">
+       <Form.Label> Are You Open To Breeding This Pet  ? </Form.Label>
+        <Form.Check
+         name= "open_to_breeding"
+         type="checkbox"
+         label= "Yes"
+         checked={formData.open_to_breeding}
+         onChange={handleChange}
+         />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+       <Form.Label>Is Your Pet Active ?</Form.Label>
+        <Form.Check
+         name= "active"
+        type="checkbox" 
+         label= "Yes"
+         checked={formData.active}
+         onChange={handleChange}
+         />
+    </Form.Group>
+  
     <Form.Group className="mb-3">
        <Form.Label>Is Your Pet Trained ?</Form.Label>
         <Form.Check
@@ -157,17 +180,7 @@ const handleChange = (e) => {
        
     </Form.Group>
       
-    <Form.Group className="mb-3">
-       <Form.Label>Is Your Pet Active ?</Form.Label>
-        <Form.Check
-         name= "active"
-        type="checkbox" 
-         label= "Yes"
-         checked={formData.active}
-         onChange={handleChange}
-         />
-    </Form.Group>
-      
+
     <Form.Group className="mb-3">
        <Form.Label>Has your Pet Undergone Alteration ? </Form.Label>
         <Form.Check
@@ -179,16 +192,7 @@ const handleChange = (e) => {
          />
     </Form.Group>
       
-    <Form.Group className="mb-3">
-       <Form.Label> Are You Open To Breeding This Pet  ? </Form.Label>
-        <Form.Check
-         name= "open_to_breeding"
-         type="checkbox"
-         label= "Yes"
-         checked={formData.open_to_breeding}
-         onChange={handleChange}
-         />
-          </Form.Group>
+
 
         <div className="addpetbtn">
          <Button 

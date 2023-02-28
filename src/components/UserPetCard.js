@@ -1,4 +1,4 @@
-import React, { useContext,useState }  from "react";
+import React, { useState, useContext }  from "react";
 import { UserContext } from "../context/user";
 import '../UserProfile.css'
 import Button from 'react-bootstrap/Button';
@@ -14,7 +14,7 @@ function UserPetCard ({userPet}){
      const navigate = useNavigate()
      const {user, setUser} = useContext(UserContext)
     //  const { id } = useParams()
-     const [ errors, setErrors ] = useState(null)
+     // const [ errors, setErrors ] = useState(null)
      const [smShow, setSmShow] = useState(false);
 // console.log(userPet)
 
@@ -25,33 +25,37 @@ function handlePetEdit(){
     setSmShow(true)
   }
 
+  function handleModalClosing (){
+     setSmShow(() => setSmShow(false))     
+ }   
+
 //   console.log(userPet.id) 
   
 
 
 
-        // function handleUserPetDelete(){
+     //    function handleUserPetDelete(){
            
-        //     fetch(`/pets/${userPet.id}`,{
-        //         method:"DELETE" ,
-        //         })
+     //        fetch(`/pets/${userPet.id}`,{
+     //            method:"DELETE" ,
+     //            })
                
-        //         .then(() =>{
-               
-        //         const userPetUpdatedArray = user.userPet?.filter((pet)=> pet.id !== userPet.id)
-        //         console.log(userPetUpdatedArray)
+     //            .then(() =>{
                 
-        //         // const userDeletedPet = {...user, userPet: userPetUpdatedArray}
+     //            const userPetUpdatedArray = user.userPet?.filter((pet)=> pet.id !== userPet.id)
+     //            console.log(userPet)
+                
+     //            const userDeletedPet = {...user, userPet: userPetUpdatedArray}
 
-        //         // setUser(userPetUpdatedArray )
+     //            setUser(userPetUpdatedArray )
           
 
-        //         alert("Your pet has been Removed please refresh to see your updated profile")
-        //                 navigate("/UserProfile")
+     //            alert("Your pet has been Removed please refresh to see your updated profile")
+     //                    navigate("/UserProfile")
            
-        //     } )
+     //        } )
            
-        // }
+     //    }
 
 
 
@@ -62,54 +66,54 @@ function handlePetEdit(){
 
 // console.log(userPet)
 
-function handleModalClosing (){
-    setSmShow(() => setSmShow(false))     
-}     
+  
 
 
 
 
-    return(
+    return (
 
-        <div className='user-petcard'>
+         <div >
             
             <div >
-                <img className ='userpet-cardImage' src ='http://cdn.akc.org/content/hero/cute_puppies_hero.jpg' alt ="avtar"/>
+                <img className ='userpet-cardImage' 
+                src ='http://cdn.akc.org/content/hero/cute_puppies_hero.jpg' alt ="avatar"/>
 
             </div>
-            <div className="UserInfo">
+          <div className="UserInfo">
             <div className="line-item">
                 <h3>name:</h3>
-           <p>{userPet.name}</p> 
+                <p>{userPet.name}</p> 
            </div>
            <div className="line-item">
                 <h3>species:</h3>
-           <p>{userPet.species}</p> 
+               <p>{userPet.species}</p> 
            </div>
            <div className="line-item">
                 <h3>breed:</h3>
-           <p>{userPet.breed}</p> 
+               <p>{userPet.breed}</p> 
            </div>
            <div className="line-item">
                 <h3>size:</h3>
-           <p>{userPet.size}</p> 
+               <p>{userPet.size}</p> 
            </div>
            <div className="line-item">
                 <h3>age:</h3>
-           <p>{userPet.age}</p> 
+               <p>{userPet.age}</p> 
            </div>
            <div className="line-item">
                 <h3>breed:</h3>
-           <p>{userPet.diet}</p> 
+               <p>{userPet.diet}</p> 
            </div>
            <div className= "petbutton-container">
-               <Button onClick={handlePetEdit} variant="dark">click to Edit</Button>
-              
-               {/* <Button onClick={handleUserPetDelete} variant="dark">click to delete</Button> */}
-                </div>
-              
+               <Button onClick={handlePetEdit} 
+                    variant="dark">click to Edit
 
-           </div>
+               </Button>
+               
+               </div>
+      
+     </div>
                       
            <Modal
      
@@ -117,18 +121,22 @@ function handleModalClosing (){
         show={smShow}
         onHide={() => setSmShow(false)}
         aria-labelledby="example-modal-sizes-title-sm"
-      >
+        >
               
-           <PetEditForm pets={userPet}
-           handleModalClosing=
-           {handleModalClosing}/>
+          <PetEditForm 
+           pets={userPet}
+           handleModalClosing={handleModalClosing}
+           />
           
            </Modal>
-
-          
+           {/* <div>
+           <Button 
+           onClick={handleUserPetDelete}
+          variant="dark"> click to remove </Button>
+               </div> */}
         </div>
     )
 }
 
 
-export default UserPetCard
+export default UserPetCard;
