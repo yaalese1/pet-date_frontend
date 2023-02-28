@@ -181,15 +181,36 @@ img{
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
 }
-.editpetbutton{
-  width: 30%;
-  height: 10%;
 
+.petedit-form{
+  display: flex;
+  background: pink;
+}
+
+.peteditheader{
+  justify-content: center;
+  padding-top: 10%;
+  font-family: 'Times New Roman', Times, serif;
+  color: black;
+  /* padding-left: 4%;
+  padding-top: 10%; */
+}
+.exiteditform-button-container{
+  display: flex;
+
+}
+.edit-textarea{
+  padding: 20px;
 }
 
 .someContainer{
   display: flex;
   justify-content: end;
+}
+
+.exit-button{
+  width: 10vw;
+  height: 10%
 }
 .addPet {
   width: 10%;

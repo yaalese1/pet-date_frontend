@@ -5,6 +5,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 // import UserProfile from './UserProfile';
 import "../PetCard.css"
 import { UserContext } from "../context/user";
+import BookingPetForm from './BookingPetForm';
+import Modal from 'react-bootstrap/Modal'
 
 
 
@@ -15,38 +17,27 @@ import { UserContext } from "../context/user";
 
   function PetsCard ({id,pet, reviews}){
     const {user,setUser} = useContext(UserContext)
-  
-  
     const [ errors, setErrors ] = useState(null)
-  
+    const  [smShow, setSmShow] = useState(false)
+
+    function handleDisplayBookingForm(){
+        setSmShow(true)
+    }
     
 
+    const [formData, setFormData] = useState({
+      start_date: "",
+      end_date: "",
+      start_time: "",
+      end_time: "",
+      pickup_location: "",
+      dropoff_location: "",
+      pet_only: false,
+      borrower_id: user?.id,
+      lender_id: pet.owner_id
 
 
-//   function handleSubmit(e) {
-//     e.preventDefault()
-//     setErrors([])
-//     console.log(updatedPet)
-//     fetch(`/pets/${pet.id}`, {
-//         method: "PATCH",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(updatedPet),
-//     }).then((r) => {
-//         if (r.ok) {
-//             r.json().then((updatedAnimal) => {
-//                 const updatedPetInfo = user.petEdit.map((info) => info.id === petEdit.id ? updatedAnimal: info)
-//                 const updatedUser = {...user, petEdit: updatedPetInfo}
-//                 setUser(updatedUser)
-//                 alert("Your pet has been updated")
-//                navigate("/Pets")
-//             })
-//         } else {
-//             r.json().then((err) => (setErrors(err.errors)))
-//         }
-//     })
-// }
+    })
 
 
 
@@ -57,10 +48,19 @@ import { UserContext } from "../context/user";
 
 
 
-// console.log(pet)
+
+
+
 
     return (
-  
+  <div>
+   <Modal
+       size="sm"
+       show={smShow}
+       onHide={() => setSmShow(false)}
+       aria-labelledby="example-modal-sizes-title-sm">
+    <BookingPetForm/>
+    </Modal>
     <div className='Petcard'>
       <div className='pet-cardImage'>
             <img src= 'http://cdn.akc.org/content/hero/cute_puppies_hero.jpg' 
@@ -107,8 +107,9 @@ import { UserContext } from "../context/user";
     
                        }
                     )}
+
               </div>
-              <Button variant="dark">click to Book</Button>
+              <Button onClick={handleDisplayBookingForm} variant="dark">click to Book</Button>
              
 
 
@@ -123,7 +124,7 @@ import { UserContext } from "../context/user";
         
         
   </div>
-       
+</div>   
        
   
        

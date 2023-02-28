@@ -27,12 +27,15 @@ const {user, setUser} = useContext(UserContext)
     
 
     const displayBooking = bookings.filter((booking)=> {
-        const day = parseInt(booking.date.slice(8))
-        const month = parseInt(booking.date.slice(5, 7)) - 1
-        const year = parseInt(booking.date.slice(0, 4))
-        const date = new Date(year, month, day)
+        const day = parseInt(booking.start_date.slice(8))
+        const month = parseInt(booking.start_date.slice(5, 7)) -1
+        const year = parseInt(booking.start_date.slice(0, 4))
+        const dayTwo = parseInt(booking.end_date.slice(8))
+        const monthTwo = parseInt(booking.start_date.slice(5,7)) -1
+        const yearTwo = parseInt(booking.start_date.slice(0,4))
+        const date = new Date(year, month, day, dayTwo, monthTwo, yearTwo)
         console.log(date.toDateString())
-    console.log(calender.toDateString())
+    // console.log(calender.toDateString())
         return date.toDateString() === calender.toDateString()
     }  )
    
@@ -104,8 +107,8 @@ console.log(displayBooking)
         <div className='bookingpage'>
 
             <div>
-                 {eachBooking}
-     
+                
+            {eachBooking}
                 
           
          

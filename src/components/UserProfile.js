@@ -1,60 +1,61 @@
 
-import React ,{useState, useEffect, useContext}from 'react';
+import React ,{useState, useContext}from 'react';
 import { UserContext } from "../context/user";
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import PetEditForm from "./PetEditForm";
+
 import Button from 'react-bootstrap/Button';
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import '../UserProfile.css'
 import UserPetCard from './UserPetCard'
 import AddPetForm from './AddPetForm'
 import {
   MDBCol,
-  MDBdiv,
+ 
   MDBRow,
   MDBCard,
   MDBCardText,
   MDBCardBody,
   MDBCardImage,
-  MDBBtn,
+
   MDBContainer,
   MDBTypography,
-  MDBProgressBar,
-  MDBIcon,
-  MDBListGroup,
-  MDBListGroupItem,
-  MDBProgress
+
 } from 'mdb-react-ui-kit';
 
 
 
 
 function UserProfile(){
- const navigate = useNavigate()
+
 
 
  
- const {user, setUser} = useContext(UserContext)
- const userPets = user && user.pets
+ const {user} = useContext(UserContext)
+//  const userPets = user && user.pets
  const  [smShow, setSmShow] = useState(false)
 // console.log(user.pets)
  const userReviews = user && user.user_reviews
 
 
 
- function handlepetAddedPage(){
+ function handlePetAddForm(){
   setSmShow(true)
   }
 
+  function handlePetAddFormClosing (){
+    setSmShow(() => setSmShow(false))     
+}      
 
 
 
 
 
 
-return (
+
+
+return  (
 
           <div>
 
@@ -82,7 +83,7 @@ return (
                     <MDBCardText className="small  mb-0">Birthdate</MDBCardText>
                   </div>
                   <div className="px-3">
-                    <MDBCardText className="mb-1 h5">{user && user.seeking_relationship ? <>💓</> : <>❌</>} </MDBCardText>
+                    <MDBCardText className="mb-1 h5">{user?.seeking_relationship ? <>💓</> : <>❌</>} </MDBCardText>
                     <MDBCardText className="small">Seeking Relationship </MDBCardText>
                   </div>
                   <div>
@@ -125,7 +126,7 @@ return (
                   </div>
                 </div>
                 <div className='someContainer'>
-                <Button onClick={handlepetAddedPage} className='addPet' variant="dark">Add Pet</Button>
+                <Button onClick={handlePetAddForm} className='addPet' variant="dark">Add Pet</Button>
                 </div>
                 <div className="align-items-center mb-4">
                   <MDBCardText className="lead ">My Pets </MDBCardText>
@@ -164,7 +165,7 @@ return (
      aria-labelledby="example-modal-sizes-title-sm"
    >
    
-        <AddPetForm/>
+        <AddPetForm handlePetAddFormClosing={handlePetAddFormClosing}/>
       
        </Modal>
 
