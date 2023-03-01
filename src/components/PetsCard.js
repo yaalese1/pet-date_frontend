@@ -25,7 +25,9 @@ import Modal from 'react-bootstrap/Modal'
     
 
 
-
+    function handleBookingFormClosing(){
+      setSmShow(false)
+    }
 
 
 
@@ -46,7 +48,8 @@ import Modal from 'react-bootstrap/Modal'
        show={smShow}
        onHide={() => setSmShow(false)}
        aria-labelledby="example-modal-sizes-title-sm">
-    <BookingPetForm pet={pet}/>
+    <BookingPetForm pet={pet}
+    handleBookingFormClosing={handleBookingFormClosing}/>
     </Modal>
     <div className='Petcard'>
       <div className='pet-cardImage'>
@@ -93,14 +96,18 @@ import Modal from 'react-bootstrap/Modal'
                         )
     
                        }
-                    )}
+                       )}
+                </div>
 
-              </div>
-              <Button onClick={handleDisplayBookingForm} variant="dark">click to Book</Button>
-             
+           
+           
+           
 
 
     </div>
+    <div className='bookbtn-container'>
+                       <Button className='b' onClick={handleDisplayBookingForm} variant="dark">click to Book</Button>
+              </div>
 
         
 {/*         
@@ -111,6 +118,7 @@ import Modal from 'react-bootstrap/Modal'
         
         
   </div>
+  
 </div>   
        
   

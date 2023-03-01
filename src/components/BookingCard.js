@@ -1,12 +1,35 @@
-import React from "react";
+import React,{useState}from "react";
 
 import Card from 'react-bootstrap/Card';
 
 import '../Booking.css'
 
 function BookingCard ({  booking}){
+const [showEditMessage, setShowEditMessage] = useState(false)
+const [showCancelMessage, setShowCancelMessage] = useState(false)
+
+ function handleEditButton (){
+  setShowEditMessage(true)
+ }
+ function handleEditButtionExit (){
+  setShowEditMessage(false)
+ }
 
 
+ function handleCancelButton(){
+  setShowCancelMessage(true)
+ }
+
+ function handleCancelButtonExit(){
+  setShowCancelMessage(false)
+ }
+
+
+
+
+
+
+ 
 
  console.log(booking.pet.name)
  console.log(booking.pet.owner_id)
@@ -14,8 +37,25 @@ function BookingCard ({  booking}){
         <div className="bookingcards">
           
       <Card>
-   
+  
       <Card.Body>
+        <div className="edit-del">
+          <div >
+      <button className="tool-button" onMouseEnter={handleEditButton} onMouseLeave={handleEditButtionExit }>🔧  </button>
+      {showEditMessage &&( 
+      <div className="tool-message">
+       Click to edit your booking
+      </div>
+       )}
+      </div>
+    <button className= 'cancel-button' onMouseEnter={handleCancelButton} onMouseLeave={handleCancelButtonExit}> ❌</button>
+    {showCancelMessage &&( 
+      <div>
+        Click To Cancel Booking
+      </div>
+    )}
+
+      </div>
       <Card.Text> Pick up information: {booking.start_date} - {booking.end_date}</Card.Text>
       <Card.Text> Session Times :{booking.start_time} - {booking.end_time}</Card.Text>
      
