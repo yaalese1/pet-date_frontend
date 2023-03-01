@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Form from 'react-bootstrap/Form';
 import Calendar from 'react-calendar';
+
 import 'react-calendar/dist/Calendar.css';
 import Modal from 'react-bootstrap/Modal'
 import { UserContext } from '../context/user'
@@ -13,7 +14,8 @@ function BookingPetForm({pet}){
 
 const [startDate, setStartDate] = useState(new Date())
 const [endDate, setEndDate] = useState(new Date ())
-const  [smShow, setSmShow] = useState()
+const  [smShow, setSmShow] = useState(false)
+const [xsShow , setXsShow] = useState()
 const {user, setUser} = useContext(UserContext)
 const[bookings , setBooking] = useState([])
 
@@ -26,7 +28,7 @@ const navigate = useNavigate()
 // console.log(value)
 
 function handleStartCalendarDisplay(){
-    setSmShow(true)
+    setXsShow(true)
 }
 
 function handleEndCalendarDisplay(){
@@ -100,12 +102,13 @@ function handleStartDatePicked(startCalendarDate){
  
 }
 
-// function handleEndDatePicked(endCalendarDate){
-//  setEndDate(endCalendarDate)
-//  const endDatePickedToString =JSON.stringify(endCalendarDate);
-//  const endDateDisplay =  endDatePickedToString.slice(1,11) 
-//  setFormData({...formData, end_date: endDateDisplay})
-// }
+function handleEndDatePicked(endCalendarDate){
+ setEndDate(endCalendarDate)
+ const endDatePickedToString =JSON.stringify(endCalendarDate);
+ const endDateDisplay =  endDatePickedToString.slice(1,11) 
+ setFormData({...formData, end_date: endDateDisplay})
+ console.log(endDateDisplay)
+}
 
 
     
@@ -193,8 +196,8 @@ function handleStartDatePicked(startCalendarDate){
         >
      <Modal
          size="sm"
-         show={smShow}
-         onHide={() => setSmShow(false)}
+         show={xsShow}
+         onHide={() => setXsShow(false)}
          aria-labelledby="example-modal-sizes-title-sm">  
         <Calendar onChange={ handleStartDatePicked} value={startDate} 
         
@@ -212,7 +215,7 @@ function handleStartDatePicked(startCalendarDate){
          show={smShow}
          onHide={() => setSmShow(false)}
          aria-labelledby="example-modal-sizes-title-sm">  
-      {/* <Calendar onChange={handleEndDatePicked} value={endDate}/> */}
+      <Calendar onChange={handleEndDatePicked} value={endDate}/>
       </Modal>
     <Form.Group/>
 
