@@ -1,17 +1,17 @@
 import React ,{ useContext,useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useNavigate , useParams} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/user";
 import CloseButton from 'react-bootstrap/CloseButton';
-import {PetContext} from "../context/pets"
+
 
 
 
 function PetEditForm({ pets, handleModalClosing}){
     // const {pets , setPets} = useContext(PetContext)
     const {user, setUser} = useContext(UserContext)
-    const { id } = useParams()
+   
      const [ errors, setErrors ] = useState(null)
      const navigate = useNavigate()
  
@@ -41,7 +41,7 @@ function PetEditForm({ pets, handleModalClosing}){
              e.preventDefault()
              setErrors([])
              console.log(updatedPet)
-             fetch('/pets/' + `${pets.id}`, {
+             fetch('/pets/'+`${pets.id}`, {
                  method: "PATCH",
                  headers: {
                      "Content-Type": "application/json",
@@ -52,7 +52,7 @@ function PetEditForm({ pets, handleModalClosing}){
                      r.json().then((updatedAnimal) => {
                         console.log(updatedAnimal)
 
-                        const  updatedPetInfo = user.pets.map((pet) => pet.id == updatedAnimal.id ? updatedAnimal: pet)
+                        const  updatedPetInfo = user.pets.map((pet) => pet.id === updatedAnimal.id ? updatedAnimal: pet)
                       
                         const updatedUser = {...user , pets: updatedPetInfo}
                         setUser(updatedUser)

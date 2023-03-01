@@ -37,4 +37,30 @@
 .react-calendar__navigation__label{
     color: deeppink;
 } 
+.mb-3{
+   display: flex;
+   justify-content: center;
 
+
+}
+.booking-form{
+
+    padding: 10px;
+   
+}
+
+.pickup-button{
+    padding: 20px; 
+}
+
+.drop-button{
+  padding: 20px;
+    
+}
+.pick-location{
+    padding: 10px;
+}
+
+.present-box{
+    padding: 20px;
+}

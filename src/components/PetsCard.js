@@ -1,10 +1,9 @@
-import React,{useState,useContext} from 'react';
+import React,{useState} from 'react';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
+
 // import UserProfile from './UserProfile';
 import "../PetCard.css"
-import { UserContext } from "../context/user";
+// import { UserContext } from "../context/user";
 import BookingPetForm from './BookingPetForm';
 import Modal from 'react-bootstrap/Modal'
 
@@ -16,7 +15,7 @@ import Modal from 'react-bootstrap/Modal'
 
 
   function PetsCard ({id,pet, reviews}){
-    const {user,setUser} = useContext(UserContext)
+    // const {user,setUser} = useContext(UserContext)
     const [ errors, setErrors ] = useState(null)
     const  [smShow, setSmShow] = useState(false)
 
@@ -25,19 +24,7 @@ import Modal from 'react-bootstrap/Modal'
     }
     
 
-    const [formData, setFormData] = useState({
-      start_date: "",
-      end_date: "",
-      start_time: "",
-      end_time: "",
-      pickup_location: "",
-      dropoff_location: "",
-      pet_only: false,
-      borrower_id: user?.id,
-      lender_id: pet.owner_id
 
-
-    })
 
 
 
@@ -59,7 +46,7 @@ import Modal from 'react-bootstrap/Modal'
        show={smShow}
        onHide={() => setSmShow(false)}
        aria-labelledby="example-modal-sizes-title-sm">
-    <BookingPetForm/>
+    <BookingPetForm pet={pet}/>
     </Modal>
     <div className='Petcard'>
       <div className='pet-cardImage'>

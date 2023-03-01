@@ -1,10 +1,7 @@
 import React from "react";
 
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button'
-import ListGroup from 'react-bootstrap/ListGroup'
-import CardGroup from 'react-bootstrap/CardGroup'
-import Row from 'react-bootstrap/Row';
+
 import '../Booking.css'
 
 function BookingCard ({  booking}){
@@ -12,6 +9,7 @@ function BookingCard ({  booking}){
 
 
  console.log(booking.pet.name)
+ console.log(booking.pet.owner_id)
     return(
         <div className="bookingcards">
           
