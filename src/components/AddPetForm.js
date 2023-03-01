@@ -59,7 +59,7 @@ function handleSubmit(e) {
     setUser(addPetToUser)
     console.log(addPetToUser)
 
-    alert("Your pet has been Removed please refresh to see your updated profile")
+    alert("Your pet has been Added")
     navigate("/UserProfile")
 } ) 
 }
@@ -70,7 +70,7 @@ function handleSubmit(e) {
     const { name, value , type , checked } = e.target
     setFormData({ ...formData, [name]: type === "checkbox" ? checked : value })
 
-    //if type equal to check box use shecked prop if not use value
+    //if type equal to check box use checked prop if not use value
     }
 
 
