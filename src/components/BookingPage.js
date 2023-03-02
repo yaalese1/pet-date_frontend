@@ -54,7 +54,7 @@ console.log(displayBooking)
         return(
             <BookingCard
             key={booking.id}
-            booking={booking}
+            userBooking={booking}
             id= {booking.id}/>
         )
 
