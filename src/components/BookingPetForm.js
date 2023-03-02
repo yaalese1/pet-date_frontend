@@ -10,7 +10,7 @@ import { UserContext } from '../context/user'
 import { useNavigate } from "react-router-dom";
 
 
-function BookingPetForm({pet}){
+function BookingPetForm({pet, handleBookingFormClosing}){
 
 const [startDate, setStartDate] = useState(new Date())
 const [endDate, setEndDate] = useState(new Date ())
@@ -18,6 +18,7 @@ const  [smShow, setSmShow] = useState(false)
 const [xsShow , setXsShow] = useState()
 const {user, setUser} = useContext(UserContext)
 const[bookings , setBooking] = useState([])
+
 
 
 const [input, setInput] = useState("")
@@ -111,11 +112,13 @@ function handleEndDatePicked(endCalendarDate){
 }
 
 
-    
+
+  
 
     return(
+        
         <div className="mb-3">
-          
+         <CloseButton onClick={handleBookingFormClosing}/>
              <Form onSubmit={handleSubmit}className="booking-form">
       <Form.Group>
         <Form.Label> Start Time</Form.Label>
@@ -186,6 +189,7 @@ function handleEndDatePicked(endCalendarDate){
             <Button 
             onClick={handleStartCalendarDisplay} 
             variant="dark"> Pick up date </Button>
+            
         </div>
 
     <Form.Group  

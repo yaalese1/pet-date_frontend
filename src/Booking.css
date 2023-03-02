@@ -12,6 +12,7 @@
 }
 
 .bookingcards{
+   
    align-items: flex-end;
     width: 30vw;
     padding-top: 70px;
@@ -19,7 +20,30 @@
   
 
 }
+
+.edit-del{
+    padding-left: 75%;
+  display: flex; 
+  justify-content: space-around;
+}
+
+.tool-button{
+    background-color:white;
+    border: white
+   
+}
+
+.tool-message{
+    border-color: black;
+}
+
+.cancel-button{
+    background-color:white;
+    border: white
+}
+
 .react-calendar{
+    
   width: 50vw;
   height: 20vw;
   background-color: pink;

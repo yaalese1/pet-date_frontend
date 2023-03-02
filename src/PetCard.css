@@ -9,6 +9,7 @@
   
   .Petcard {
     width: 30vw;
+    height: 50vw;
     margin-top: 20px;
     border: 2px solid rgb(16, 31, 93);
     border-radius: 20px;
@@ -86,3 +87,15 @@
     
   
   }
+  /* .bookbtn-container{
+    display: flex;
+    justify-content: space-between;
+  } */
+
+.b{
+  /* width: 20%; */
+  justify-content: space-between;
+  /* margin-left: 100px; */
+  /* padding-bottom: 50px; */
+  /* align-items: baseline; */
+}

@@ -13,9 +13,10 @@ import Modal from 'react-bootstrap/Modal';
 function UserPetCard ({userPet}){
      const navigate = useNavigate()
      const {user, setUser} = useContext(UserContext)
-    //  const { id } = useParams()
-     // const [ errors, setErrors ] = useState(null)
+   
+   
      const [smShow, setSmShow] = useState(false);
+     const [ errors, setErrors ] = useState([])
 // console.log(userPet)
 
 
@@ -29,43 +30,30 @@ function handlePetEdit(){
      setSmShow(() => setSmShow(false))     
  }   
 
-//   console.log(userPet.id) 
+  console.log(userPet) 
   
 
+function handleUserPetDelete(){
+    setErrors(null)
 
-
-     //    function handleUserPetDelete(){
-           
-     //        fetch(`/pets/${userPet.id}`,{
-     //            method:"DELETE" ,
-     //            })
-               
-     //            .then(() =>{
-                
-     //            const userPetUpdatedArray = user.userPet?.filter((pet)=> pet.id !== userPet.id)
-     //            console.log(userPet)
-                
-     //            const userDeletedPet = {...user, userPet: userPetUpdatedArray}
-
-     //            setUser(userPetUpdatedArray )
+    fetch(`/pets/${userPet.id}`,{method:"DELETE",}).then((r)=> {
+        if(r.ok){
           
+            const userPetUpdatedArray = user.userPet?.filter((pet)=> pet.id !== userPet.id)  
+            const userPetUpdate = {...user, userPet:userPetUpdatedArray }
+        
+            setUser(userPetUpdate)
+            
 
-     //            alert("Your pet has been Removed please refresh to see your updated profile")
-     //                    navigate("/UserProfile")
-           
-     //        } )
-           
-     //    }
+        }else{
+            r.json().then((err) => (setErrors(err.errors)))
+        }
+        alert("Your pet has been Removed please refresh to see your updated profile")
+            navigate("/UserProfile")
+    })
+}
 
-
-
-            // const newUserPetsArray =(...)
-          
-         
-
-
-// console.log(userPet)
-
+     
   
 
 
@@ -129,11 +117,11 @@ function handlePetEdit(){
            />
           
            </Modal>
-           {/* <div>
+           <div>
            <Button 
            onClick={handleUserPetDelete}
           variant="dark"> click to remove </Button>
-               </div> */}
+               </div>
         </div>
     )
 }
