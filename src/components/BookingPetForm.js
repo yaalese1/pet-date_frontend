@@ -18,7 +18,10 @@ const  [smShow, setSmShow] = useState(false)
 const [xsShow , setXsShow] = useState()
 const {user, setUser} = useContext(UserContext)
 const[bookings , setBooking] = useState([])
-
+const userStartView = JSON.stringify(startDate)
+const userStartViewFormat = userStartView.slice(1,11)
+const userEndView = JSON.stringify(endDate)
+const userEndViewFormat = userEndView.slice(1,11)
 
 
 const [input, setInput] = useState("")
@@ -112,7 +115,6 @@ function handleEndDatePicked(endCalendarDate){
 }
 
 
-
   
 
     return(
@@ -189,7 +191,10 @@ function handleEndDatePicked(endCalendarDate){
             <Button 
             onClick={handleStartCalendarDisplay} 
             variant="dark"> Pick up date </Button>
-            
+            <div className="user-start"
+            >
+            <p>{userStartViewFormat}</p>
+            </div>
         </div>
 
     <Form.Group  
@@ -214,6 +219,9 @@ function handleEndDatePicked(endCalendarDate){
       </Form.Group>
       <div className="drop-button">
       <Button onClick={handleEndCalendarDisplay} variant="dark"> Drop off date </Button>
+      <div>
+        <p>{userEndViewFormat}</p>
+      </div>
       </div> 
       <Modal  size="sm"
          show={smShow}

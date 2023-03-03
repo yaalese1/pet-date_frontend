@@ -1,11 +1,12 @@
-import React,{useState} from 'react';
+import React,{useState, useContext} from 'react';
 import Button from 'react-bootstrap/Button';
-
+import { UserContext } from "../context/user";
 // import UserProfile from './UserProfile';
 import "../PetCard.css"
 // import { UserContext } from "../context/user";
 import BookingPetForm from './BookingPetForm';
 import Modal from 'react-bootstrap/Modal'
+import PetReviewForm from './PetReviewForm';
 
 
 
@@ -15,9 +16,10 @@ import Modal from 'react-bootstrap/Modal'
 
 
   function PetsCard ({id,pet, reviews}){
-    // const {user,setUser} = useContext(UserContext)
+    const {user,setUser} = useContext(UserContext)
     const [ errors, setErrors ] = useState(null)
     const  [smShow, setSmShow] = useState(false)
+
 
     function handleDisplayBookingForm(){
         setSmShow(true)
@@ -32,7 +34,7 @@ import Modal from 'react-bootstrap/Modal'
 
 
 
-
+console.log(pet)
 
 
 
@@ -43,6 +45,7 @@ import Modal from 'react-bootstrap/Modal'
 
     return (
   <div>
+      
    <Modal
        size="sm"
        show={smShow}
@@ -50,6 +53,8 @@ import Modal from 'react-bootstrap/Modal'
        aria-labelledby="example-modal-sizes-title-sm">
     <BookingPetForm pet={pet}
     handleBookingFormClosing={handleBookingFormClosing}/>
+
+   
     </Modal>
     <div className='Petcard'>
       <div className='pet-cardImage'>
@@ -92,34 +97,28 @@ import Modal from 'react-bootstrap/Modal'
                         <div className='review-star'>
                           ⭐️{review.star_rating} 
                         </div> 
+                     
                       </div> 
                         )
     
                        }
                        )}
-                </div>
-
-           
-           
-           
-
-
-    </div>
-    <div className='bookbtn-container'>
-                       <Button className='b' onClick={handleDisplayBookingForm} variant="dark">click to Book</Button>
-              </div>
+            </div>
+          </div>
+           <div className='bookbtn-container'>
+                <Button className='b' onClick={handleDisplayBookingForm} variant="dark">click to Book</Button>
+            </div>
 
         
 {/*         
         <UserProfile pet={pet} comments={reviews.comments}/> */}
         
-        
-        
-        
-        
-  </div>
-  
-</div>   
+        </div>
+             <PetReviewForm 
+                id={pet.id}
+                pet={pet}
+                  />
+    </div>   
        
   
        

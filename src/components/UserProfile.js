@@ -94,9 +94,9 @@ return  (
               </div>
               <MDBCardBody className=''>
                 <div className="mb-9">
-                  <p className="lead fw-normal mb-1">About</p>
+                  <p className="lead fw-normal mb-1"> About me </p>
                   <div className="p-4" style={{ backgroundColor: '#f8f9fa' }}>
-                    <MDBCardText className="font-italic mb-1">Web Developer</MDBCardText>
+                    <MDBCardText className="font-italic mb-1">{user?.about_me}</MDBCardText>
 
 
                    
