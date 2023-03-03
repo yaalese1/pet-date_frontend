@@ -30,7 +30,7 @@ console.log(pets)
     key={pet.id}
     id= {pet.id}
     reviews={pet.pet_reviews}/>
-   
+    
     )
    
  })

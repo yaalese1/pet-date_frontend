@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import '../HomePage.css'
-
+import Button from 'react-bootstrap/Button';
 
 
 
@@ -20,9 +20,9 @@ function HomePage(){
             We are not limited to only finding you love ,
             you are welcome to borrowing and lending a domestic Animal of your choosing.  </p> 
             <div className="lglink">
-            <Link to='/Login'>Login </Link> 
-            /
-            <Link to='/Signup'>Signup </Link>
+            <Link to='/Login'> <Button variant="dark">Login</Button> </Link> 
+            
+            <Link to='/Signup'><Button variant="dark">Signup </Button></Link>
             </div>
         </div>
     </div>

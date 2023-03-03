@@ -5,6 +5,14 @@ import { UserContext } from '../context/user'
 
 import '../Booking.css'
 import { useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import CloseButton from 'react-bootstrap/CloseButton';
+import Form from 'react-bootstrap/Form';
+import Calendar from 'react-calendar';
+
+import 'react-calendar/dist/Calendar.css';
+import Modal from 'react-bootstrap/Modal'
+
 
 function BookingCard ({  userBooking}){
   const [showEditMessage, setShowEditMessage] = useState(false)
@@ -12,7 +20,17 @@ function BookingCard ({  userBooking}){
   const {user, setUser} = useContext(UserContext)
   const [ errors, setErrors ] = useState(null)
   const navigate = useNavigate()
-  
+  const  [smShow, setSmShow] = useState(false)
+  const [xsShow , setXsShow] = useState()  
+  const [startDate, setStartDate] = useState(new Date())
+  const [endDate, setEndDate] = useState(new Date ())
+  const [bookingMod, setBookingMod] = useState(false)
+  const userStartView = JSON.stringify(startDate)
+  const userStartViewFormat = userStartView.slice(1,11)
+  const userEndView = JSON.stringify(endDate)
+  const userEndViewFormat = userEndView.slice(1,11)
+
+
  function handleEditButton (){
   setShowEditMessage(true)
  }
@@ -31,6 +49,20 @@ function BookingCard ({  userBooking}){
 
  function changeBackground(e) {
   e.target.style.background = 'red';
+}
+
+function handleStartCalendarDisplay(){
+  setXsShow(true)
+}
+function handleEndCalendarDisplay(){
+  setSmShow(true)
+}
+
+function handleBookingModal (){
+  setBookingMod(true)
+}
+function handleCloseModal(){
+  setBookingMod(false)
 }
 
 console.log(user.my_bookings)
@@ -77,11 +109,11 @@ function handleSubmit(e){
   }). then((r)=>{
     if (r.ok){
       r.json().then((updatedBooking)=>{
-        const updatedBookingInfo = user.userBookings.map((booking)=> booking.id === updatedBooking.id ? updatedBooking: booking)
+        const updatedBookingInfo = user.userBookings?.map((booking)=> booking.id === updatedBooking.id ? updatedBooking: booking)
         const updateBookingForUser= {...user, booking: updatedBookingInfo}
         setUser(updateBookingForUser)
         alert("Your Booking has been updated")
-        navigate("/schedule")
+        navigate("/UserProfile")
                      
       })
     }
@@ -93,7 +125,20 @@ function handleEditChange(e){
   const{name,value,type,checked} = e.target
   setFormData({...formData, [name]: type === "checkbox" ? checked : value})
 }
+function handleStartDatePicked(startCalendarDate){
+  setStartDate(startCalendarDate)
+  const startDatePickedToString =JSON.stringify(startCalendarDate);
+  const startDateDisplay =  startDatePickedToString.slice(1,11) 
+  setFormData({...formData, start_date: startDateDisplay})
+}
 
+function handleEndDatePicked(endCalendarDate){
+  setEndDate(endCalendarDate)
+  const endDatePickedToString =JSON.stringify(endCalendarDate);
+  const endDateDisplay =  endDatePickedToString.slice(1,11) 
+  setFormData({...formData, end_date: endDateDisplay})
+  console.log(endDateDisplay)
+ }
 // MAKE A FORM TO EDIT AND IMPORT THE CALENDER 
 
  
@@ -105,7 +150,7 @@ function handleEditChange(e){
       <Card.Body>
         <div className="edit-del">
           <div >
-      <button className="tool-button" onMouseEnter={handleEditButton} onMouseLeave={handleEditButtionExit } >🔧  </button>
+      <button className="tool-button" onMouseEnter={handleEditButton} onMouseLeave={handleEditButtionExit } onClick={handleBookingModal } >🔧  </button>
       {showEditMessage &&( 
       <div className="tool-message">
        Click to edit your booking
@@ -145,21 +190,164 @@ function handleEditChange(e){
           <small className="text-muted">Last updated 3 mins ago</small>
         </Card.Footer>
       </Card>
-    
-    {/* <ListGroup.Item>{booking.pet}</ListGroup.Item> */}
-           {/* <Card style={{ width: '18em' , flex: '1'}}>
-      <Card.Body>
-            <Card.Title>{booking.date}</Card.Title>
-            <Card.Title>{booking.time}</Card.Title>
-            <Card.Title><h5>Pet Only Date:</h5>{booking.pet_only ? <>🐩</> : <>❌</>}</Card.Title>
-            <ListGroup.Item>
-            <h5>Dropoff:</h5>{booking.dropoff_location}</ListGroup.Item>
-            <ListGroup.Item>
-            <h5>Pickup:</h5>{booking.pickup_location}</ListGroup.Item>
-        <Card.Link href="#">Card Link</Card.Link>
-        <Card.Link href="#">Another Link</Card.Link>
-      </Card.Body>
-    </Card> */}
+  
+
+      <Modal
+      size="sm"
+      show={bookingMod}
+      onHide={() => setBookingMod(false)}
+      aria-labelledby="example-modal-sizes-title-sm">
+      <div className="mb-3">
+         <CloseButton  onClick={handleCloseModal}/>
+             <Form onSubmit={handleSubmit}className="booking-form">
+      <Form.Group>
+        <Form.Label> Start Time</Form.Label>
+        <Form.Select  
+        name="start_time"
+        value={formData.start_time}
+        onChange={handleEditChange}>
+          <option>12:00 am</option>
+          <option>1:00 AM</option>
+          <option>2:00 AM</option>
+          <option>3:00 AM</option>
+          <option>4:00 AM</option>
+          <option>5:00 AM</option>
+          <option>6:00 AM</option>
+          <option>7:00 AM</option>
+          <option>8:00 AM</option>
+          <option>9:00 AM</option>
+          <option>10:00 AM</option>
+          <option>11:00 AM</option>
+          <option>1:00 PM</option>
+          <option>2:00 PM</option>
+           <option>3:00 PM</option>
+           <option>4:00 PM</option>
+           <option>5:00 PM</option>
+           <option>6:00 PM</option>
+           <option>7:00 PM</option>
+           <option>8:00 PM</option>
+           <option>9:00 PM</option>
+           <option>10:00 PM</option>
+           <option>11:00 PM</option>                       
+        </Form.Select> 
+      </Form.Group>
+
+
+        <Form.Group>
+        <Form.Label> End Time</Form.Label>
+        <Form.Select 
+            name="end_time"
+            value={formData.end_time}
+            onChange={handleEditChange}>
+          <option>12:00 AM</option>
+          <option>1:00 AM</option>
+          <option>2:00 AM</option>
+          <option>3:00 AM</option>
+          <option>4:00 AM</option>
+          <option>5:00 AM</option>
+          <option>6:00 AM</option>
+          <option>7:00 AM</option>
+          <option>8:00 AM</option>
+          <option>9:00 AM</option>
+          <option>10:00 AM</option>
+          <option>11:00 AM</option>
+          <option>1:00 PM</option>
+          <option>2:00 PM</option>
+           <option>3:00 PM</option>
+           <option>4:00 PM</option>
+           <option>5:00 PM</option>
+           <option>6:00 PM</option>
+           <option>7:00 PM</option>
+           <option>8:00 PM</option>
+           <option>9:00 PM</option>
+           <option>10:00 PM</option>
+           <option>11:00 PM</option>                       
+        </Form.Select> 
+      </Form.Group>
+
+        <div className="pickup-button">
+            <Button 
+            onClick={handleStartCalendarDisplay} 
+            variant="dark"> Pick up date </Button>
+             <p>{ userStartViewFormat }</p>
+        </div>
+
+    <Form.Group  
+        name='start_date'
+      
+        // value={formData.start_date}
+        // onChange={handleStartDatepicked}>  
+        >
+     <Modal
+         size="sm"
+         show={xsShow}
+         onHide={() => setXsShow(false)}
+         aria-labelledby="example-modal-sizes-title-sm">  
+        <Calendar onChange={ handleStartDatePicked} value={startDate} 
+        
+        />     
+    </Modal>   
+    </Form.Group>
+        
+       <Form.Group
+       name='end-date'>
+      </Form.Group>
+      <div className="drop-button">
+      <Button onClick={handleEndCalendarDisplay} variant="dark"> Drop off date </Button>
+      <p>{userEndViewFormat}</p>
+      </div> 
+      <Modal  size="sm"
+         show={smShow}
+         onHide={() => setSmShow(false)}
+         aria-labelledby="example-modal-sizes-title-sm">  
+      <Calendar onChange={handleEndDatePicked} value={endDate}/>
+      </Modal>
+    <Form.Group/>
+
+
+    <div className= "pick-location">
+      <Form.Group >
+        <Form.Label>Pickup Location</Form.Label>
+        <Form.Control 
+        name="pickup_location" 
+        value={formData.pickup_location}
+        onChange={handleEditChange} />
+      </Form.Group>
+    </div>
+      
+         <Form.Group>
+        <Form.Label>Dropoff Location</Form.Label>
+        <Form.Control 
+        name="dropoff_location" 
+        value={formData.dropoff_location}
+        onChange={handleEditChange} />
+      </Form.Group>
+
+      <div className='present-box'>
+        <Form.Group>
+        <Form.Label>
+            Would you like the owner to be present for a Date ?
+        </Form.Label>
+        <Form.Check 
+        name="pet_only" 
+        type="checkbox" 
+        checked={formData.pet_only}
+        onChange={handleEditChange}
+        />
+       </Form.Group>
+    </div>
+
+     
+      <Button variant="dark" type="submit">
+        Submit
+      </Button>
+    </Form>
+   
+        </div>
+
+    </Modal>
+
+
         </div>
     )
 }
