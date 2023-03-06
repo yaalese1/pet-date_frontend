@@ -22,7 +22,7 @@ function PetsPage () {
     
     },[]) 
 
-console.log(pets)
+
 
  const eachPet = pets.map((pet) =>{
     return( <PetsCard 
@@ -34,7 +34,7 @@ console.log(pets)
     )
    
  })
-//  console.log (eachPet)
+
 
 
 

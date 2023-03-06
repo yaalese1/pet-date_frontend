@@ -9,12 +9,13 @@
 
     .homepagecard{
         width: 30vw;
-    height: 20vw;
+    height: 30vw;
     border: 2px groove rgb(68, 65, 66); 
     box-shadow: rgb(55, 54, 55);
     border-radius: 10px; 
     background-color: deeppink; 
     box-shadow: rgb(190, 25, 151);
+    justify-content: space-around;
    
 
     }
@@ -25,11 +26,35 @@
 
         color: rgb(25, 3, 15);  
     }
+
+
     .lglink{
-        align-items: center; 
-        padding-bottom: 150px;
-        padding-left: 200px;
+        display: flex;
+        justify-content: center;
+    flex-direction: row-reverse;
+      
+      
+       
     }
+    .logbtn{
+        /* padding-left: 10vw; */
+        /* padding-bottom: 20px; */
+        padding: 10px;
+        justify-content: center;
+    }
+
+    .signbtn{
+        padding: 10px;
+        /* padding-right: 10vw; */
+    }
+    /* .homebttn{
+        justify-content: center;
+    padding-left: 5vw;
+    padding-bottom: 20vw;
+ 
+       
+       
+    } */
 /* 
     p{
         align-items: center;

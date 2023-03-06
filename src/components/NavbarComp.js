@@ -39,10 +39,10 @@ function NavbarComp() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="HomePage">Home</Nav.Link>
-            <Nav.Link href="Login"> Login</Nav.Link>
+            <Nav.Link href="Home">Home</Nav.Link>
+           <Nav.Link href= "Pets">Pets</Nav.Link>
             <Nav.Link href="UserProfile"> Profile</Nav.Link>
-            <NavDropdown title="UserInfo" id="navbarScrollingDropdown">
+            <NavDropdown title="User Info" id="navbarScrollingDropdown">
               <NavDropdown.Item href="schedule">Schedule</NavDropdown.Item>
               <NavDropdown.Item href="Pets">
                 Pets

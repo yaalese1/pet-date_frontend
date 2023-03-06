@@ -1,0 +1,72 @@
+.login-form{
+    display: flex; 
+    justify-content: center;
+   padding-left: 5vw;
+   /* padding: 2vw; */
+ align-items: center;
+ 
+    background-color: pink;
+    border-radius: 10px;
+   height: 25vw;
+  
+  padding-bottom: 20px;
+  
+} 
+
+
+
+
+
+ .login-header{
+ /* padding-left:90px;
+ padding-bottom: 10px; */
+ font-weight: 600;
+ font-variant: black;
+    
+} 
+
+.rem{
+    /* display: flex; 
+    justify-content: center; */
+    padding: 20px;
+    margin-right: 23vw;
+}
+.bck-btn{
+    background-color: pink;
+    border: pink;
+    padding: 10px;
+    border-top-left-radius: 10px;
+}
+.bck-container{
+    border-radius: 10px;
+    background-color: pink;
+}
+
+.back-sign{
+    display: flex; 
+    justify-content: center;
+    background-color: pink;
+    border-radius: 10px;
+    height: 55vw;
+}
+   /* padding-left: 5vw; */
+   /* padding: 2vw; */
+ /* align-items: center;
+ 
+    background-color: pink;
+    border-radius: 10px;
+   height: 25vw;
+  
+  padding-bottom: 20px; */
+
+
+
+.bcksign-btn{
+    background-color: pink;
+    border: pink;
+    padding: 10px;
+    border-top-left-radius: 10px; 
+}
+.x{
+   padding-bottom: 10px
+}

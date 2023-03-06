@@ -30,7 +30,7 @@ function handlePetEdit(){
      setSmShow(() => setSmShow(false))     
  }   
 
-  console.log(userPet) 
+
   
 
 function handleUserPetDelete(){
@@ -39,8 +39,8 @@ function handleUserPetDelete(){
     fetch(`/pets/${userPet.id}`,{method:"DELETE",}).then((r)=> {
         if(r.ok){
           
-            const userPetUpdatedArray = user.userPet?.filter((pet)=> pet.id !== userPet.id)  
-            const userPetUpdate = {...user, userPet:userPetUpdatedArray }
+            const userPetUpdatedArray = user.pets?.filter((pet)=> pet.id !== userPet.id)  
+            const userPetUpdate = {...user, pets:userPetUpdatedArray }
         
             setUser(userPetUpdate)
             

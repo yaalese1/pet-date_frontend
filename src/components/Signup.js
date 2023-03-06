@@ -5,11 +5,11 @@ import Alert from 'react-bootstrap/Alert';
 import {useState, useContext} from 'react'
 import { UserContext } from "../context/user";
 import { useNavigate } from "react-router-dom";
+import Modal from "react-bootstrap/Modal"
 
 
 
-
-function Signup (){
+function Signup ({handleSignupClose}){
     const [first_name, setFirst_name] = useState("");
     const [last_name, setLast_name] = useState("");
     const [email, setEmail] = useState("")
@@ -20,7 +20,7 @@ function Signup (){
     const [address, setAddress] = useState("")
     const [seeking_relationship, setSeeking_Relationship] = useState (false)
 //    const [errors, setErrors] = useState([]);
-   const [isLoading, setIsLoading] = useState(false);
+const [isLoading, setIsLoading] = useState(false);
    const {setUser} = useContext(UserContext)
    const navigate = useNavigate()
    const [ errors, setErrors ] = useState(null)
@@ -66,14 +66,22 @@ function Signup (){
 
 
  return(
+
+
+  <div className='back-sign'>
     <Form onSubmit={handleUserSubmit}> 
        <div className='sign_up_errors'>
               {errors ? errors.map((e) =>
                   <Alert severity="error" >{e}</Alert>) : null}
           </div> 
+          <button className='bcksign-btn' onClick={handleSignupClose}>
+          ﹤ Back
+          </button>
+
+    <div className='sign-form'>
     
-      <h3 className="slogan">Where tinder meets pet pal </h3>
-      <h1>Sign Up Below </h1>
+      <h1 className="slogan">Where Pet Pal Meets Tinder </h1>
+      <h3>Sign Up Below </h3>
 
       <Form.Group>
         <Form.Label>First Name</Form.Label>
@@ -130,7 +138,7 @@ function Signup (){
       </Form.Group>
 
 
-    <Form.Group>
+      <Form.Group>
         <Form.Label>Address</Form.Label>
              <Form.Control type="address" placeholder="Address"
                  value={address}
@@ -139,9 +147,11 @@ function Signup (){
 
        <br></br>
        <Form.Group 
-           className="mb-3" controlId="formBasicCheckbox">
+    
+           className="x" controlId="formBasicCheckbox">
+               <p> Are you seeking a Relationship with lenders as well ?</p>
                 <Form.Check type="checkbox" 
-                    label="Seeking Relationship"
+                    label="yes I am seeking a relationship"
                         value={seeking_relationship}
                             onChange={(e) =>setSeeking_Relationship(true)} />
       </Form.Group>
@@ -157,7 +167,7 @@ function Signup (){
       </Form.Group> */}
       
       <Button 
-       type="submit" variant="primary" >
+       type="submit" variant="dark" >
       {isLoading ? "Loading..." : "Sign Up"}
 
       </Button>
@@ -166,7 +176,10 @@ function Signup (){
 
 
 
+      </div>
       </Form>
+      </div>
+  
  )
 
 }
