@@ -34,12 +34,12 @@ function BookingPage(){
         const monthTwo = parseInt(booking.start_date.slice(5,7)) -1
         const yearTwo = parseInt(booking.start_date.slice(0,4))
         const date = new Date(year, month, day, dayTwo, monthTwo, yearTwo)
-        console.log(date.toDateString())
+        // console.log(date.toDateString())
     // console.log(calender.toDateString())
         return date.toDateString() === calender.toDateString()
     }  )
    
-console.log(displayBooking)
+
 
 
    
@@ -59,7 +59,7 @@ console.log(displayBooking)
         )
 
     })
-//    console.log(calender)
+
 
     return(
         <div className='bookingpage'>

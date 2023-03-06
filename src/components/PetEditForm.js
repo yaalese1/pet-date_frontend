@@ -40,7 +40,7 @@ function PetEditForm({ pets, handleModalClosing}){
        function handleSubmit(e) {
              e.preventDefault()
              setErrors([])
-             console.log(updatedPet)
+            //  console.log(updatedPet)
              fetch('/pets/'+`${pets.id}`, {
                  method: "PATCH",
                  headers: {
@@ -56,6 +56,7 @@ function PetEditForm({ pets, handleModalClosing}){
                       
                         const updatedUser = {...user , pets: updatedPetInfo}
                         setUser(updatedUser)
+                        console.log(user)
                         
                         //  const updatedPetInfo = user.pets.map((info) => info.id 
                         

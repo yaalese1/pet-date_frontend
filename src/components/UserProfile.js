@@ -80,7 +80,7 @@ return  (
                 <div className='infoblock text-center'>
                   <div>
                     <MDBCardText className="mb-1 h5">{user?.age}</MDBCardText>
-                    <MDBCardText className="small  mb-0">Birthdate</MDBCardText>
+                    <MDBCardText className="small  mb-0">Age</MDBCardText>
                   </div>
                   <div className="px-3">
                     <MDBCardText className="mb-1 h5">{user?.seeking_relationship ? <>💓</> : <>❌</>} </MDBCardText>
@@ -159,7 +159,7 @@ return  (
       
   <Modal
      
-     size="sm"
+      size="sm"
      show={smShow}
      onHide={() => setSmShow(false)}
      aria-labelledby="example-modal-sizes-title-sm"

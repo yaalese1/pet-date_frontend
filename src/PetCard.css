@@ -13,7 +13,7 @@
     margin-top: 20px;
     border: 2px solid rgb(16, 31, 93);
     border-radius: 20px;
-  
+    overflow: scroll
     
   }
   
@@ -53,17 +53,22 @@
     font-size: 16px;
     margin: 0;
   }
+  .line-item{
+    flex-direction: row;
+  }
   
   .ReviewList-item{
     border-top: 2px groove #d3d3d3;
-   
+    padding: 10px;
+  
   }
   
   .reviewsContainer{
-    padding: 5px;
+    padding: 10px;
     display: flex;
     flex-wrap: wrap;
     overflow: scroll;
+    flex-direction: row;
   }
   
   
@@ -91,10 +96,15 @@
     display: flex;
     justify-content: space-between;
   } */
-
-.b{
+.trash-container{
+  display: flex;
+  padding-left: 300px;
+}
+.trash-btn{
   /* width: 20%; */
+  background-color: white;
   justify-content: space-between;
+  border: white
   /* margin-left: 100px; */
   /* padding-bottom: 50px; */
   /* align-items: baseline; */

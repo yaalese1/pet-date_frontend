@@ -7,6 +7,7 @@ import "../PetCard.css"
 import BookingPetForm from './BookingPetForm';
 import Modal from 'react-bootstrap/Modal'
 import PetReviewForm from './PetReviewForm';
+import Rating from '@mui/material/Rating';
 
 
 
@@ -34,10 +35,23 @@ import PetReviewForm from './PetReviewForm';
 
 
 
-console.log(pet)
+ const reviewsId = reviews.map((review)=>{
+  return review.id
+  
+ })
+
+ console.log(reviews)
 
 
-
+function handleDeleteReview(){
+  fetch('/pet_reviews/',{method:"DELETE",}).then((r)=>{
+    if(r.ok){
+      const userReviewRemoved = reviews.filter((pet)=> pet.id)
+      const userReviewUpdated = {...user, reviews:userReviewRemoved}
+      setUser(userReviewUpdated)
+    }
+  })
+}
 
 
 
@@ -61,6 +75,9 @@ console.log(pet)
             <img src= 'http://cdn.akc.org/content/hero/cute_puppies_hero.jpg' 
             alt ="https://images.unsplash.com/photo-1579380656108-f98e4df8ea62?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZnJvZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"/>
           </div>
+          <div className='bookbtn-container'>
+                <Button className='b' onClick={handleDisplayBookingForm} variant="dark">click to Book</Button>
+            </div>
         <div className='PetInfo'>
             <div className='line-item'>
               <h3>name:</h3>
@@ -86,16 +103,21 @@ console.log(pet)
               <h3>diet:</h3>
               <p>{pet.diet}</p>
             </div>
-            <div className='reviewsContainer'>
-                     {reviews.map((review)=> {
+            <div className='line'>
+                     {reviews?.map((review)=> {
                     return(
                     <div className='ReviewList-item'
                         key={review.id}> 
                         <div className='review-comments'>
                         {review.comments} 
                         </div>
-                        <div className='review-star'>
-                          ⭐️{review.star_rating} 
+                        <div className='line-item'>
+                         
+                        <Rating name="read-only" value={review.star_rating}  readOnly />
+                        <div className='trash-container'>
+                        <button onClick={ handleDeleteReview} className='trash-btn'variant="DARK">🗑</button>
+                        </div>
+                          
                         </div> 
                      
                       </div> 
@@ -105,9 +127,7 @@ console.log(pet)
                        )}
             </div>
           </div>
-           <div className='bookbtn-container'>
-                <Button className='b' onClick={handleDisplayBookingForm} variant="dark">click to Book</Button>
-            </div>
+          
 
         
 {/*         

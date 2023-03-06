@@ -65,8 +65,9 @@ function handleCloseModal(){
   setBookingMod(false)
 }
 
-console.log(user.my_bookings)
-console.log(user.pet_bookings)
+// console.log(user.my_bookings)
+// console.log(user.pet_bookings)
+
 
 
 
@@ -83,10 +84,12 @@ function handleDeletBookingClick(){
           setUser(otherUserUpdate)
 
       }
-       alert("Your date has been Removed ")
+       alert("Your date has been Canceled ")
+
     })
+    navigate("/Schedule")
 }
- console.log(userBooking.start_date)
+
 
 const [formData, setFormData] = useState({
   start_data: userBooking.start_date,
@@ -109,24 +112,35 @@ function handleSubmit(e){
   }). then((r)=>{
     if (r.ok){
       r.json().then((updatedBooking)=>{
-        const updatedBookingInfo = user.userBookings?.map((booking)=> booking.id === updatedBooking.id ? updatedBooking: booking)
-        const updateBookingForUser= {...user, booking: updatedBookingInfo}
-        setUser(updateBookingForUser)
+
+        const updatedBookingInfo = user.my_bookings?.map((my_booking)=> 
+        my_booking.id === updatedBooking.id ? updatedBooking: my_booking)
+      
+   
+        
+        const updateBookingForUser= {...user , my_bookings: updatedBookingInfo}
+       
+        setUser( updateBookingForUser)
+   
+        
         alert("Your Booking has been updated")
-        navigate("/UserProfile")
-                     
+        navigate("/Schedule")
+        
+       
       })
     }
   })
-
+  
 }
+
+
+
 
 function handleEditChange(e){
   const{name,value,type,checked} = e.target
   setFormData({...formData, [name]: type === "checkbox" ? checked : value})
 }
 function handleStartDatePicked(startCalendarDate){
-  setStartDate(startCalendarDate)
   const startDatePickedToString =JSON.stringify(startCalendarDate);
   const startDateDisplay =  startDatePickedToString.slice(1,11) 
   setFormData({...formData, start_date: startDateDisplay})
@@ -137,7 +151,7 @@ function handleEndDatePicked(endCalendarDate){
   const endDatePickedToString =JSON.stringify(endCalendarDate);
   const endDateDisplay =  endDatePickedToString.slice(1,11) 
   setFormData({...formData, end_date: endDateDisplay})
-  console.log(endDateDisplay)
+  
  }
 // MAKE A FORM TO EDIT AND IMPORT THE CALENDER 
 

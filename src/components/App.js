@@ -1,7 +1,7 @@
-// import { useState, useEffect } from "react";
+import { useState} from "react";
 import NavbarComp from "./NavbarComp";
-import Login from "./Login";
-import Signup from "./Signup";
+
+
 import PetsPage from "./PetsPage";
 import BookingPage from "./BookingPage"
 import UserProfile from "./UserProfile"
@@ -12,6 +12,9 @@ import { UserProvider } from "../context/user";
 import {PetProvider} from "../context/pets"
 import {Routes, Route} from "react-router-dom"
 
+import { CloseButton } from 'react-bootstrap';
+// import "../Login.css"
+
 
 function App() {
 
@@ -21,21 +24,22 @@ function App() {
   return (
     <div>
       <UserProvider>
-        <PetProvider>
+    
+ 
+   
+
       <NavbarComp/>
       <Routes>
 
-      <Route exact path= "/schedule" element = {<BookingPage/>}/>
+      <Route exact path= "/Schedule" element = {<BookingPage/>}/>
       <Route exact path= "/Pets" element = {<PetsPage/>}/>
-      <Route exact path= "/Login" element = {<Login/>}/>
-      <Route exact path= "/Signup" element = {<Signup/>}/>
       <Route exact path= "/UserProfile" element ={<UserProfile/>}/>
-      <Route exact path= "/HomePage" element ={<HomePage/>}/>
-      {/* <Route exact path= "/PetEditForm/" element = {<PetEditForm/>}/> */}
+      <Route exact path= "/Home" element ={<HomePage />}/>
+      
      
 
       </Routes>
-      </PetProvider>
+
       </UserProvider>
       
     </div>

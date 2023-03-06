@@ -1,18 +1,26 @@
 import React, { useState, useContext } from 'react'
 import Button from 'react-bootstrap/Button';
+
 import Form from 'react-bootstrap/Form';
 import { UserContext } from "../context/user";
 import { useNavigate } from "react-router-dom";
+import "../Login.css"
+import { CloseButton } from 'react-bootstrap';
 
-  function Login (){
+  function Login ({ handleClose}){
     const navigate = useNavigate()
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [userAvatar, setUserAvatar] = useState({})
     const {user, setUser} = useContext(UserContext)
-
+    const [isLoading, setIsLoading] = useState(false);
+function handleBack (){
+  // navigate("/Home")
+  
+}
     function handleSubmit(e) {
       e.preventDefault();
+      setIsLoading(true)
       fetch("/login", {
         method: "POST",
         headers: {
@@ -20,6 +28,7 @@ import { useNavigate } from "react-router-dom";
         },
         body: JSON.stringify({email, password} ),
       }).then((r) => {
+        setIsLoading(false)
         if (r.ok) {
          
           r.json().then ((user) => setUser(user));
@@ -32,27 +41,55 @@ import { useNavigate } from "react-router-dom";
 
     
     return (
+<div className='bck-container'>
+    <button  className='bck-btn' onClick={handleClose}> 
+      ﹤ Back
+      </button>
+      
+        <div className='login-form' >
+      
+
         <Form onSubmit ={handleSubmit}>
-          <h1>Login</h1>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" value= {email} onChange= {(e)=> setEmail(e.target.value)} />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
+   
+      
+            <h1 className='login-header'>Login</h1>
+          <Form.Group >
+              <Form.Label>
+                Email address
+              </Form.Label>
+              <Form.Control 
+                type="email" 
+                placeholder="Enter email" 
+                value= {email} 
+                onChange= {(e)=> setEmail(e.target.value)} 
+              />
+              <Form.Text 
+                className="text-muted">
+                We'll never share your email with anyone else.
+              </Form.Text>
         </Form.Group>
   
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="Password" >
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" value= {password} onChange= {(e)=> setPassword(e.target.value)} />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Remember me" />
+
+        <Form.Group className='rem' >
+          <Form.Check 
+           type="checkbox" 
+           label="Remember me" />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
+
+        <Button variant="dark" type="submit">
+        login
         </Button>
+      
+       
       </Form>
+     
+      </div>  
+  
+      </div>
 
     )
    
