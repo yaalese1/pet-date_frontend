@@ -6,6 +6,8 @@ import Calendar from 'react-calendar';
 
 import 'react-calendar/dist/Calendar.css';
 import Modal from 'react-bootstrap/Modal'
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import { UserContext } from '../context/user'
 import { useNavigate } from "react-router-dom";
 
@@ -118,12 +120,15 @@ function handleEndDatePicked(endCalendarDate){
   
 
     return(
-        
-        <div className="mb-3">
-         <CloseButton onClick={handleBookingFormClosing}/>
-             <Form onSubmit={handleSubmit}className="booking-form">
-      <Form.Group>
-        <Form.Label> Start Time</Form.Label>
+      <div className="btnbck-container">
+      <button className="bckbooking-btn" onClick={handleBookingFormClosing}> ﹤Back</button> 
+        <div className="bookingform-container">
+             <Form onSubmit={handleSubmit} >
+              <h3 className="form-petname">Booking form for {pet.name}</h3>
+        <p >Fill out the booking form below  </p>
+            
+      <Form.Group  className="2">
+        <Form.Label > Start Time</Form.Label>
         <Form.Select  
         name="start_time"
         value={formData.start_time}
@@ -185,25 +190,34 @@ function handleEndDatePicked(endCalendarDate){
            <option>10:00 PM</option>
            <option>11:00 PM</option>                       
         </Form.Select> 
-      </Form.Group>
-
-        <div className="pickup-button">
-            <Button 
-            onClick={handleStartCalendarDisplay} 
-            variant="dark"> Pick up date </Button>
-            <div className="user-start"
-            >
-            <p>{userStartViewFormat}</p>
-            </div>
-        </div>
-
-    <Form.Group  
-        name='start_date'
       
-        // value={formData.start_date}
-        // onChange={handleStartDatepicked}>  
+
+      </Form.Group >
+    
+    
+
+        <div >
+       
+          <Form.Group className="pickup-button" >
+            <Button className="pickup-button"
+            size="sm"
+            onClick={handleStartCalendarDisplay} 
+            variant="dark"> Pick up date  </Button>
+             </Form.Group> 
+
+            <div className="user-start">
+            
+           <h5 className="user-start"> 
+           Pickup date: {userStartViewFormat}
+           </h5>
+            </div>
+   </div>
+
+    <Form.Group   
+        name='start_date'
         >
      <Modal
+
          size="sm"
          show={xsShow}
          onHide={() => setXsShow(false)}
@@ -214,41 +228,46 @@ function handleEndDatePicked(endCalendarDate){
     </Modal>   
     </Form.Group>
         
-       <Form.Group
+       <Form.Group 
        name='end-date'>
-      </Form.Group>
-      <div className="drop-button">
-      <Button onClick={handleEndCalendarDisplay} variant="dark"> Drop off date </Button>
+      </Form.Group >
       <div>
-        <p>{userEndViewFormat}</p>
+      <Button  className="drop-button"
+     
+       size="sm" onClick={handleEndCalendarDisplay} variant="dark"> Drop off date </Button>
+      <div >
+        <h4 className="user-end"> Drop off date: {userEndViewFormat}</h4>
       </div>
       </div> 
-      <Modal  size="sm"
+      <Modal  size="md"
          show={smShow}
          onHide={() => setSmShow(false)}
-         aria-labelledby="example-modal-sizes-title-sm">  
+         aria-labelledby="example-modal-sizes-title-md">  
       <Calendar onChange={handleEndDatePicked} value={endDate}/>
       </Modal>
-    <Form.Group/>
+   
+     
+   
 
-
-    <div className= "pick-location">
-      <Form.Group >
+<Row>
+ 
+      <Form.Group as={Col} className= "pick-location" >
         <Form.Label>Pickup Location</Form.Label>
         <Form.Control 
         name="pickup_location" 
         value={formData.pickup_location}
         onChange={handleChange} />
       </Form.Group>
-    </div>
+  
       
-         <Form.Group>
+         <Form.Group as={Col} className= "drop-location">
         <Form.Label>Dropoff Location</Form.Label>
         <Form.Control 
         name="dropoff_location" 
         value={formData.dropoff_location}
         onChange={handleChange} />
       </Form.Group>
+    </Row>
 
       <div className='present-box'>
         <Form.Group>
@@ -270,6 +289,8 @@ function handleEndDatePicked(endCalendarDate){
       </Button>
     </Form>
    
+        </div>
+        
         </div>
     )
 }

@@ -1,6 +1,8 @@
 import React ,{ useContext,useState } from 'react'
 import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/user";
 import CloseButton from 'react-bootstrap/CloseButton';
@@ -31,10 +33,14 @@ function PetEditForm({ pets, handleModalClosing}){
           diet: petEdit.diet,
           size: petEdit.size,
           mental_disorder: petEdit.mental_disorder,
+          state: petEdit.state,
+          city: petEdit.city,
+          zip_code: petEdit.zip_code,
           open_to_breeding: petEdit.open_to_breeding,
           active: petEdit.active,
           trained: petEdit.trained,
           alteration: petEdit.alteration,
+
         
     })
        function handleSubmit(e) {
@@ -90,13 +96,16 @@ function PetEditForm({ pets, handleModalClosing}){
     return(
         
         <div className='petedit-form'>
-      <CloseButton  onClick={handleModalClosing} />
+      <button className='edit-bckbtn' onClick={handleModalClosing}> ﹤Back </button>
         <Form onSubmit={handleSubmit}>  
-    
-        <h3 className="peteditheader">Edit Your Pet Below </h3>
-  
-        <Form.Group className='edit-textarea'>
-          <Form.Control 
+       
+        <h3 className="peteditheader">Edit Your Pet's Info Below </h3>
+       
+        <Row className="row-1">
+        <Form.Group as={Col} className= "edit-textarea">
+            Name:
+          <Form.Control
+           
             input= "text"
             name="name" 
             placeholder="Name"
@@ -104,10 +113,13 @@ function PetEditForm({ pets, handleModalClosing}){
             onChange={handleEditChange}
           />
         </Form.Group>
+        
        
   
-        <Form.Group className='edit-textarea'>
+        <Form.Group as={Col} className= "edit-textarea"  >
+            Species:
          <Form.Control 
+            
             input= "text"
             name="species" 
             placeholder="Species"
@@ -115,24 +127,33 @@ function PetEditForm({ pets, handleModalClosing}){
             onChange={handleEditChange}
             />
         </Form.Group>
-        <Form.Group className='edit-textarea'>
+        </Row>
+
+    <Row className="row-2">
+        <Form.Group as={Col} className='edit-textarea'>
+            Breed:
             <Form.Control 
              name="breed" 
             placeholder="Breed"
             value={updatedPet.breed}
             onChange={handleEditChange} />    
         </Form.Group>
-  
-        <Form.Group className='edit-textarea'>
-            <Form.Control 
+ 
+        <Form.Group as={Col} className='edit-textarea'>
+            Age:
+            <Form.Control
+             className='edit-input' 
              name="age" 
             placeholder="Age"
             value={updatedPet.age}
             onChange={handleEditChange} />    
         </Form.Group>
-
-        <Form.Group className='edit-textarea'>
+    </Row>
+    <Row className='row-3'>
+        <Form.Group as={Col}  className='edit-textarea'>
+            Diet:
             <Form.Control 
+             className='edit-input'
             input= "text"
             name="diet" 
             placeholder="Diet"
@@ -141,8 +162,10 @@ function PetEditForm({ pets, handleModalClosing}){
             />
         </Form.Group>
 
-        <Form.Group className='edit-textarea'>
+        <Form.Group as={Col}  className='edit-textarea'>
+            Size:
             <Form.Control 
+                className='edit-input'
                 input= "text"
                 name="size" 
                 placeholder="Size"
@@ -150,9 +173,12 @@ function PetEditForm({ pets, handleModalClosing}){
                 onChange={handleEditChange}
                  />
         </Form.Group>
+  
 
-        <Form.Group className='edit-textarea'>
-            <Form.Control 
+        <Form.Group as={Col}  className='edit-textarea'>
+            Mental Disorder(s):
+            <Form.Control
+             className='edit-input' 
             input= "text"
             name="mental_disorder" 
             placeholder="Mental Disorder"
@@ -160,7 +186,49 @@ function PetEditForm({ pets, handleModalClosing}){
             onChange={handleEditChange} 
             />
         </Form.Group>
-        <Form.Group className='edit-textarea'>
+    </Row>
+
+    <Row className='location'>
+        <Form.Group as={Col}  className='edit-textarea'>
+            State:
+            <Form.Control 
+            className='edit-input'
+            input= "text"
+            name="state" 
+            placeholder="state"
+            value={updatedPet.state}
+            onChange={handleEditChange} 
+            />
+        </Form.Group>
+
+        <Form.Group as={Col}  className='edit-textarea'>
+            City:
+            <Form.Control 
+            className='edit-input'
+            input= "text"
+            name="city" 
+            placeholder="City"
+            value={updatedPet.city}
+            onChange={handleEditChange} 
+            />
+        </Form.Group>
+        <Form.Group as={Col}  className='edit-textarea'>
+            Zip Code:
+            <Form.Control 
+            className='edit-input'
+            input= "text"
+            name="zip_code" 
+            placeholder="Zip Code"
+            value={updatedPet.zip_code}
+            onChange={handleEditChange} 
+            />
+        </Form.Group>
+        </Row>
+        
+    <Row> 
+    <p className='editcheck-directions'>Uncheck the box for No </p> 
+        <Form.Group as={Col}  className='edit-textarea'>
+ 
                 <Form.Label> Are you open to breeding this pet  ? </Form.Label>
                 <Form.Check
                 name= 'open_to_breeding'
@@ -170,7 +238,7 @@ function PetEditForm({ pets, handleModalClosing}){
                 onChange={handleEditChange} />
             </Form.Group>
 
-            <Form.Group className='edit-textarea'>
+            <Form.Group as={Col}  className='edit-textarea'>
                 <Form.Label> Is your pet active ? </Form.Label>
                 <Form.Check
                 name= 'active'
@@ -179,8 +247,9 @@ function PetEditForm({ pets, handleModalClosing}){
                 checked={updatedPet.active}
                 onChange={handleEditChange} />
             </Form.Group>
-
-            <Form.Group className='edit-textarea'>
+        </Row>  
+        <Row>
+            <Form.Group as={Col}  className='edit-textarea'>
                 <Form.Label> Is your pet trained ? </Form.Label>
                 <Form.Check
                  name="trained"
@@ -190,7 +259,7 @@ function PetEditForm({ pets, handleModalClosing}){
                 onChange={handleEditChange} />
             </Form.Group>
 
-            <Form.Group className='edit-textarea'>
+            <Form.Group as={Col}  className='edit-textarea'>
                 <Form.Label> Has your pet undergone alteration? </Form.Label>
                 <Form.Check
                  name="alteration"
@@ -199,7 +268,7 @@ function PetEditForm({ pets, handleModalClosing}){
                checked={updatedPet.alteration}
                 onChange={handleEditChange} />
             </Form.Group>
-
+        </Row>
          
 
            

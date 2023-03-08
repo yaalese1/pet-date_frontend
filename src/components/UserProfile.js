@@ -92,16 +92,20 @@ return  (
                   </div>
                 </div>
               </div>
-              <MDBCardBody className=''>
+              <MDBCardBody >
                 <div className="mb-9">
-                  <p className="lead fw-normal mb-1"> About me </p>
+                  <p className="lead fw-normal mb-1"> About me </p> 
+              
+                 
                   <div className="p-4" style={{ backgroundColor: '#f8f9fa' }}>
-                    <MDBCardText className="font-italic mb-1">{user?.about_me}</MDBCardText>
-
-
                    
-                   
+                    <MDBCardText className="font-italic mb-1">{user?.about_me}
+                    </MDBCardText>
+                    <div className= "abt-btn">
+                   </div>
+                    
                   </div>
+                   <Button variant='dark'>click to edit</Button>
                 </div>
                 <div>
                 <div className="mb-9 ">
@@ -129,11 +133,12 @@ return  (
                 <Button onClick={handlePetAddForm} className='addPet' variant="dark">Add Pet</Button>
                 </div>
                 <div className="align-items-center mb-4">
-                  <MDBCardText className="lead ">My Pets </MDBCardText>
+                  <MDBCardText className="lead "> {user?.first_name}'s Pets </MDBCardText>
                   
                 </div>
                 <MDBRow>
                   <MDBCol className="mb-2">
+                    
                   <div className='userpetscontainer'>
                        {user?.pets.map( userPet=>{
                     return <UserPetCard
@@ -159,10 +164,10 @@ return  (
       
   <Modal
      
-      size="sm"
+      size="lg"
      show={smShow}
      onHide={() => setSmShow(false)}
-     aria-labelledby="example-modal-sizes-title-sm"
+     aria-labelledby="example-modal-sizes-title-lg"
    >
    
         <AddPetForm handlePetAddFormClosing={handlePetAddFormClosing}/>

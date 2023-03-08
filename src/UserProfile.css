@@ -94,7 +94,6 @@
  
  } */
 
-
  .userpet-cardImage {
   width: 100%;
  }
@@ -105,7 +104,14 @@
   object-fit: cover;
   overflow: hidden;
   border-top-right-radius: 20px;
-  border-top-left-radius: 20px; 
+  border-top-left-radius: 20px;
+  border-bottom-right-radius:  20px; 
+  border-bottom-left-radius: 20px;
+}
+.pet-intro{
+  font-style: oblique;
+  padding-top: 20px;
+  
 }
 
 
@@ -156,10 +162,7 @@
   border-top-right-radius: 10px;
   border-top-left-radius: 10px; */
 }
-.imagesize{
-  width: 200px;
-  border-bottom-right-radius: 10px;
-}
+
 
 .infoBlock{
 background-color: pink;
@@ -174,33 +177,72 @@ background-color: pink;
 .userpet-cardImage{
   /* padding: 100px; */
   width:fit-content
+  
 }
-img{
+.image{
   width: 100%;
   height: 110%;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
+
 }
+.userpet-cardImage{
+  width: 50%;
+  height: 110%;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+}
+/* img{
+  width: 100%;
+  height: 110%;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+} */
 
 .petedit-form{
   display: flex;
+  justify-content: center;
+ width: 55vw;
+ height: 40vw;
   background: pink;
 }
 
+
 .peteditheader{
-  justify-content: center;
-  padding-top: 10%;
+ 
+
+  padding-top: 3vw;
+  padding-right: 20vw;
   font-family: 'Times New Roman', Times, serif;
   color: black;
   /* padding-left: 4%;
   padding-top: 10%; */
 }
-.exiteditform-button-container{
+
+.p-4{
   display: flex;
+ 
+  
+}
+.abt-btn{
+  justify-content: end;
+}
+.pet-editbtn{
+  padding: 20px;
+}
+
+.edit-bckbtn{
+  display: flex;
+  padding-top: 20px;
+  background-color: pink;
+  border: pink;
 
 }
 .edit-textarea{
-  padding: 20px;
+  width: 15vw;
+  border-color: black;
+  padding: 5px;
 }
 
 .someContainer{
@@ -237,11 +279,11 @@ img{
 
   /* display: flex; */
 }
-
+/* 
 .form-control{
-  width: 80%;
+  width: 15vw;
   border-color: black;
-}
+} */
 
 .form-label{
   color: black;
@@ -252,6 +294,20 @@ img{
   border-color: black;
 }
 
+
+
+.info-btn{
+  padding-left: 30px;
+}
 .addpetbtn{
  padding-top: 20px;
+}
+.petbutton-container{
+ align-items: start;
+
+}
+.pet-remove-btn{
+  padding-bottom: 10px;
+  padding-left: 30px;
+  justify-content: end;
 }

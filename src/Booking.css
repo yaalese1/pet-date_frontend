@@ -67,23 +67,62 @@
 
 
 }
+.bookingform-container{
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    justify-content: space;
+    background-color: pink;
+    height: 45vw;
+    
+}
 .booking-form{
 
     padding: 10px;
    
 }
-
+.bckbooking-btn{
+    background-color: pink;
+    border:pink;
+    padding-left: 11vw;
+    padding-top: 2vw;
+}
+.btnbck-container{
+    background-color: pink;
+}
+.form-petname{
+    font-weight: 300;
+}
 .pickup-button{
-    padding: 20px; 
+    padding-top: 15px; 
+   
+  
+}
+.drop-button{
+   
+    padding: 15px; 
+}
+.user-start{
+    padding-top: 10px;
+    font-style: oblique;
+    font-size: large;
+
+}
+
+.user-end{
+    font-style: oblique;
+    font-size: large;
+    padding-top: 10px; 
 }
 
 .drop-button{
-  padding: 20px;
+    padding-top: 15px ;
+    padding-bottom: 25px ;
+  /* padding: 10px; */
     
 }
-.pick-location{
-    padding: 10px;
-}
+
+
 
 .present-box{
     padding: 20px;

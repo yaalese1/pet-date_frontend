@@ -6,6 +6,8 @@ import { UserContext } from "../context/user";
 import { useNavigate } from "react-router-dom";
 import "../Login.css"
 import { CloseButton } from 'react-bootstrap';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
   function Login ({ handleClose}){
     const navigate = useNavigate()
@@ -50,14 +52,13 @@ function handleBack (){
       
 
         <Form onSubmit ={handleSubmit}>
-   
-      
             <h1 className='login-header'>Login</h1>
-          <Form.Group >
+        <Row>
+          <Form.Group as={Col} >
               <Form.Label>
                 Email address
               </Form.Label>
-              <Form.Control 
+              <Form.Control className='email-control'
                 type="email" 
                 placeholder="Enter email" 
                 value= {email} 
@@ -69,17 +70,17 @@ function handleBack (){
               </Form.Text>
         </Form.Group>
   
-        <Form.Group className="Password" >
+        <Form.Group as={Col}className="Password" >
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" value= {password} onChange= {(e)=> setPassword(e.target.value)} />
+          <Form.Control className='password-control' type="password" placeholder="Password" value= {password} onChange= {(e)=> setPassword(e.target.value)} />
         </Form.Group>
 
+          </Row>
         <Form.Group className='rem' >
           <Form.Check 
            type="checkbox" 
            label="Remember me" />
         </Form.Group>
-
         <Button variant="dark" type="submit">
         login
         </Button>

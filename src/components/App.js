@@ -19,12 +19,10 @@ import { CloseButton } from 'react-bootstrap';
 function App() {
 
 
- 
-
   return (
     <div>
       <UserProvider>
-    
+    <PetProvider>
  
    
 
@@ -39,7 +37,7 @@ function App() {
      
 
       </Routes>
-
+      </PetProvider>
       </UserProvider>
       
     </div>

@@ -18,9 +18,9 @@ function PetsPage () {
         .then((resp) => resp.json())
         .then ((pets) => setPets(pets))
     
-         
-    
+        
     },[]) 
+   
 
 
 
@@ -28,8 +28,12 @@ function PetsPage () {
     return( <PetsCard 
     pet={pet}
     key={pet.id}
-    id= {pet.id}
-    reviews={pet.pet_reviews}/>
+    // petid= {pet.id}
+   
+    pets={pets}
+    setPets={setPets}
+    reviews={pet.pet_reviews}
+    />
     
     )
    

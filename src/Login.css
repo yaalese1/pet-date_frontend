@@ -14,7 +14,12 @@
 } 
 
 
-
+.email-control{
+    width: 15vw;
+}
+.password-control{
+    width: 15vw;  
+}
 
 
  .login-header{

@@ -48,7 +48,7 @@ function HomePage(){
         <Modal 
     
 
-    size="md"
+    size="lg"
       show={showLoginModal}
       onHide={ handleLoginClose}
       

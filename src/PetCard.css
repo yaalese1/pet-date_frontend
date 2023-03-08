@@ -9,12 +9,16 @@
   
   .Petcard {
     width: 30vw;
-    height: 50vw;
+    height: 40vw;
     margin-top: 20px;
     border: 2px solid rgb(16, 31, 93);
     border-radius: 20px;
     overflow: scroll
     
+  }
+  .petcard-intro{
+    padding: 1vw;
+    font-style: oblique;
   }
   
   .pet-cardImage {
@@ -92,10 +96,16 @@
     
   
   }
-  /* .bookbtn-container{
-    display: flex;
+  .bookbtn-container{
+    padding: 2%;
     justify-content: space-between;
-  } */
+  }
+  .infobtn-container{
+    padding: 2%;
+  }
+  .reviewbtn-container{
+    padding: 2%;
+  }
 .trash-container{
   display: flex;
   padding-left: 300px;

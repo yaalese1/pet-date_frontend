@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import Calendar from 'react-calendar';
 
 import 'react-calendar/dist/Calendar.css';
@@ -164,7 +166,7 @@ function handleEndDatePicked(endCalendarDate){
       <Card.Body>
         <div className="edit-del">
           <div >
-      <button className="tool-button" onMouseEnter={handleEditButton} onMouseLeave={handleEditButtionExit } onClick={handleBookingModal } >🔧  </button>
+      <button className="tool-button" onMouseEnter={handleEditButton} onMouseLeave={handleEditButtionExit } onClick={handleBookingModal } >Edit  </button>
       {showEditMessage &&( 
       <div className="tool-message">
        Click to edit your booking
@@ -172,7 +174,7 @@ function handleEndDatePicked(endCalendarDate){
        )}
       </div>
       {/* onMouseEnter={handleCancelButton} onMouseLeave={handleCancelButtonExit}  */}
-    <button className= 'cancel-button'onMouseOver={changeBackground} onClick={ handleDeletBookingClick}> ❌</button>
+    <button className= 'cancel-button'onMouseOver={changeBackground} onClick={ handleDeletBookingClick}> Cancel </button>
     {showCancelMessage &&( 
       <div>
         Click To Cancel Booking
@@ -200,22 +202,26 @@ function handleEndDatePicked(endCalendarDate){
             </Card.Text>
 
         </Card.Body>
-        <Card.Footer>
+        {/* <Card.Footer>
           <small className="text-muted">Last updated 3 mins ago</small>
-        </Card.Footer>
+        </Card.Footer> */}
       </Card>
   
 
       <Modal
-      size="sm"
+      size="lg"
       show={bookingMod}
       onHide={() => setBookingMod(false)}
-      aria-labelledby="example-modal-sizes-title-sm">
-      <div className="mb-3">
-         <CloseButton  onClick={handleCloseModal}/>
-             <Form onSubmit={handleSubmit}className="booking-form">
-      <Form.Group>
-        <Form.Label> Start Time</Form.Label>
+      aria-labelledby="example-modal-sizes-title-lg">
+        <div className="btnbck-container">
+      <button className="bckbooking-btn" onClick={handleCloseModal}> ﹤Back</button> 
+        <div className="bookingform-container">
+             <Form onSubmit={handleSubmit} >
+             
+        <h3>Edit your booking below </h3>
+            
+      <Form.Group  className="2">
+        <Form.Label > Start Time</Form.Label>
         <Form.Select  
         name="start_time"
         value={formData.start_time}
@@ -277,22 +283,34 @@ function handleEndDatePicked(endCalendarDate){
            <option>10:00 PM</option>
            <option>11:00 PM</option>                       
         </Form.Select> 
-      </Form.Group>
-
-        <div className="pickup-button">
-            <Button 
-            onClick={handleStartCalendarDisplay} 
-            variant="dark"> Pick up date </Button>
-             <p>{ userStartViewFormat }</p>
-        </div>
-
-    <Form.Group  
-        name='start_date'
       
-        // value={formData.start_date}
-        // onChange={handleStartDatepicked}>  
+
+      </Form.Group >
+    
+    
+
+        <div >
+       
+          <Form.Group className="pickup-button" >
+            <Button className="pickup-button"
+            size="sm"
+            onClick={handleStartCalendarDisplay} 
+            variant="dark"> Pick up date  </Button>
+             </Form.Group> 
+
+            <div className="user-start">
+            
+           <h5 className="user-start"> 
+           Pickup date: {userStartViewFormat}
+           </h5>
+            </div>
+   </div>
+
+    <Form.Group   
+        name='start_date'
         >
      <Modal
+
          size="sm"
          show={xsShow}
          onHide={() => setXsShow(false)}
@@ -303,39 +321,46 @@ function handleEndDatePicked(endCalendarDate){
     </Modal>   
     </Form.Group>
         
-       <Form.Group
+       <Form.Group 
        name='end-date'>
-      </Form.Group>
-      <div className="drop-button">
-      <Button onClick={handleEndCalendarDisplay} variant="dark"> Drop off date </Button>
-      <p>{userEndViewFormat}</p>
+      </Form.Group >
+      <div>
+      <Button  className="drop-button"
+     
+       size="sm" onClick={handleEndCalendarDisplay} variant="dark"> Drop off date </Button>
+      <div >
+        <h4 className="user-end"> Drop off date: {userEndViewFormat}</h4>
+      </div>
       </div> 
-      <Modal  size="sm"
+      <Modal  size="md"
          show={smShow}
          onHide={() => setSmShow(false)}
-         aria-labelledby="example-modal-sizes-title-sm">  
+         aria-labelledby="example-modal-sizes-title-md">  
       <Calendar onChange={handleEndDatePicked} value={endDate}/>
       </Modal>
-    <Form.Group/>
+   
+     
+   
 
-
-    <div className= "pick-location">
-      <Form.Group >
+<Row>
+ 
+      <Form.Group as={Col} className= "pick-location" >
         <Form.Label>Pickup Location</Form.Label>
         <Form.Control 
         name="pickup_location" 
         value={formData.pickup_location}
         onChange={handleEditChange} />
       </Form.Group>
-    </div>
+  
       
-         <Form.Group>
+         <Form.Group as={Col} className= "drop-location">
         <Form.Label>Dropoff Location</Form.Label>
         <Form.Control 
         name="dropoff_location" 
         value={formData.dropoff_location}
         onChange={handleEditChange} />
       </Form.Group>
+    </Row>
 
       <div className='present-box'>
         <Form.Group>
@@ -358,6 +383,9 @@ function handleEndDatePicked(endCalendarDate){
     </Form>
    
         </div>
+        
+        </div>
+
 
     </Modal>
 
