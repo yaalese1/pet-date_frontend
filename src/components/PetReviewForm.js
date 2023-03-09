@@ -22,7 +22,7 @@ const [formData, setFormData] = useState({
     star_rating: parseFloat(starRatingValue)
 })
 
-
+ 
 function handleSubmit(e){
     e.preventDefault();
     fetch("/pet_reviews",{
@@ -43,13 +43,13 @@ function handleSubmit(e){
 
 //  console.log(addNewComment)
  const updatePetReview = {...pet,pet_reviews:addNewComment }
-console.log(updatePetReview.id)
+
 const settingPets = pets.map((pet)=>
   pet.id === updatePetReview.id ? updatePetReview : pet)
 
 setPets( settingPets )
 
-console.log(updatePetReview)
+
 
 
     navigate("/Pets")

@@ -79,11 +79,22 @@ function handleDeletBookingClick(){
     if(r.ok){
       const cancelBooking = user?.pet_bookings.filter((booking)=> booking.id !== userBooking.id)
       const updatedUser ={...user, pet_bookings: cancelBooking}
+     
        setUser(updatedUser)
       }else{
-          const cancelMyBooking = user.my_bookings.filter((booking)=> booking.id !== userBooking.id)
-          const otherUserUpdate ={...user, my_bookings:cancelMyBooking }
-          setUser(otherUserUpdate)
+        console.log(userBooking.id)
+          const cancelMyBooking = user.my_bookings.filter((booking)=> 
+        
+        booking.id  !== userBooking.id)
+      
+          const otherUserUpdate = {...user, my_bookings:cancelMyBooking }
+    
+// const cancelBooking = user.bookings.filter((booking)=>  booking.id !==  userBooking.id)
+// console.log(cancelBooking)
+
+// const updateUser = {...user, bookings: cancelBooking}
+
+setUser(otherUserUpdate)
 
       }
        alert("Your date has been Canceled ")

@@ -42,11 +42,9 @@ function NavbarComp() {
             <Nav.Link href="Home">Home</Nav.Link>
            <Nav.Link href= "Pets">Pets</Nav.Link>
             <Nav.Link href="UserProfile"> Profile</Nav.Link>
-            <NavDropdown title="User Info" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="schedule">Schedule</NavDropdown.Item>
-              <NavDropdown.Item href="Pets">
-                Pets
-                 </NavDropdown.Item>
+            <NavDropdown title= 'Your Info' id="navbarScrollingDropdown">
+              <NavDropdown.Item href="Calendar">Calendar</NavDropdown.Item>
+             
             <NavDropdown.Divider />
             <NavDropdown.Item  onClick={handleLogoutClick} href="Logout">
             Logout 

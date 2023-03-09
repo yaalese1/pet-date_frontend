@@ -16,7 +16,7 @@ import Rating from '@mui/material/Rating';
 
 
 
-  function PetsCard ({id,pet, reviews, pets, setPets}){
+  function PetsCard ({id,pet, reviews, pets, setPets, }){
     const {user,setUser} = useContext(UserContext)
     const [ errors, setErrors ] = useState(null)
     const  [smShow, setSmShow] = useState(false)
@@ -37,9 +37,17 @@ import Rating from '@mui/material/Rating';
       setSmShow(false)
     }
 
+const reviewId = pet.pet_reviews.find((pet_review)=>{
+  return pet_review.id 
+ 
+})
+// const selectedId = reviewId.filter((reviewId.id))
 
 
-
+ 
+// const selectedReview = reviewId.filter((selectRev)=>{
+//   selectRev
+// })
 //  const reviewsId = reviews.map((review)=>{
 //   return review.id
   
@@ -47,12 +55,21 @@ import Rating from '@mui/material/Rating';
 
 
 
-function handleDeleteReview(){
-  fetch('/pet_reviews/',{method:"DELETE",}).then((r)=>{
+function handleDeleteReview(deletedReviewId){
+  fetch(`/pet_reviews/${deletedReviewId}`,{method:"DELETE",}).then((r)=>{
     if(r.ok){
-      const userReviewRemoved = reviews.filter((pet)=> pet.id)
-      const userReviewUpdated = {...user, reviews:userReviewRemoved}
-      setUser(userReviewUpdated)
+
+      const  petReviewRemoved  = pet.pet_reviews.filter((review)=> review.id !== deletedReviewId)
+      const petReviewUpdated ={...pet, pet_reviews: petReviewRemoved }
+      console.log( petReviewUpdated )
+      // const userReviewRemoved = reviewId.filter((pet)=> pet.id !== reviewId)
+      // const userReviewUpdated = {...user, reviews:userReviewRemoved}
+
+      const updateAllPets =  pets.map((pet)=> 
+        pet.id  === petReviewUpdated.id ? petReviewUpdated : pet
+      )
+
+      setPets( updateAllPets)
     }
   })
 }
@@ -175,7 +192,7 @@ function handleDeleteReview(){
                          
                         <Rating name="read-only" value={review.star_rating}  readOnly />
                         <div className='trash-container'>
-                        <button onClick={ handleDeleteReview} className='trash-btn'variant="DARK">🗑</button>
+                        <button onClick={ ()=>handleDeleteReview(review.id)} className='trash-btn'variant="DARK">🗑</button>
                         </div>
                         </div> 
                      

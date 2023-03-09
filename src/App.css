@@ -1,4 +1,14 @@
+.FAQ {
+    
+ justify-content: center;
+}
 
+.question{
+    display: flex
+}
+h5{
+   flex-direction: row ;  
+}
 
 
 

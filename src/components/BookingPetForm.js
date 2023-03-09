@@ -55,6 +55,8 @@ useEffect(() =>{
 
 
 
+const myBooking = user.my_bookings
+
 const [formData, setFormData] = useState({
     start_date: new Date(),
     end_date: new Date (),
@@ -80,12 +82,15 @@ const [formData, setFormData] = useState({
     .then((r)=> r.json())
     .then((newBooking)=>{
 
-        const newBookingAdded = [...bookings,bookings, newBooking]
-        const addBookingToUser ={...user, bookings: newBookingAdded}
+      const newBookingAdded = [...bookings, myBooking , newBooking]
+      const addBookingToUser = {...user, myBooking: newBookingAdded}
+
+        // const newBookingAdded = [...bookings,bookings, newBooking]
+        // const addBookingToUser ={...user, bookings: newBookingAdded}
         setUser(addBookingToUser)
 
         
-        alert("Your pet has been Added")
+        alert("Your Date with `${pet.name}` has been booked,  we will redirect you to  your calendar page  please press ok !")
         navigate("/schedule")
     })
   }

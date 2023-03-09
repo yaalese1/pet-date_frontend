@@ -33,6 +33,7 @@ function PetsPage () {
     pets={pets}
     setPets={setPets}
     reviews={pet.pet_reviews}
+   
     />
     
     )

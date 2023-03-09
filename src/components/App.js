@@ -6,6 +6,7 @@ import PetsPage from "./PetsPage";
 import BookingPage from "./BookingPage"
 import UserProfile from "./UserProfile"
 import HomePage from "./HomePage"
+import Frequently from "./Frequently"
 // import PetEditForm from "./PetEditForm"
 
 import { UserProvider } from "../context/user";
@@ -22,23 +23,27 @@ function App() {
   return (
     <div>
       <UserProvider>
-    <PetProvider>
+    
  
    
 
       <NavbarComp/>
       <Routes>
 
-      <Route exact path= "/Schedule" element = {<BookingPage/>}/>
+      <Route exact path= "/Calendar" element = {<BookingPage/>}/>
       <Route exact path= "/Pets" element = {<PetsPage/>}/>
       <Route exact path= "/UserProfile" element ={<UserProfile/>}/>
       <Route exact path= "/Home" element ={<HomePage />}/>
-      
+     
+      <Route exact path= "/FAQ" element ={<Frequently/>}/>
+     
      
 
       </Routes>
-      </PetProvider>
+     
+    
       </UserProvider>
+    
       
     </div>
   );
