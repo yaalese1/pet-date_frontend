@@ -141,6 +141,9 @@
 
     /* h-100" */
   }
+  .white-space{
+    color:white
+  }
   .col{
     l: 9; 
   }
@@ -164,13 +167,16 @@
 }
 
 
-.infoBlock{
-background-color: pink;
+.city{
+  padding-left: 30px;
+  font-size: large;
+  font-weight: 200;
 }
-
 .infoblock{
   display: flex;
   justify-content: end;
+  margin-right: 20vw ;
+  background-color: pink;
   /* justify-content: center; */
 }
 

@@ -46,7 +46,7 @@ function handleUserPetDelete(){
           
             const userPetUpdatedArray = user.pets?.filter((pet)=> pet.id !== userPet.id)  
             const userPetUpdate = {...user, pets:userPetUpdatedArray }
-                console.log(user)
+              
             setUser(userPetUpdate)
             
 

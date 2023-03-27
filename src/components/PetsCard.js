@@ -16,7 +16,8 @@ import Rating from '@mui/material/Rating';
 
 
 
-  function PetsCard ({id,pet, reviews, pets, setPets, }){
+
+  function PetsCard ({id,pet, reviews, pets, setPets, speciesSearch}){
     const {user,setUser} = useContext(UserContext)
     const [ errors, setErrors ] = useState(null)
     const  [smShow, setSmShow] = useState(false)
@@ -80,6 +81,7 @@ function handleDeleteReview(deletedReviewId){
 
     return (
   <div>
+
       
    <Modal
        size="lg"

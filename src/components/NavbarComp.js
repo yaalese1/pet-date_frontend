@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import Container from "react-bootstrap/Container";
-import { Nav, Navbar, NavDropdown, Form, Button } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown} from "react-bootstrap";
 import { UserContext } from "../context/user";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -39,7 +39,7 @@ function NavbarComp() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="Home">Home</Nav.Link>
+            <Nav.Link href="Pet&Date">Home</Nav.Link>
            <Nav.Link href= "Pets">Pets</Nav.Link>
             <Nav.Link href="UserProfile"> Profile</Nav.Link>
             <NavDropdown title= 'Your Info' id="navbarScrollingDropdown">
@@ -53,15 +53,7 @@ function NavbarComp() {
             </NavDropdown>
             <Nav.Link href="FAQ">FAQ</Nav.Link>
           </Nav>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
+       
         </Navbar.Collapse>
       </Container>
     </Navbar>

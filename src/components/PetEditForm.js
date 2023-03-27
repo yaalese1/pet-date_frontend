@@ -56,13 +56,15 @@ function PetEditForm({ pets, handleModalClosing}){
              }).then((r) => {
                  if (r.ok) {
                      r.json().then((updatedAnimal) => {
-                        console.log(updatedAnimal)
-
+                   
+console.log(updatedAnimal)
                         const  updatedPetInfo = user.pets.map((pet) => pet.id === updatedAnimal.id ? updatedAnimal: pet)
-                      
+                        
+                  console.log(updatedPetInfo)
                         const updatedUser = {...user , pets: updatedPetInfo}
+                        console.log(updatedUser)
                         setUser(updatedUser)
-                        console.log(user)
+                   
                         
                         //  const updatedPetInfo = user.pets.map((info) => info.id 
                         
@@ -231,7 +233,7 @@ function PetEditForm({ pets, handleModalClosing}){
  
                 <Form.Label> Are you open to breeding this pet  ? </Form.Label>
                 <Form.Check
-                name= 'open_to_breeding'
+                name='open_to_breeding'
                 type="checkbox" 
                 label= "yes"
                 checked={updatedPet.open_to_breeding}

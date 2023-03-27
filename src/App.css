@@ -11,4 +11,26 @@ h5{
 }
 
 
+.welcome-card{
+    display: flex;
+    justify-content: center;
+    padding-top: 15vw
+}
+ .welcome-text{
+    width: 50vw;
+    height: 30vw;
+    background-color: pink;
+    
+   
+} 
 
+.welcome-msg{
+  justify-content: center;
+  margin-top: 70px;
+} 
+
+.users-firstname{
+    font-style: oblique;
+    font-size: xx-large;
+    color: black;
+} 

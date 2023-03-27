@@ -1,10 +1,12 @@
 
 import React ,{useState, useContext}from 'react';
 import { UserContext } from "../context/user";
+import { useNavigate } from "react-router-dom";
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 // import { useNavigate } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import '../UserProfile.css'
@@ -32,13 +34,13 @@ function UserProfile(){
 
 
  
- const {user} = useContext(UserContext)
+ const {user, setUser} = useContext(UserContext)
 //  const userPets = user && user.pets
  const  [smShow, setSmShow] = useState(false)
 // console.log(user.pets)
  const userReviews = user && user.user_reviews
-
-
+const [ showAboutMe, setShowAboutMe] = useState(false)
+const navigate = useNavigate() 
 
  function handlePetAddForm(){
   setSmShow(true)
@@ -50,14 +52,57 @@ function UserProfile(){
 
 
 
+function handleAboutMeDisplay(){
+  setShowAboutMe(true)
+}
+
+const [formData, setFormData] = useState({
+  about_me: ""
+})
+
+function handleAboutSubmit(e){
+  e.preventDefault()
+  fetch('/users/'+`${user.id}`, {
+    method: "PATCH",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+}).then((r) => {
+    if (r.ok) {
+        r.json().then((aboutMeData) => {
+         
+          console.log(aboutMeData)
 
 
+       const  updateAboutMe= {...user, about_me: aboutMeData.about_me}
+   
+           
+           setUser(updateAboutMe)
+           
+           navigate("/UserProfile")
+          
+        })
+    } 
+})
+}
 
-
+const handleAboutMeChange =(e)=>{
+  const {name,value} = e.target
+  setFormData({...formData,[name]: value})
+}
 
 return  (
 
+
+
           <div>
+          
+
+   
+      
+     
+
 
   
 <div className="outterbackground" >
@@ -65,19 +110,27 @@ return  (
         <MDBRow className="profilecontainer">
           <MDBCol >
             <MDBCard>
+            <MDBCardText className='white-space'>C</MDBCardText>
+            
               <div className="userimage ">
+                
                 <div className=" imagesize" >
                   <MDBCardImage  className= 'Image'src="https://static.vecteezy.com/system/resources/thumbnails/002/002/253/small/beautiful-woman-wearing-sunglasses-avatar-character-icon-free-vector.jpg"
                     alt="Generic placeholder image" />
                   
                 </div>
+                
                 <div className="ms-3">
-                  <MDBTypography tag="h5">{user?.first_name}</MDBTypography>
-                  <MDBCardText>New York</MDBCardText>
+                  <MDBTypography tag="h5">  {user?.first_name}</MDBTypography>
+               
                 </div>
+       
               </div>
+              <MDBCardText className='city'>City: {user?.city}</MDBCardText>
               <div className="infoblockcontainer " style={{ backgroundColor: 'pink' }}>
+              
                 <div className='infoblock text-center'>
+               
                   <div>
                     <MDBCardText className="mb-1 h5">{user?.age}</MDBCardText>
                     <MDBCardText className="small  mb-0">Age</MDBCardText>
@@ -87,7 +140,7 @@ return  (
                     <MDBCardText className="small">Seeking Relationship </MDBCardText>
                   </div>
                   <div>
-                    <MDBCardText className="mb-1 h5">Her/She</MDBCardText>
+                    <MDBCardText className="mb-1 h5">{user?.pronouns}</MDBCardText>
                     <MDBCardText className="small mb-0">Pronouns</MDBCardText>
                   </div>
                 </div>
@@ -105,7 +158,32 @@ return  (
                    </div>
                     
                   </div>
-                   <Button variant='dark'>click to edit</Button>
+                  <Modal                  
+                    size="lg"
+                    show={showAboutMe}
+                    onHide={() => setShowAboutMe(false)}
+                    aria-labelledby="example-modal-sizes-title-lg"
+                    >
+                        <Form onSubmit={ handleAboutSubmit}>
+                        <Form.Group className= "mb-3">
+                        <Form.Label> edit your About Me text here</Form.Label>
+                        
+                          <Form.Control
+                            input= "text"
+                            name="about_me" 
+                           
+                            value={formData.about_me}
+                            onChange={handleAboutMeChange}
+
+                          /> 
+                          <div>
+                          <Button type='submit' variant='dark'> Save Changes</Button>
+                          </div>
+                          </Form.Group>
+                        </Form>
+
+                    </Modal>
+                  <Button onClick={handleAboutMeDisplay} variant='dark'>click to edit</Button>
                 </div>
                 <div>
                 <div className="mb-9 ">
@@ -140,7 +218,7 @@ return  (
                   <MDBCol className="mb-2">
                     
                   <div className='userpetscontainer'>
-                       {user?.pets.map( userPet=>{
+                       {user?.pets.map( (userPet) =>{
                     return <UserPetCard
                       userPet={userPet}
                       key= {userPet.id}/>
@@ -167,7 +245,7 @@ return  (
       size="lg"
      show={smShow}
      onHide={() => setSmShow(false)}
-     aria-labelledby="example-modal-sizes-title-lg"
+     aria-labelledby="example-modal-sizes-title-"
    >
    
         <AddPetForm handlePetAddFormClosing={handlePetAddFormClosing}/>

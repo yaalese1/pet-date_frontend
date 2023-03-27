@@ -63,9 +63,9 @@ const handleChange =(e) =>{
     setFormData({...formData,[name]: value})
 }
 
-function refreshPage() {
-    window.location.reload(false);
-  }
+// function refreshPage() {
+//     window.location.reload(false);
+//   }
 
 //   console.log (formData)
 

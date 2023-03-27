@@ -90,8 +90,8 @@ const [formData, setFormData] = useState({
         setUser(addBookingToUser)
 
         
-        alert("Your Date with `${pet.name}` has been booked,  we will redirect you to  your calendar page  please press ok !")
-        navigate("/schedule")
+        alert("Your Date with has been booked,  we will redirect you to  your calendar page  please press ok !")
+        navigate("/Calendar")
     })
   }
 

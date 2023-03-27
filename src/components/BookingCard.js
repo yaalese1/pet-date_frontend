@@ -100,7 +100,7 @@ setUser(otherUserUpdate)
        alert("Your date has been Canceled ")
 
     })
-    navigate("/Schedule")
+    navigate("/Calendar")
 }
 
 
@@ -137,7 +137,7 @@ function handleSubmit(e){
    
         
         alert("Your Booking has been updated")
-        navigate("/Schedule")
+        navigate("/Calendar")
         
        
       })
@@ -154,6 +154,7 @@ function handleEditChange(e){
   setFormData({...formData, [name]: type === "checkbox" ? checked : value})
 }
 function handleStartDatePicked(startCalendarDate){
+  setStartDate(startCalendarDate)
   const startDatePickedToString =JSON.stringify(startCalendarDate);
   const startDateDisplay =  startDatePickedToString.slice(1,11) 
   setFormData({...formData, start_date: startDateDisplay})
@@ -209,10 +210,10 @@ function handleEndDatePicked(endCalendarDate){
           Dropoff: {userBooking.dropoff_location}
           </Card.Text>
           <Card.Text>
-            Pet Only : {userBooking.pet_only ? <> 🐩 Yes</> : <> 💓 No</>}   
-            </Card.Text>
+            Will the owner be joining you for a date     </Card.Text>     <p>: {userBooking.pet_only ? <>  💕Yes💕 </> : <> No this will be a pet only date</>}   
+            </p>
 
-        </Card.Body>
+        </Card.Body> 
         {/* <Card.Footer>
           <small className="text-muted">Last updated 3 mins ago</small>
         </Card.Footer> */}
