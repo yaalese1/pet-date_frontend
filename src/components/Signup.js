@@ -107,20 +107,56 @@ const [isLoading, setIsLoading] = useState(false);
 // }
 
 function handleSubmit(e){
+  e.preventDefault()
+
+  const data = new FormData();
+  data.append("user[avatar]", avatar);
+  data.append("user[first_name]", first_name);
+  data.append("user[last_name]", last_name);
+  data.append("user[email]", email);
+  data.append("user[password]" ,password);
+  data.append("user[password_confirmation]",passwordConfirmation);
+  data.append("user[age]",age);
+  data.append("user[city]",city);
+  data.append("user[state]",state );
+  data.append("user[zip_code]",zip_code );
+  data.append("user[about_me]",about_me);
+  data.append("user[pronouns]", pronouns);
+  data.append("user[seeking_relationship]",seeking_relationship)
+
+
+
+  fetch("/signup", {
+    method: "POST",
+    body: data,
+  }).then((r) => {
+        setIsLoading(false)
+        if (r.ok) {
+          r.json().then((data) => setUser(data));
+          navigate("/Welcome")
+        } else {
+           r.json().then((err) => (setErrors(err.errors)))
+        }
+        })
+
 
 }
 
-function submitToAPI(data){
+// function submitToAPI(data){
+
   
-}
+  
+      
 
+// }
 
+console.log(passwordConfirmation)
 
  return(
 
 
   <div className='back-sign'>
-    <Form onSubmit={handleUserSubmit}> 
+    <Form onSubmit={(e) => handleSubmit(e)}> 
        <div className='sign_up_errors'>
               {errors ? errors.map((e) =>
                   <Alert severity="error" >{e}</Alert>) : null}
@@ -152,7 +188,8 @@ function submitToAPI(data){
                 <Form.Label>Last Name</Form.Label>
                         <Form.Control type="name" placeholder="Last Name"
                                 value={last_name}
-                                onChange={(e) =>setLast_name(e.target.value)}/>
+                                onChange={(e) =>setLast_name(e.target.value)}
+                                />
          </Form.Group>
          </Row>
 
@@ -162,7 +199,8 @@ function submitToAPI(data){
                 <Form.Label>Email address</Form.Label>
                    <Form.Control type="email" placeholder="Enter email"
                        value={email}
-                          onChange={(e) =>setEmail(e.target.value)} />
+                          onChange={(e) =>setEmail(e.target.value)} 
+                          />
                             <Form.Text className="text-muted">
                                We'll never share your email with anyone else.
                                         </Form.Text>
@@ -171,8 +209,9 @@ function submitToAPI(data){
         <Form.Group as={Col}>
                 <Form.Label>Password</Form.Label>
                    <Form.Control type="password" placeholder="Password"
-                       value={password}
-                         onChange={(e) =>setPassword(e.target.value)} />
+                    value={password}
+                         onChange={(e) =>setPassword(e.target.value)} 
+                         />
                             <Form.Text className="text-muted">
                                         </Form.Text>
         </Form.Group>
@@ -180,8 +219,9 @@ function submitToAPI(data){
                 <Form.Label>Password Confirmation </Form.Label>
                    <Form.Control type="password" 
                    placeholder="Password Confirmation"   
-                       value={passwordConfirmation}
-                         onChange={(e) =>setPasswordConfirmation(e.target.value)} />
+                      value={passwordConfirmation}
+                         onChange={(e) =>setPasswordConfirmation(e.target.value)} 
+                         />
                             <Form.Text className="text-muted">
                                         </Form.Text>
         </Form.Group>
@@ -189,14 +229,14 @@ function submitToAPI(data){
         <br></br>
 
         <Row>
-        <Form.Group as={Col}>
+         <Form.Group as={Col}>
                  <Form.Label>Age</Form.Label>
                     <Form.Control type="age"
                      placeholder="Must Be 18 or Older to pet 😉"  
-                        value={age}
+                      value={age}
                             onChange={(e) =>setAge(e.target.value)}/>
       </Form.Group>
-      <Form.Group as={Col} >
+      <Form.Group as={Col} > 
     
         <Form.Label>Pronouns</Form.Label>
              <Form.Control type="pronouns" placeholder='Pronouns'
@@ -244,24 +284,24 @@ function submitToAPI(data){
                <p> Are you seeking a Relationship with lenders as well ?</p>
                 <Form.Check type="checkbox" 
                     label="yes I am seeking a relationship "
-                        value={seeking_relationship}
+                        name={seeking_relationship}
                     onChange={(e) =>setSeeking_Relationship(true)} />
- 
+
 
       </Form.Group>
-      <Form onSubmit={handleUserImageSubmit}>
+     
       <Form.Group controlId="formFileSm" >
         <Form.Label>Profile Image</Form.Label>
         <Form.Control 
         type="file" 
         size="sm"
         name="avatar"
-    
+
         inputprops={{ accept: "avatar/*" }}
-        onChange={(e) => 
-        setAvatar(e.target.avatar.files[0])} />
+        onChange={(e) => setAvatar(e.target.files[0])} 
+        />
       </Form.Group>
-      </Form>  
+   
     
       {/* <Form.Group>
         <Form.Label>Upload Profile Image </Form.Label>

@@ -115,7 +115,7 @@ return  (
               <div className="userimage ">
                 
                 <div className=" imagesize" >
-                  <MDBCardImage  className= 'Image'src="https://static.vecteezy.com/system/resources/thumbnails/002/002/253/small/beautiful-woman-wearing-sunglasses-avatar-character-icon-free-vector.jpg"
+                  <MDBCardImage  className= 'Image'src={user?.avatar_url}
                     alt="Generic placeholder image" />
                   
                 </div>
