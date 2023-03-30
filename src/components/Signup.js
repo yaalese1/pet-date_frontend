@@ -5,10 +5,10 @@ import Alert from 'react-bootstrap/Alert';
 import {useState, useContext} from 'react'
 import { UserContext } from "../context/user";
 import { useNavigate } from "react-router-dom";
-import Modal from "react-bootstrap/Modal"
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { FormControl } from '@mui/material';
+
+
 
 
 
@@ -18,7 +18,6 @@ function Signup ({handleSignupClose}){
    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("" );
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
- // const [avatar, setAvatar] = useState ({})
     const [age, setAge] = useState("")
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
@@ -27,84 +26,12 @@ function Signup ({handleSignupClose}){
     const [pronouns, setPronouns] =useState ("")
     const [seeking_relationship, setSeeking_Relationship] = useState (false)
     const [avatar, setAvatar] = useState([])
-//    const [errors, setErrors] = useState([]);
-const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
    const {setUser} = useContext(UserContext)
    const navigate = useNavigate()
    const [ errors, setErrors ] = useState(null)
 
-    // function handleUserSubmit(e) {
-    //   e.preventDefault();
-    //   setIsLoading(true)
-    //   setErrors(null)
-    //   fetch("/signup", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-            
-    //       first_name,
-    //       last_name,
-    //       email,
-    //       password,
-    //       passwordConfirmation,
-    //       age,
-    //       about_me,
-    //       city,
-    //       state,
-    //       zip_code,
-    //       pronouns,
-    //       seeking_relationship,
-  
-
-    //     }),
-           
-    //   }).then((r) => {
-    //     setIsLoading(false)
-    //     if (r.ok) {
-    //       r.json().then((user) => setUser(user));
-    //       navigate("/Welcome")
-    //     } else {
-    //        r.json().then((err) => (setErrors(err.errors)))
-    //   }
-    //   });
-    // }
-
-
-    // setUser(user)
-
-// function handleUserImageSubmit(e){
-//   e.preventDefault();
-//   const data = new FormData();
-//   data.append("user[avatar]", avatar);    
-  // data.append("user[first_name]", first_name);
-  // data.append("user[last_name]", last_name);
-  // data.append("user[email]", email);
-  // data.append("user[password]", password);
-  // data.append("user[passwordConfirmation]", passwordConfirmation);
-  // data.append("user[age]", age);
-  // data.append("user[city]", city);
-  // data.append("user[state]",state );
-  // data.append("user[zip_code]",zip_code );
-  // data.append("user[about_me]",about_me );
-  // data.append("user[pronouns]",pronouns );
-  // data.append("user[seeking_relationship]",seeking_relationship)
-
-//   fetch("/signup", {
-//     method: "POST",
-//     body: data,
-//   }).then((r) => {
-//         setIsLoading(false)
-//         if (r.ok) {
-//           r.json().then((user) => setUser(user));
-//           navigate("/Welcome")
-//         } else {
-//            r.json().then((err) => (setErrors(err.errors)))
-//         }
-//         })
-      
-// }
+console.log(seeking_relationship)
 
 function handleSubmit(e){
   e.preventDefault()
@@ -142,20 +69,21 @@ function handleSubmit(e){
 
 }
 
-// function submitToAPI(data){
 
-  
-  
-      
+  function handleEditChange(e){
+    const {name, value, type, checked} = e.target
+    
+    setSeeking_Relationship({...seeking_relationship, [name]: type === "checkbox" ? checked : value})
 
-// }
+ }
 
-console.log(passwordConfirmation)
+
 
  return(
+   <div> 
 
 
-  <div className='back-sign'>
+   <div className='back-sign'>
     <Form onSubmit={(e) => handleSubmit(e)}> 
        <div className='sign_up_errors'>
               {errors ? errors.map((e) =>
@@ -180,7 +108,7 @@ console.log(passwordConfirmation)
           placeholder="First Name"
           value={first_name}
           onChange={(e) =>setFirst_name(e.target.value)}
-        />
+          />
       </Form.Group>
      
 
@@ -199,8 +127,8 @@ console.log(passwordConfirmation)
                 <Form.Label>Email address</Form.Label>
                    <Form.Control type="email" placeholder="Enter email"
                        value={email}
-                          onChange={(e) =>setEmail(e.target.value)} 
-                          />
+                       onChange={(e) =>setEmail(e.target.value)} 
+                       />
                             <Form.Text className="text-muted">
                                We'll never share your email with anyone else.
                                         </Form.Text>
@@ -210,8 +138,8 @@ console.log(passwordConfirmation)
                 <Form.Label>Password</Form.Label>
                    <Form.Control type="password" placeholder="Password"
                     value={password}
-                         onChange={(e) =>setPassword(e.target.value)} 
-                         />
+                    onChange={(e) =>setPassword(e.target.value)} 
+                    />
                             <Form.Text className="text-muted">
                                         </Form.Text>
         </Form.Group>
@@ -219,9 +147,9 @@ console.log(passwordConfirmation)
                 <Form.Label>Password Confirmation </Form.Label>
                    <Form.Control type="password" 
                    placeholder="Password Confirmation"   
-                      value={passwordConfirmation}
-                         onChange={(e) =>setPasswordConfirmation(e.target.value)} 
-                         />
+                   value={passwordConfirmation}
+                   onChange={(e) =>setPasswordConfirmation(e.target.value)} 
+                   />
                             <Form.Text className="text-muted">
                                         </Form.Text>
         </Form.Group>
@@ -233,15 +161,15 @@ console.log(passwordConfirmation)
                  <Form.Label>Age</Form.Label>
                     <Form.Control type="age"
                      placeholder="Must Be 18 or Older to pet 😉"  
-                      value={age}
-                            onChange={(e) =>setAge(e.target.value)}/>
+                     value={age}
+                     onChange={(e) =>setAge(e.target.value)}/>
       </Form.Group>
       <Form.Group as={Col} > 
     
         <Form.Label>Pronouns</Form.Label>
              <Form.Control type="pronouns" placeholder='Pronouns'
                  value={pronouns}
-                    onChange={(e) =>setPronouns(e.target.value)}  />
+                 onChange={(e) =>setPronouns(e.target.value)}  />
       </Form.Group>
       </Row>
 
@@ -250,20 +178,20 @@ console.log(passwordConfirmation)
         <Form.Label>City</Form.Label>
              <Form.Control type="city" placeholder="City"
                  value={city}
-                    onChange={(e) =>setCity(e.target.value)}  />
+                 onChange={(e) =>setCity(e.target.value)}  />
       </Form.Group>
       <Form.Group as={Col} >
         <Form.Label>State</Form.Label>
              <Form.Control type="state" placeholder="State"
                  value={state}
-                    onChange={(e) =>setState(e.target.value)}  />
+                 onChange={(e) =>setState(e.target.value)}  />
       </Form.Group>
 
       <Form.Group as={Col} >
         <Form.Label>Zip Code</Form.Label>
              <Form.Control type="zip_code" placeholder="Zip Code"
                  value={zip_code}
-                    onChange={(e) =>setZip_code(e.target.value)}  />
+                 onChange={(e) =>setZip_code(e.target.value)}  />
       </Form.Group>
       </Row>
 
@@ -272,7 +200,7 @@ console.log(passwordConfirmation)
         <Form.Label>Tell other users about yourself below </Form.Label>
              <Form.Control type="about_me"
                  value={about_me}
-                    onChange={(e) =>setAbout_me(e.target.value)}  />
+                 onChange={(e) =>setAbout_me(e.target.value)}  />
       </Form.Group>
 
        <br></br>
@@ -282,10 +210,12 @@ console.log(passwordConfirmation)
        <Form.Group as={Col}
            className="x" controlId="formBasicCheckbox">
                <p> Are you seeking a Relationship with lenders as well ?</p>
-                <Form.Check type="checkbox" 
+                <Form.Check 
+                type="checkbox" 
                     label="yes I am seeking a relationship "
-                        name={seeking_relationship}
-                    onChange={(e) =>setSeeking_Relationship(true)} />
+                    checked={seeking_relationship}
+                    // value={seeking_relationship}
+                    onChange={()=>setSeeking_Relationship((prev)=> !prev)} />
 
 
       </Form.Group>
@@ -296,7 +226,7 @@ console.log(passwordConfirmation)
         type="file" 
         size="sm"
         name="avatar"
-
+        
         inputprops={{ accept: "avatar/*" }}
         onChange={(e) => setAvatar(e.target.files[0])} 
         />
@@ -305,12 +235,12 @@ console.log(passwordConfirmation)
     
       {/* <Form.Group>
         <Form.Label>Upload Profile Image </Form.Label>
-             <Form.Control
-           input type="file" 
-      
-              // value={address}
-              // onChange={(e) =>setAddress(e.target.value)}/>
-              />
+        <Form.Control
+        input type="file" 
+        
+        // value={address}
+        // onChange={(e) =>setAddress(e.target.value)}/>
+        />
       </Form.Group>  */}
        <br></br>
       <Button 
@@ -327,6 +257,7 @@ console.log(passwordConfirmation)
       </Form>
       </div>
   
+         </div>
  )
 
 }

@@ -43,6 +43,7 @@ function PetEditForm({ pets, handleModalClosing}){
 
         
     })
+    console.log(updatedPet)
        function handleSubmit(e) {
              e.preventDefault()
              setErrors([])

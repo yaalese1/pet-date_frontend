@@ -44,7 +44,7 @@ function NavbarComp() {
             <Nav.Link href="UserProfile"> Profile</Nav.Link>
             <NavDropdown title= 'Your Info' id="navbarScrollingDropdown">
               <NavDropdown.Item href="Calendar">Calendar</NavDropdown.Item>
-             
+              <NavDropdown.Item href="Settings">Settings</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item  onClick={handleLogoutClick} href="Logout">
             Logout 

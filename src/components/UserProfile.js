@@ -35,9 +35,9 @@ function UserProfile(){
 
  
  const {user, setUser} = useContext(UserContext)
-//  const userPets = user && user.pets
+
  const  [smShow, setSmShow] = useState(false)
-// console.log(user.pets)
+
  const userReviews = user && user.user_reviews
 const [ showAboutMe, setShowAboutMe] = useState(false)
 const navigate = useNavigate() 
@@ -60,6 +60,8 @@ const [formData, setFormData] = useState({
   about_me: ""
 })
 
+console.log(typeof(formData))
+
 function handleAboutSubmit(e){
   e.preventDefault()
   fetch('/users/'+`${user.id}`, {
@@ -71,12 +73,11 @@ function handleAboutSubmit(e){
 }).then((r) => {
     if (r.ok) {
         r.json().then((aboutMeData) => {
-         
-          console.log(aboutMeData)
+
 
 
        const  updateAboutMe= {...user, about_me: aboutMeData.about_me}
-   
+
            
            setUser(updateAboutMe)
            
@@ -91,6 +92,10 @@ const handleAboutMeChange =(e)=>{
   const {name,value} = e.target
   setFormData({...formData,[name]: value})
 }
+
+
+
+
 
 return  (
 
@@ -113,24 +118,28 @@ return  (
             <MDBCardText className='white-space'>C</MDBCardText>
             
               <div className="userimage ">
-                
+          
                 <div className=" imagesize" >
-                  <MDBCardImage  className= 'Image'src={user?.avatar_url}
-                    alt="Generic placeholder image" />
-                  
+                  <MDBCardImage  className= 'Image'
+                  src={user?.avatar_url}
+                    alt="Generic placeholder image"
+                   />
                 </div>
-                
+            <div>
+              
+                </div>
                 <div className="ms-3">
+           
                   <MDBTypography tag="h5">  {user?.first_name}</MDBTypography>
                
                 </div>
-       
+             
               </div>
               <MDBCardText className='city'>City: {user?.city}</MDBCardText>
               <div className="infoblockcontainer " style={{ backgroundColor: 'pink' }}>
-              
+              <Button variant='dark'>edit profile info</Button>
                 <div className='infoblock text-center'>
-               
+           
                   <div>
                     <MDBCardText className="mb-1 h5">{user?.age}</MDBCardText>
                     <MDBCardText className="small  mb-0">Age</MDBCardText>
