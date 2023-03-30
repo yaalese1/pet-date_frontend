@@ -8,6 +8,7 @@ import UserProfile from "./UserProfile"
 import HomePage from "./HomePage"
 import Frequently from "./Frequently"
 import  LandingPage from "./LandingPage"
+import Settings from "./Settings";
 // import PetEditForm from "./PetEditForm"
 
 import { UserProvider } from "../context/user";
@@ -37,6 +38,7 @@ function App() {
       <Route exact path= "/Pets" element = {<PetsPage/>}/>
       <Route exact path= "/UserProfile" element ={<UserProfile/>}/>
       <Route exact path= "/Pet&Date" element ={<HomePage />}/>
+      <Route exact path= "/Settings" element ={<Settings/>}/>
       <Route exact path= "/FAQ" element ={<Frequently/>}/>
       <Route exact path = "/Welcome" element = {<LandingPage/>}/>
      
