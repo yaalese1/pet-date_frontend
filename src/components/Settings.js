@@ -29,7 +29,7 @@ function Settings(){
 
     const [pronouns, setPronouns] =useState (user?.pronouns,)
     const [seeking_relationship, setSeeking_Relationship] = useState (user?.seeking_relationship)
-    const [avatar, setAvatar] = useState([])
+    // const [avatar, setAvatar] = useState([])
 const [isLoading, setIsLoading] = useState(false);
    const navigate = useNavigate()
    const [ errors, setErrors ] = useState(null)
@@ -78,24 +78,19 @@ setSeeking_Relationship(user?.seeking_relationship)
 
 
 
-function handleEditChange(e){
-    console.log('yaya')
-    const {name, value, type, checked} = e.target
-    
-    setSeeking_Relationship({...seeking_relationship, [name]: type === "checkbox" ? checked : value})
 
- }
 
 function handleSubmit(e){
     e.preventDefault()
     
     const updateData = new FormData();
     // updateData.append("user[avatar]", avatar);
+
     updateData.append("user[first_name]",first_name);
     updateData.append("user[last_name]", last_name);
     updateData.append("user[email]", email);
     updateData.append("user[password]" ,password);
-    updateData .append("user[password_confirmation]",passwordConfirmation);
+    updateData.append("user[password_confirmation]",passwordConfirmation);
     updateData.append("user[age]",age);
     updateData.append("user[city]",city);
     updateData.append("user[state]",state );
@@ -104,15 +99,17 @@ function handleSubmit(e){
     updateData.append("user[seeking_relationship]",seeking_relationship)
     
    
-console.log(updateData)
+
   
-    fetch("/users/"+`${user.id}`, {
-      method: "PATCH",
+    fetch(`/users/+${user.id}`, {
+      method:"PATCH",
       body:updateData,
+      
     }).then((r) => {
-          setIsLoading(false)
-          if (r.ok) {
-            r.json().then((newUserData) => {
+      setIsLoading(false)
+      if (r.ok) {
+        r.json().then((newUserData) => {
+              console.log(newUserData)
 
 
                 const addingUserinfo = {...user,...newUserData}
@@ -146,9 +143,9 @@ console.log(updateData)
        
 
     <div className='sign-form'>
-    
-      <h1 className="slogan">Where Pet Pal Meets Tinder </h1>
-      <h3>Edit Your info Below In Below </h3>
+{/*     
+      <h1 className="slogan">Where Pet Pal Meets Tinder </h1> */}
+      <h3 className="setting-header">Edit your profile info Below  </h3>
 
     <Row>
    
@@ -226,7 +223,7 @@ console.log(updateData)
                     onChange={(e) =>setPronouns(e.target.value)}  />
       </Form.Group>
       </Row>
-
+      <br></br>
   <Row>
       <Form.Group as={Col} >
         <Form.Label>City</Form.Label>
@@ -255,7 +252,7 @@ console.log(updateData)
       
       <br></br>
      
-       <br></br>
+ 
       
     
 
@@ -265,18 +262,27 @@ console.log(updateData)
                 <Form.Check 
                 name="seeking_relationship"
                 type="checkbox" 
-                label="yes I am seeking a relationship "
+               
                 checked={seeking_relationship}
                 // name="seeking_relastionship"
                 // checked={seeking_relationship}
                   
                         // value={seeking_relationship}
                     onChange={()=>setSeeking_Relationship((prev)=> !prev)} />
-
+                    <p>{seeking_relationship ? 'yes I want to date ' : 'no '}</p>
 
       </Form.Group>
-{/*      
-      <Form.Group controlId="formFileSm" >
+      
+      <h5>Enter! Password and Password confirmation to save changes</h5>
+     <Button 
+     
+      type="submit" variant="dark" >
+   
+     {isLoading ? "Loading..." : "Save Changes"}
+   
+     </Button>
+     
+      {/* <Form.Group controlId="formFileSm" >
         {avatar ? avatar.name : "change"}
         <Form.Label>Profile Image</Form.Label>
         <Form.Control 
@@ -289,30 +295,6 @@ console.log(updateData)
         />
       </Form.Group> */}
    
-    
-      {/* <Form.Group>
-        <Form.Label>Upload Profile Image </Form.Label>
-             <Form.Control
-           input type="file" 
-      
-              // value={address}
-              // onChange={(e) =>setAddress(e.target.value)}/>
-              />
-      </Form.Group>  */}
-       <br></br>
-       <h5>enter! password and password confirmation to save changes</h5>
-      <Button 
-      
-       type="submit" variant="dark" >
- 
-      {isLoading ? "Loading..." : "Save Changes"}
-
-      </Button>
-
-
-
-
-
       </div>
       </Form>
       </div>

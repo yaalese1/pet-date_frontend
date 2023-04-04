@@ -68,7 +68,9 @@ function PetsPage () {
 
             <div className='pets-page'>
              <div className='petSearch'>
+             <p>Search pet  by species </p> 
                 <input
+                className='search-input'
                 type='text'
                
                 onChange={handlePetSearch}

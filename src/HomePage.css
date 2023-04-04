@@ -47,6 +47,9 @@
         padding: 10px;
         /* padding-right: 10vw; */
     }
+    .setting-header{
+        padding-top: 40px;
+    }
     /* .homebttn{
         justify-content: center;
     padding-left: 5vw;

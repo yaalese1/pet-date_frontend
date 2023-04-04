@@ -2,10 +2,10 @@ import React, { useState, useContext }  from "react";
 import { UserContext } from "../context/user";
 import '../UserProfile.css'
 import Button from 'react-bootstrap/Button';
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import PetEditForm from "./PetEditForm"
 import Modal from 'react-bootstrap/Modal';
-
+import Form from 'react-bootstrap/Form';
 
 
 
@@ -18,7 +18,10 @@ function UserPetCard ({userPet}){
      const [smShow, setSmShow] = useState(false);
      const[showPetDetail, setShowPetDetail] = useState(false)
      const [ errors, setErrors ] = useState([])
-// console.log(userPet)
+     const [isLoading, setIsLoading] = useState(false);
+     const [showPetEditImageModal,setShowPetEditImageModal] = useState(false)
+     const [editImage, setEditImage] = useState(userPet.image_url)
+
 
 
 function handlePetEdit(){
@@ -58,33 +61,116 @@ function handleUserPetDelete(){
     })
 }
 
-     
+ function  handlePetEditImageUpload(){
+setShowPetEditImageModal(true)
+ }
+ function  handlePetEditImageUploadClosing (){
+    setShowPetEditImageModal(() => setShowPetEditImageModal(false))
+ }
+// const handlePetEditImageUpload = () => setShowPetEditImageModal(true)
+// const handlePetEditImageUploadClosing = () => setShowPetEditImageModal(false)
+
+function handlePetEditPhotoSubmit(e){
+    e.preventDefault()
   
-
-
+    const photo = new FormData();
+    photo.append("pet[image]", editImage)
+  
+    fetch(`/pets/+${userPet.id}`, {
+   
+        method: "PATCH",
+        body:photo,
+      }).then((r) => {
+            setIsLoading(false)
+            if (r.ok) {
+              r.json().then((newPhotoData) => {
+  
+  
+  
+                const  updatedPetInfo = user.pets.map((pet) => pet.id === newPhotoData.id ? newPhotoData: pet)
+                 
+                const updatedUser = {...user , pets: updatedPetInfo}
+                console.log(updatedUser)
+                setUser(updatedUser)
+          
+          });
+  
+  
+              navigate("/UserProfile")
+            } else {
+               r.json().then((err) => (setErrors(err.errors)))
+            }
+            })
+  
+  }
 
 
     return (
 
          <div >
-            
             <div >
                 <img className ='userpet-cardImage' 
-                src ='http://cdn.akc.org/content/hero/cute_puppies_hero.jpg' alt ="avatar"/>
+                src ={userPet.image_url} alt ="avatar"/>
                 <p className= "pet-intro">
                  Hello, my name is {userPet.name}.
                  Click the info button to 
                  know more about me !</p> 
             </div>
+            <div className="pet-imgeditBttn">
+                <Button onClick={handlePetEditImageUpload} variant="dark">
+                    edit  {userPet.name}'s' image 
+                </Button>
+            </div>
+         
+            <Modal
+            size="md"
+            onHide={()=>setShowPetEditImageModal}
+            show={showPetEditImageModal}
+            aria-labelledby="example-modal-sizes-title-md"
+            centered>
+                   <button 
+              onClick={handlePetEditImageUploadClosing}
+              className='upload-backbttn'>
+                ≪Back
+            </button>
+            <div className='imageModal'>
+                <Form onSubmit={handlePetEditPhotoSubmit}>
+               
+                      <Form.Label 
+                          className='upload-header'>
+                          Upload your new image below
+                        </Form.Label>
+                          <div className='upload-inputcontainer'>
+                            <Form.Control 
+                                className='edit-upload'
+                                type="file" 
+                                size="sm"
+                                name="image"
+                             
+                                inputprops={{ accept: "image/*" }}
+                                onChange={(e) => setEditImage(e.target.files[0])} 
+                              />
+                              </div>
+                              <div className='upload-inputcontainer'>
+                          <Button  variant='dark' type="submit">save changes</Button>
+                          </div>
+
+                </Form>
+
+
+                
+                
+                </div>
+            </Modal>
     <div >
 
             <Modal 
 
-            size="sm"
-            show={showPetDetail}
-            onHide={() =>setShowPetDetail(false)}
-            aria-labelledby="example-modal-sizes-title-sm"
-            >
+size="sm"
+onHide={() =>setShowPetDetail(false)}
+show={showPetDetail}
+aria-labelledby="example-modal-sizes-title-sm"
+>
          
             <div className="line-item">
                 <h3>Name:</h3>
@@ -135,6 +221,10 @@ function handleUserPetDelete(){
                <p>{userPet.trained ? <p>yes</p> : <p>no</p>}</p> 
            </div>
            <div className="line-item">
+                <h3> Alteration: </h3>
+               <p>{userPet.alteration ? <p>yes</p> : <p>no</p>}</p> 
+           </div>
+           <div className="line-item">
                 <h3> Mental Disorders: </h3>
                <p>{userPet.mental_disorder}</p> 
            </div>
@@ -148,7 +238,7 @@ function handleUserPetDelete(){
 
            <div className= "petbutton-container">
                <Button onClick={handlePetEdit} 
-                    variant="dark">click to Edit
+                    variant="dark"> Edit {userPet.name}'s info'
 
                </Button>
                

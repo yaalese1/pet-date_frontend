@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/user";
-import CloseButton from 'react-bootstrap/CloseButton';
+
 
 
 
@@ -17,6 +17,7 @@ function PetEditForm({ pets, handleModalClosing}){
      const [ errors, setErrors ] = useState(null)
      const navigate = useNavigate()
  
+   
     
     
     // console.log(userPet)
@@ -48,7 +49,7 @@ function PetEditForm({ pets, handleModalClosing}){
              e.preventDefault()
              setErrors([])
             //  console.log(updatedPet)
-             fetch('/pets/'+`${pets.id}`, {
+             fetch(`/pets/+${pets.id}`, {
                  method: "PATCH",
                  headers: {
                      "Content-Type": "application/json",
@@ -61,9 +62,9 @@ function PetEditForm({ pets, handleModalClosing}){
 console.log(updatedAnimal)
                         const  updatedPetInfo = user.pets.map((pet) => pet.id === updatedAnimal.id ? updatedAnimal: pet)
                         
-                  console.log(updatedPetInfo)
+              
                         const updatedUser = {...user , pets: updatedPetInfo}
-                        console.log(updatedUser)
+                      
                         setUser(updatedUser)
                    
                         
@@ -88,6 +89,8 @@ console.log(updatedAnimal)
             setUpdatePet({...updatedPet, [name]: type === "checkbox" ? checked : value})
 
          }
+
+        
 
 
 
@@ -236,9 +239,9 @@ console.log(updatedAnimal)
                 <Form.Check
                 name='open_to_breeding'
                 type="checkbox" 
-                label= "yes"
                 checked={updatedPet.open_to_breeding}
                 onChange={handleEditChange} />
+                   <p>{updatedPet.open_to_breeding ? 'yes' : 'no'}</p>
             </Form.Group>
 
             <Form.Group as={Col}  className='edit-textarea'>
@@ -246,9 +249,9 @@ console.log(updatedAnimal)
                 <Form.Check
                 name= 'active'
                 type="checkbox" 
-                label= "yes"
                 checked={updatedPet.active}
                 onChange={handleEditChange} />
+                 <p>{updatedPet.active ? 'yes' : 'no'}</p>
             </Form.Group>
         </Row>  
         <Row>
@@ -256,20 +259,20 @@ console.log(updatedAnimal)
                 <Form.Label> Is your pet trained ? </Form.Label>
                 <Form.Check
                  name="trained"
-               type="checkbox" 
-                label="yes"
-               checked={updatedPet.trained}
-                onChange={handleEditChange} />
+                 type="checkbox" 
+                 checked={updatedPet.trained}
+                 onChange={handleEditChange} />
+                <p>{updatedPet.trained ? 'yes' : 'no'}</p>
             </Form.Group>
 
             <Form.Group as={Col}  className='edit-textarea'>
                 <Form.Label> Has your pet undergone alteration? </Form.Label>
                 <Form.Check
                  name="alteration"
-               type="checkbox" 
-                label="yes"
-               checked={updatedPet.alteration}
-                onChange={handleEditChange} />
+                 type="checkbox" 
+                 checked={updatedPet.alteration}
+                 onChange={handleEditChange} />
+                 <p>{updatedPet.alteration? 'yes' : 'no'}</p>
             </Form.Group>
         </Row>
          

@@ -128,7 +128,10 @@
   }
   
 
+  .profile-imgbutton{
+    padding-top: 20px;
 
+  }
 
 
   .outterbackground{
@@ -179,6 +182,43 @@
   background-color: pink;
   /* justify-content: center; */
 }
+.infoblockcontainer{
+  padding-top: 20px;
+  padding-left: 20px;
+  background-color: pink;
+
+}
+
+.imageModal{
+  display: flex;
+  background-color: pink;
+  justify-content: center;
+  /* width: 80px;
+  height: 80px; */
+}
+
+.upload-header{
+  font-family: 'Times New Roman', Times, serif;
+  color: black;
+  padding-top: 15px;
+  padding-left:20px ;
+}
+.upload-inputcontainer{
+  padding-left:20px ;
+  padding-bottom: 20px;
+}
+
+.upload-backbttn{
+  padding-right:22vw;
+  padding-top: 15px;
+  background-color: pink;
+  border: pink;
+}
+
+.edit-upload{
+  width: 25vw;
+  
+}
 
 .userpet-cardImage{
   /* padding: 100px; */
@@ -192,6 +232,8 @@
   border-bottom-left-radius: 10px;
 
 }
+
+
 .userpet-cardImage{
   width: 50%;
   height: 110%;
@@ -228,12 +270,53 @@
 
 .p-4{
   display: flex;
- 
+  /* align-items: center; */
   
 }
+.back-editabout{
+  display: flex;
+  justify-content: center;
+  background-color: pink;
+  border-color: pink;
+}
+
+.about-modal{
+  padding-left:15px ;
+  background-color: pink;
+
+}
+
 .abt-btn{
   justify-content: end;
 }
+
+.abt-backbttn{
+  padding-right:23.5vw;
+  padding-top: 15px;
+  background-color: pink;
+  border: pink;
+}
+
+.about-editheader{
+  font-family: 'Times New Roman', Times, serif;
+  color: black;
+  padding-top: 10px;
+  padding-left:20px ;
+}
+.input-abtme{
+  padding-right:25vw ;
+  width: 20vw;
+  height: 10vw;
+
+}
+
+.save-abtBttn{
+  padding-left:20px ;
+  padding-bottom: 35px;
+  padding-right: 25px;
+
+}
+
 .pet-editbtn{
   padding: 20px;
 }
@@ -307,6 +390,13 @@
 }
 .addpetbtn{
  padding-top: 20px;
+}
+
+
+.pet-imgeditBttn{
+  display: flex;
+ 
+  padding-left: 650px;
 }
 .petbutton-container{
  align-items: start;
