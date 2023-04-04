@@ -96,7 +96,7 @@ function handleDeleteReview(deletedReviewId){
     
     <div className='Petcard'>
       <div className='pet-cardImage'>
-            <img src= 'http://cdn.akc.org/content/hero/cute_puppies_hero.jpg' 
+            <img src= {pet.image_url}
             alt ="https://images.unsplash.com/photo-1579380656108-f98e4df8ea62?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZnJvZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"/>
           </div>
           <p className= "petcard-intro">
@@ -168,6 +168,11 @@ function handleDeleteReview(deletedReviewId){
            <div className="line-item">
                 <h3> Trained: </h3>
                <p>{pet.trained ? <p>yes</p> : <p>no</p>}</p> 
+           </div>
+           
+           <div className="line-item">
+                <h3> Alteration: </h3>
+               <p>{pet.alteration ? <p>yes</p> : <p>no</p>}</p> 
            </div>
            <div className="line-item">
                 <h3> Mental Disorders: </h3>

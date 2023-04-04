@@ -31,8 +31,6 @@ function Signup ({handleSignupClose}){
    const navigate = useNavigate()
    const [ errors, setErrors ] = useState(null)
 
-console.log(seeking_relationship)
-
 function handleSubmit(e){
   e.preventDefault()
 
@@ -57,10 +55,12 @@ function handleSubmit(e){
     method: "POST",
     body: data,
   }).then((r) => {
+   
         setIsLoading(false)
         if (r.ok) {
-          r.json().then((data) => setUser(data));
-          navigate("/Welcome")
+          r.json().then((newdata) => console.log(newdata));
+   
+          // navigate("/Welcome")
         } else {
            r.json().then((err) => (setErrors(err.errors)))
         }

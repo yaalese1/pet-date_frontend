@@ -6,6 +6,19 @@
     width: 100vw;
     justify-content: space-evenly;
   }
+
+  .petSearch{
+    padding-top: 40px;
+    font-size: large;
+    font-weight: 800;
+    color: rgb(10, 0, 2);
+    
+  }
+
+  .search-input{
+border-color: pink;
+box-shadow: rgb(156, 137, 156);
+  }
   
   .Petcard {
     width: 30vw;
@@ -43,6 +56,8 @@
     margin: 10px;
     
   }
+
+
   
   .line-item h3 {
     font-size: 16px;

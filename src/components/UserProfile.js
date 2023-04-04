@@ -1,5 +1,5 @@
 
-import React ,{useState, useContext}from 'react';
+import React ,{useState, useContext, useEffect}from 'react';
 import { UserContext } from "../context/user";
 import { useNavigate } from "react-router-dom";
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
@@ -37,10 +37,65 @@ function UserProfile(){
  const {user, setUser} = useContext(UserContext)
 
  const  [smShow, setSmShow] = useState(false)
+ const [ showAboutMe, setShowAboutMe] = useState(false)
+ const[showEditAvatarShow, setShowEditAvatarShow] = useState(false)
 
  const userReviews = user && user.user_reviews
-const [ showAboutMe, setShowAboutMe] = useState(false)
 const navigate = useNavigate() 
+const [editAvatar, setEditAvatar] = useState(user?.avatar_url)
+const [isLoading, setIsLoading] = useState(false);
+  
+   const [ errors, setErrors ] = useState(null)
+
+useEffect(() => {
+setEditAvatar(user?.avatar_url)
+},[user])
+
+
+function handleEditAvatarForm(){
+  setShowEditAvatarShow(true)
+}
+function  handleEditAvatarFormClosing(){
+  setShowEditAvatarShow(() => setShowEditAvatarShow(false))
+}
+
+
+
+
+function handleEditPhotoSubmit(e){
+  e.preventDefault()
+
+  const photo = new FormData();
+  photo.append("user[avatar]", editAvatar)
+
+  fetch(`/users/+${user.id}`, {
+      method: "PATCH",
+      body:photo,
+    }).then((r) => {
+          setIsLoading(false)
+          if (r.ok) {
+            r.json().then((newPhotoData) => {
+
+
+
+                const addingNewPhotoinfo = {...user,avatar_url: newPhotoData.avatar_url}
+               
+            setUser(addingNewPhotoinfo)
+        
+        });
+
+
+            navigate("/UserProfile")
+          } else {
+             r.json().then((err) => (setErrors(err.errors)))
+          }
+          })
+
+}
+
+
+
+
 
  function handlePetAddForm(){
   setSmShow(true)
@@ -56,15 +111,22 @@ function handleAboutMeDisplay(){
   setShowAboutMe(true)
 }
 
+function handleAboutMeDisplayClosed(){
+  setShowAboutMe(false)
+
+}
+
+
 const [formData, setFormData] = useState({
   about_me: ""
 })
 
-console.log(typeof(formData))
+
+
 
 function handleAboutSubmit(e){
   e.preventDefault()
-  fetch('/users/'+`${user.id}`, {
+  fetch(`/users/+${user.id}`, {
     method: "PATCH",
     headers: {
         "Content-Type": "application/json",
@@ -95,7 +157,7 @@ const handleAboutMeChange =(e)=>{
 
 
 
-
+console.log()
 
 return  (
 
@@ -111,33 +173,72 @@ return  (
 
   
 <div className="outterbackground" >
-      <MDBContainer className="py-5 h-100">
+        <MDBContainer className="py-5 h-100">
         <MDBRow className="profilecontainer">
-          <MDBCol >
-            <MDBCard>
-            <MDBCardText className='white-space'>C</MDBCardText>
-            
-              <div className="userimage ">
-          
-                <div className=" imagesize" >
-                  <MDBCardImage  className= 'Image'
-                  src={user?.avatar_url}
-                    alt="Generic placeholder image"
-                   />
-                </div>
-            <div>
-              
-                </div>
-                <div className="ms-3">
-           
-                  <MDBTypography tag="h5">  {user?.first_name}</MDBTypography>
-               
-                </div>
-             
+        <MDBCol>
+        <MDBCard>
+        <MDBCardText className='white-space'>C</MDBCardText>
+      <div className="userimage ">
+            <div className=" imagesize" >
+              <MDBCardImage  className= 'Image'
+                src={user?.avatar_url}
+                alt="Generic placeholder image"
+              />
+            </div>
+            <div className="ms-3">
+                <MDBTypography tag="h5">
+                {user?.first_name}
+                </MDBTypography>
               </div>
-              <MDBCardText className='city'>City: {user?.city}</MDBCardText>
-              <div className="infoblockcontainer " style={{ backgroundColor: 'pink' }}>
-              <Button variant='dark'>edit profile info</Button>
+       </div>
+             <MDBCardText className='city'>
+              City:{user?.city}
+              </MDBCardText>
+        <div className="infoblockcontainer ">
+          <Button 
+            onClick={handleEditAvatarForm}
+            variant='dark'>edit profile image
+          </Button>
+        <Modal                  
+            size="md"
+            show={showEditAvatarShow}
+            onHide={handleEditAvatarFormClosing}
+            aria-labelledby="example-modal-sizes-title-sm"
+            centered
+           >
+            <button 
+              onClick={handleEditAvatarFormClosing}
+              className='upload-backbttn'>
+                ≪Back
+            </button>
+                <div className='imageModal'>
+                  <Form
+                      onSubmit={handleEditPhotoSubmit}>
+                    <Form.Group>
+                      <Form.Label 
+                          className='upload-header'>
+                          Upload your new image below
+                        </Form.Label>
+                          <div className='upload-inputcontainer'>
+                            <Form.Control 
+                                className='edit-upload'
+                                type="file" 
+                                size="sm"
+                                name="avatar"
+                                placeholder={user?.avatar_url}
+                                inputprops={{ accept: "avatar/*" }}
+                                onChange={(e) => setEditAvatar(e.target.files[0])} 
+                              />
+                          </div>
+                      </Form.Group>  
+                          <div className='upload-inputcontainer'>
+                          <Button  variant='dark' type="submit">save changes</Button>
+                          </div>
+                      
+                      </Form>
+                    
+                      </div>
+                      </Modal>
                 <div className='infoblock text-center'>
            
                   <div>
@@ -167,32 +268,50 @@ return  (
                    </div>
                     
                   </div>
-                  <Modal                  
-                    size="lg"
+                  <div>
+                  <Modal
+                          
+                    size="md"
                     show={showAboutMe}
                     onHide={() => setShowAboutMe(false)}
-                    aria-labelledby="example-modal-sizes-title-lg"
+                    aria-labelledby="example-modal-sizes-title-md"
+                    centered
                     >
-                        <Form onSubmit={ handleAboutSubmit}>
-                        <Form.Group className= "mb-3">
-                        <Form.Label> edit your About Me text here</Form.Label>
+                      
+                        <button onClick={handleAboutMeDisplayClosed}className='abt-backbttn'>≪Back</button>
                         
+                        <Form  className='about-modal'onSubmit={ handleAboutSubmit}>
+                        <Form.Label className='about-editheader'> Edit your about me text here </Form.Label>
+                        <div className='aboutedit-inputcontainer'>
+                        <Form.Group className= "mb-3">
+                       
+                 
                           <Form.Control
+                          className='input-abtme'
                             input= "text"
                             name="about_me" 
-                           
+                           size='lg'
+                         
                             value={formData.about_me}
                             onChange={handleAboutMeChange}
 
                           /> 
-                          <div>
-                          <Button type='submit' variant='dark'> Save Changes</Button>
-                          </div>
+                      
+                   
+                 
                           </Form.Group>
+                          </div>  
+                          <div className='save-abtBttn'>
+                          <Button type='submit' variant='dark'> Save Changes</Button>
+                          </div> 
                         </Form>
-
+                   
                     </Modal>
+                 
+                         
                   <Button onClick={handleAboutMeDisplay} variant='dark'>click to edit</Button>
+                  
+                  </div>
                 </div>
                 <div>
                 <div className="mb-9 ">
