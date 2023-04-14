@@ -48,7 +48,7 @@ function PetEditForm({ pets, handleModalClosing}){
        function handleSubmit(e) {
              e.preventDefault()
              setErrors([])
-            //  console.log(updatedPet)
+            
              fetch(`/pets/+${pets.id}`, {
                  method: "PATCH",
                  headers: {

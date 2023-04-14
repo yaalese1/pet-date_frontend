@@ -11,6 +11,7 @@ function LandingPage(){
 
 
     function handleWelcomeNav(){
+        
         navigate("/Pets")
     }
     console.log(user)
@@ -23,7 +24,7 @@ function LandingPage(){
         <Card.Title className="users-firstname">{user?.first_name} </Card.Title>
         <Card.Title>Pet & Date </Card.Title>
         <Card.Text className="welcome-msg">
-         Hello , welcome To Pet & Date. To get started  you can click the button below  and take a look at all our various pets provided to us by our awsome lenders. You can also click the profile link in the Nav  Bar  above to add your own pets as well .  Any questions check out the FAQ link. 
+         Hello , Welcome To Pet & Date. To get started  you can click the button below  and take a look at all our various pets provided to us by our awsome lenders. You can also click the profile link in the Nav  Bar  above to add your own pets as well .  Any questions check out the FAQ link. 
         </Card.Text>
         <Button onClick={handleWelcomeNav} variant="dark"> Click to book a pet! </Button>
       </Card.Body>

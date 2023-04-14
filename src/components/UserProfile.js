@@ -36,6 +36,7 @@ function UserProfile(){
  
  const {user, setUser} = useContext(UserContext)
 
+
  const  [smShow, setSmShow] = useState(false)
  const [ showAboutMe, setShowAboutMe] = useState(false)
  const[showEditAvatarShow, setShowEditAvatarShow] = useState(false)
@@ -43,12 +44,16 @@ function UserProfile(){
  const userReviews = user && user.user_reviews
 const navigate = useNavigate() 
 const [editAvatar, setEditAvatar] = useState(user?.avatar_url)
+const [editAboutMe, setEditAboutMe] = useState(user?.about_me)
 const [isLoading, setIsLoading] = useState(false);
+const [pets, setPets] = useState([])
   
    const [ errors, setErrors ] = useState(null)
 
 useEffect(() => {
 setEditAvatar(user?.avatar_url)
+setEditAboutMe(user?.about_me)
+setPets(user?.pets)
 },[user])
 
 
@@ -117,21 +122,24 @@ function handleAboutMeDisplayClosed(){
 }
 
 
-const [formData, setFormData] = useState({
-  about_me: ""
-})
+
+// const [formData, setFormData] = useState({
+//   about_me: ""
+// })
 
 
 
 
 function handleAboutSubmit(e){
   e.preventDefault()
+  const aboutMeData = new FormData();
+  aboutMeData.append("user[about_me]", editAboutMe);
   fetch(`/users/+${user.id}`, {
     method: "PATCH",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
+    // headers: {
+    //     "Content-Type": "application/json",
+    // },
+    body:aboutMeData
 }).then((r) => {
     if (r.ok) {
         r.json().then((aboutMeData) => {
@@ -150,14 +158,14 @@ function handleAboutSubmit(e){
 })
 }
 
-const handleAboutMeChange =(e)=>{
-  const {name,value} = e.target
-  setFormData({...formData,[name]: value})
-}
+// const handleAboutMeChange =(e)=>{
+//   const {name,value} = e.target
+//   setFormData({...formData,[name]: value})
+// }
 
 
 
-console.log()
+console.log(pets)
 
 return  (
 
@@ -280,27 +288,30 @@ return  (
                       
                         <button onClick={handleAboutMeDisplayClosed}className='abt-backbttn'>≪Back</button>
                         
-                        <Form  className='about-modal'onSubmit={ handleAboutSubmit}>
+                        <Form  className='about-modal'
+                        onSubmit={ handleAboutSubmit}>
                         <Form.Label className='about-editheader'> Edit your about me text here </Form.Label>
-                        <div className='aboutedit-inputcontainer'>
+                    
                         <Form.Group className= "mb-3">
                        
                  
                           <Form.Control
-                          className='input-abtme'
-                            input= "text"
-                            name="about_me" 
-                           size='lg'
                          
-                            value={formData.about_me}
-                            onChange={handleAboutMeChange}
+                            // input= "text"
+                            type="about_me" 
+                        
+                           size='lg'
+                      
+                         
+                            value={editAboutMe}
+                            onChange={(e) => setEditAboutMe(e.target.value)}
 
                           /> 
                       
                    
                  
                           </Form.Group>
-                          </div>  
+                       
                           <div className='save-abtBttn'>
                           <Button type='submit' variant='dark'> Save Changes</Button>
                           </div> 
@@ -346,7 +357,7 @@ return  (
                   <MDBCol className="mb-2">
                     
                   <div className='userpetscontainer'>
-                       {user?.pets.map( (userPet) =>{
+                       {pets?.map( (userPet) =>{
                     return <UserPetCard
                       userPet={userPet}
                       key= {userPet.id}/>

@@ -60,7 +60,7 @@ function handleSubmit(e){
         if (r.ok) {
           r.json().then((newdata) => console.log(newdata));
    
-          // navigate("/Welcome")
+          navigate("/Welcome")
         } else {
            r.json().then((err) => (setErrors(err.errors)))
         }

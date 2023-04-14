@@ -109,7 +109,7 @@ function handleSubmit(e){
       setIsLoading(false)
       if (r.ok) {
         r.json().then((newUserData) => {
-              console.log(newUserData)
+              
 
 
                 const addingUserinfo = {...user,...newUserData}

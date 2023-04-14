@@ -49,7 +49,6 @@ function PetsPage () {
 
        
        
-       console.log(newSearch)
        
        
        
@@ -88,7 +87,7 @@ function PetsPage () {
                 </Form> */}
 
             </div>
-    
+        {/* {if pets.owner_id === user.id } */}
             {eachPet}
             
          
