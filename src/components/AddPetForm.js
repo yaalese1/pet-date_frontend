@@ -25,6 +25,9 @@ function AddPetForm({handlePetAddFormClosing}){
                 breed: "",
                 diet: "",
                 size: "",
+                state: "",
+                city: "",
+                zip_code: "",
                 mental_disorder: "",
                 open_to_breeding: false,
                 active: (false),
@@ -33,7 +36,7 @@ function AddPetForm({handlePetAddFormClosing}){
                 owner_id: user.id
                
             })
-// console.log(formData)
+
       
 function handleSubmit(e) {
     e.preventDefault();
@@ -54,12 +57,15 @@ function handleSubmit(e) {
  
 
     console.log(newPetAdded)
- 
+ console.log(user)
    
 
     const addPetToUser = {...user, pets: newPetAdded}
     setUser(addPetToUser)
+
+    
     console.log(addPetToUser)
+    console.log(user)
 
     alert("Your pet has been Added")
     navigate("/UserProfile")

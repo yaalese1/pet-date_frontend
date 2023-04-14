@@ -1,47 +1,42 @@
-import React,{useState, useContext, useEffect}from "react";
-
-import Card from 'react-bootstrap/Card';
-import { UserContext } from '../context/user'
-
-import '../Booking.css'
+import React,{useState, useEffect, useContext} from 'react'
 import { useNavigate } from "react-router-dom";
+import {UserContext} from  "../context/user"
+import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import CloseButton from 'react-bootstrap/CloseButton';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import Calendar from 'react-calendar';
-
-import 'react-calendar/dist/Calendar.css';
 import Modal from 'react-bootstrap/Modal'
+import Calendar from 'react-calendar';
+import '../Booking.css';
 
 
-function BookingCard ({  userBooking, setBookings}){
-  const [showEditMessage, setShowEditMessage] = useState(false)
+function OwnersPetsBookingCard({userBooking, myBookings}){
+  const {user, setUser} = useContext(UserContext)   
+   const [showEditMessage, setShowEditMessage] = useState(false)
   const [showCancelMessage, setShowCancelMessage] = useState(false)
-  const {user, setUser} = useContext(UserContext)
   const [ errors, setErrors ] = useState(null)
   const navigate = useNavigate()
   const  [smShow, setSmShow] = useState(false)
   const [xsShow , setXsShow] = useState()  
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date ())
+  
   const [bookingMod, setBookingMod] = useState(false)
   const userStartView = JSON.stringify(startDate)
   const userStartViewFormat = userStartView.slice(1,11)
   const userEndView = JSON.stringify(endDate)
   const userEndViewFormat = userEndView.slice(1,11)
-  const[petBookings , setPetBookings] = useState()
+  const[bookings , setBookings] = useState()
 
   useEffect(() =>{
-    fetch('/bookings/').then((resp)=>{
-        if(resp.ok){
-            resp.json().then((bookingInfo)=>{setPetBookings(bookingInfo)})
-        }
+      fetch('/bookings/').then((resp)=>{
+          if(resp.ok){
+              resp.json().then((bookingInfo)=>{setBookings(bookingInfo)})
+          }
 
-    });
-},[])
-
+      });
+  },[])
 
  function handleEditButton (){
   setShowEditMessage(true)
@@ -79,105 +74,112 @@ function handleCloseModal(){
 
 
 
-
-
+// const bookingId = myBookings.map((myBooking)=>{
+//   return myBooking.id})
 
 
 function handleDeletBookingClick(){
 
   fetch(`/bookings/${userBooking.id}`, {method: "DELETE",}).then((r) =>{
     if(r.ok){
-      const cancelBooking = petBookings.filter((petBooking)=> petBooking.id !== userBooking.id)
+      const cancelBooking = user?.pet_bookings.filter((booking)=> booking.id !== userBooking.id)
+      const updatedUser ={...user, pet_bookings: cancelBooking}
 
-      console.log(cancelBooking)
-      const updatedUser ={...petBookings, bookings: cancelBooking}
      
-   console.log(updatedUser) 
-
- const updateAllPetBookings =petBookings.map((petBooking)=>petBooking.id === updatedUser.id ? updatedUser : petBooking)
+       setUser(updatedUser)
+      }else{
+        console.log(userBooking.id)
+          const cancelMyBooking = user.my_bookings.filter((booking)=> 
+        
+        booking.id  !== userBooking.id)
       
-    console.log(updateAllPetBookings)
+          const otherUserUpdate = {...user, my_bookings:cancelMyBooking }
+    
+// const cancelBooking = user.bookings.filter((booking)=>  booking.id !==  userBooking.id)
+// console.log(cancelBooking)
 
+// const updateUser = {...user, bookings: cancelBooking}
 
-setUser(updateAllPetBookings)
+setUser(otherUserUpdate)
 
       }
        alert("Your date has been Canceled ")
 
     })
+    navigate("/Calendar")
+}
+
+
+const [formData, setFormData] = useState({
+  start_data: userBooking.start_date,
+  end_date: userBooking.end_date,
+  start_time: userBooking.start_time,
+  end_time: userBooking.end_time,
+  pickup_location: userBooking.pickup_location,
+  dropoff_location: userBooking.dropoff_location,
+  pet_only: userBooking.pet_only,
+  // booking_id: bookings.id
+
+})
+console.log(userBooking)
+
+
+function handleSubmit(e){
+  e.preventDefault();
+  setErrors([])
+  fetch(`/bookings/${userBooking.id}`,{
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  }). then((r)=>{
+    if (r.ok){
+      r.json().then((updatedBooking)=>{
+
+        const updatedOwnerBookingInfo = user.my_bookings.map((my_booking)=>
+          my_booking.id === updatedBooking.id ? updatedBooking:my_booking
+        )
+        const updatingTheUser={...user,my_bookings: updatedOwnerBookingInfo}
+      //  const updatingTheUser = {...user, my_bookings: updatedBooking.my_bookings}
+       console.log(updatingTheUser)
+        setUser( updatingTheUser)
+   
+        
+        alert("Your Booking has been updated")
+        navigate("/PetCalendar")
+        
+       
+      })
+    }
+  })
   
 }
 
 
-// const [formData, setFormData] = useState({
-//   start_data: userBooking.start_date,
-//   end_date: userBooking.end_date,
-//   start_time: userBooking.start_time,
-//   end_time: userBooking.end_time,
-//   pickup_location: userBooking.pickup_location,
-//   dropoff_location: userBooking.dropoff_location,
-//   pet_only: userBooking.pet_only,
 
-// })
-// /bookings/${userBooking.id}
-// function handleSubmit(e){
-//   e.preventDefault();
-//   setErrors([])
-//   fetch(`/owner_booking/${user.id}/${userBooking.id}`,{
-//     method: "PATCH",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(formData),
-//   }). then((r)=>{
-//     if (r.ok){
-//       r.json().then((updatedBooking)=>{
-//         const updatedBookingInfo = user.my_bookings?.map((my_booking)=> 
-//         my_booking.id === updatedBooking.id ? updatedBooking: my_booking)
-       
-      
-   
-        
-//         const updateBookingForUser= {...user,...updatedBooking}
-//         console.log(updateBookingForUser)
-//         setUser( updateBookingForUser)
-   
-        
-//         alert("Your Booking has been updated")
-//         navigate("/Dates")
-        
-       
-//       })
-//     }
-//   })
+
+function handleEditChange(e){
+  const{name,value,type,checked} = e.target
+  setFormData({...formData, [name]: type === "checkbox" ? checked : value})
+}
+function handleStartDatePicked(startCalendarDate){
+  setStartDate(startCalendarDate)
+  const startDatePickedToString =JSON.stringify(startCalendarDate);
+  const startDateDisplay =  startDatePickedToString.slice(1,11) 
+  setFormData({...formData, start_date: startDateDisplay})
+}
+
+function handleEndDatePicked(endCalendarDate){
+  setEndDate(endCalendarDate)
   
-// }
-
-
-
-
-// function handleEditChange(e){
-//   const{name,value,type,checked} = e.target
-//   setFormData({...formData, [name]: type === "checkbox" ? checked : value})
-// }
-// function handleStartDatePicked(startCalendarDate){
-//   setStartDate(startCalendarDate)
-//   const startDatePickedToString =JSON.stringify(startCalendarDate);
-//   const startDateDisplay =  startDatePickedToString.slice(1,11) 
-//   setFormData({...formData, start_date: startDateDisplay})
-// }
-
-// function handleEndDatePicked(endCalendarDate){
-//   setEndDate(endCalendarDate)
-//   const endDatePickedToString =JSON.stringify(endCalendarDate);
-//   const endDateDisplay =  endDatePickedToString.slice(1,11) 
-//   setFormData({...formData, end_date: endDateDisplay})
+  const endDatePickedToString =JSON.stringify(endCalendarDate);
+  const endDateDisplay =  endDatePickedToString.slice(1,11) 
+  setFormData({...formData, end_date: endDateDisplay})
   
-//  }
-// MAKE A FORM TO EDIT AND IMPORT THE CALENDER 
+ }
 
- 
-    return(
+ return(
         <div className="bookingcards">
           
       <Card>
@@ -227,7 +229,7 @@ setUser(updateAllPetBookings)
       </Card>
   
 
-      {/* <Modal
+      <Modal
       size="lg"
       show={bookingMod}
       onHide={() => setBookingMod(false)}
@@ -302,8 +304,6 @@ setUser(updateAllPetBookings)
            <option>10:00 PM</option>
            <option>11:00 PM</option>                       
         </Form.Select> 
-      
-
       </Form.Group >
     
     
@@ -356,13 +356,12 @@ setUser(updateAllPetBookings)
          onHide={() => setSmShow(false)}
          aria-labelledby="example-modal-sizes-title-md">  
       <Calendar onChange={handleEndDatePicked} value={endDate}/>
-      </Modal> */}
+      </Modal>
    
      
    
 
-{/* <Row>
- 
+      <Row>
       <Form.Group as={Col} className= "pick-location" >
         <Form.Label>Pickup Location</Form.Label>
         <Form.Control 
@@ -399,14 +398,14 @@ setUser(updateAllPetBookings)
       <Button variant="dark" type="submit">
         Submit
       </Button>
-    </Form> */}
+    </Form>
    
-        {/* </div>
+        </div>
         
         </div>
 
 
-    </Modal> */}
+    </Modal>
 
 
         </div>
@@ -414,6 +413,6 @@ setUser(updateAllPetBookings)
 }
 
 
-export default BookingCard;
 
 
+export default OwnersPetsBookingCard

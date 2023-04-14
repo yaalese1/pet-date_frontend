@@ -193,7 +193,7 @@ aria-labelledby="example-modal-sizes-title-sm"
                <p>{userPet.age}</p> 
            </div>
            <div className="line-item">
-                <h3>Breed:</h3>
+                <h3>Diet:</h3>
                <p>{userPet.diet}</p> 
            </div>
            <div className="line-item">

@@ -14,6 +14,7 @@ import Settings from "./Settings";
 import { UserProvider } from "../context/user";
 // import {PetProvider} from "../context/pets"
 import {Routes, Route} from "react-router-dom"
+import OwnersPetBookings from "./OwnersPetsBookings";
 
 // import { CloseButton } from 'react-bootstrap';
 // import "../Login.css"
@@ -34,7 +35,8 @@ function App() {
     <NavbarComp/>
     <Routes>
 
-      <Route exact path= "/Calendar" element = {<BookingPage/>}/>
+      <Route exact path= "/Dates" element = {<BookingPage/>}/>
+      <Route exact path= "/PetCalendar" element = {<OwnersPetBookings/>}/>
       <Route exact path= "/Pets" element = {<PetsPage/>}/>
       <Route exact path= "/UserProfile" element ={<UserProfile/>}/>
       <Route exact path= "/Pet&Date" element ={<HomePage />}/>

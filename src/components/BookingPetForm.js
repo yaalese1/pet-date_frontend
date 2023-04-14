@@ -19,11 +19,12 @@ const [endDate, setEndDate] = useState(new Date ())
 const  [smShow, setSmShow] = useState(false)
 const [xsShow , setXsShow] = useState()
 const {user, setUser} = useContext(UserContext)
-const[bookings , setBooking] = useState([])
+const[bookings , setBookings] = useState([])
 const userStartView = JSON.stringify(startDate)
 const userStartViewFormat = userStartView.slice(1,11)
 const userEndView = JSON.stringify(endDate)
 const userEndViewFormat = userEndView.slice(1,11)
+const [petBookings, setPetBookings] = useState([])
 
 
 const [input, setInput] = useState("")
@@ -42,21 +43,24 @@ function handleEndCalendarDisplay(){
 }
 
 
-// console.log(pet.owner_id)
+
 
 useEffect(() =>{
+ 
     fetch('/bookings').then((resp)=>{
         if(resp.ok){
-            resp.json().then((bookingInfo)=>{setBooking(bookingInfo)})
+            resp.json().then((bookingInfo)=>{setBookings(bookingInfo)})
         }
 
     });
 },[])
 
-
-
-const myBooking = user.my_bookings
-
+console.log(user)
+useEffect(() => {
+  setPetBookings(user?.pet_bookings)
+  // setMyBookings(user?.my_bookings)
+  }, [user])
+ 
 const [formData, setFormData] = useState({
     start_date: new Date(),
     end_date: new Date (),
@@ -72,7 +76,7 @@ const [formData, setFormData] = useState({
 
   function handleSubmit(e){
     e.preventDefault();
-    fetch('/bookings',{
+    fetch(`/users_booking/${user.id}`,{
         method: "POST",
         headers: {
             "Content-Type": "application/json", 
@@ -82,16 +86,15 @@ const [formData, setFormData] = useState({
     .then((r)=> r.json())
     .then((newBooking)=>{
 
-      const newBookingAdded = [...bookings, myBooking , newBooking]
-      const addBookingToUser = {...user, myBooking: newBookingAdded}
+ const newBookingAdded = {...user,pet_bookings: newBooking.pet_bookings}
+ setUser( newBookingAdded )
 
-        // const newBookingAdded = [...bookings,bookings, newBooking]
-        // const addBookingToUser ={...user, bookings: newBookingAdded}
-        setUser(addBookingToUser)
+ 
+
 
         
         alert("Your Date with has been booked,  we will redirect you to  your calendar page  please press ok !")
-        navigate("/Calendar")
+         navigate("/Dates")
     })
   }
 
@@ -106,19 +109,14 @@ function handleStartDatePicked(startCalendarDate){
     const startDatePickedToString =JSON.stringify(startCalendarDate);
     const startDateDisplay =  startDatePickedToString.slice(1,11) 
     setFormData({...formData, start_date: startDateDisplay})
-
-   
-//     const{value, dateDisplay} = e.target
-//    setStartDate({...value, [value]: dateDisplay})
- 
 }
+
 
 function handleEndDatePicked(endCalendarDate){
  setEndDate(endCalendarDate)
  const endDatePickedToString =JSON.stringify(endCalendarDate);
  const endDateDisplay =  endDatePickedToString.slice(1,11) 
  setFormData({...formData, end_date: endDateDisplay})
- console.log(endDateDisplay)
 }
 
 
@@ -138,20 +136,20 @@ function handleEndDatePicked(endCalendarDate){
         name="start_time"
         value={formData.start_time}
         onChange={handleChange}>
-          <option>12:00 am</option>
+          {/* <option>12:00 am</option>
           <option>1:00 AM</option>
-          <option>2:00 AM</option>
-          <option>3:00 AM</option>
-          <option>4:00 AM</option>
-          <option>5:00 AM</option>
-          <option>6:00 AM</option>
-          <option>7:00 AM</option>
-          <option>8:00 AM</option>
-          <option>9:00 AM</option>
-          <option>10:00 AM</option>
-          <option>11:00 AM</option>
-          <option>1:00 PM</option>
-          <option>2:00 PM</option>
+           <option>2:00 AM</option>
+           <option>3:00 AM</option>
+           <option>4:00 AM</option>
+           <option>5:00 AM</option>
+           <option>6:00 AM</option> */}
+           <option>7:00 AM</option>
+           <option>8:00 AM</option>
+           <option>9:00 AM</option>
+           <option>10:00 AM</option>
+           <option>11:00 AM</option>
+           <option>1:00 PM</option>
+           <option>2:00 PM</option>
            <option>3:00 PM</option>
            <option>4:00 PM</option>
            <option>5:00 PM</option>
@@ -171,20 +169,20 @@ function handleEndDatePicked(endCalendarDate){
             name="end_time"
             value={formData.end_time}
             onChange={handleChange}>
-          <option>12:00 AM</option>
-          <option>1:00 AM</option>
-          <option>2:00 AM</option>
-          <option>3:00 AM</option>
-          <option>4:00 AM</option>
-          <option>5:00 AM</option>
-          <option>6:00 AM</option>
-          <option>7:00 AM</option>
-          <option>8:00 AM</option>
-          <option>9:00 AM</option>
-          <option>10:00 AM</option>
-          <option>11:00 AM</option>
-          <option>1:00 PM</option>
-          <option>2:00 PM</option>
+          {/* <option>12:00 AM</option>
+           <option>1:00 AM</option>
+           <option>2:00 AM</option>
+           <option>3:00 AM</option>
+           <option>4:00 AM</option>
+           <option>5:00 AM</option>
+           <option>6:00 AM</option> */}
+           <option>7:00 AM</option>
+           <option>8:00 AM</option>
+           <option>9:00 AM</option>
+           <option>10:00 AM</option>
+           <option>11:00 AM</option>
+           <option>1:00 PM</option>
+           <option>2:00 PM</option>
            <option>3:00 PM</option>
            <option>4:00 PM</option>
            <option>5:00 PM</option>
