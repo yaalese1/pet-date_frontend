@@ -46,9 +46,13 @@ function OwnersPetsBookings(){
 
     })
     return(
+        <div>
+        <h2 className='pet-dateheader'>Click a day to see info on your dates with borrowers  </h2>
         <div className='bookingpage'>
+           
             { eachMyPetBooking }
           <Calendar onChange={setMyBookingCalender} value ={myBookingCalender}/>
+        </div>
         </div>
     )
 }

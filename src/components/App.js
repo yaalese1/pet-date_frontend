@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useState, useEffect} from "react";
 import NavbarComp from "./NavbarComp";
 
 
@@ -21,7 +21,15 @@ import OwnersPetBookings from "./OwnersPetsBookings";
 
 
 function App() {
+  const [pets, setPets] = useState([])
 
+  useEffect (()=>{
+    fetch('/pets')
+    .then((resp) => resp.json())
+    .then ((petsArray) => setPets(petsArray))
+
+    
+},[]) 
 
   return (
  <div>
@@ -35,9 +43,9 @@ function App() {
     <NavbarComp/>
     <Routes>
 
-      <Route exact path= "/Dates" element = {<BookingPage/>}/>
+      <Route exact path= "/Dates" element = {<BookingPage pets={pets}/>}/>
       <Route exact path= "/PetCalendar" element = {<OwnersPetBookings/>}/>
-      <Route exact path= "/Pets" element = {<PetsPage/>}/>
+      <Route exact path= "/Pets" element = {<PetsPage pets={pets} setPets={ setPets}/>}/>
       <Route exact path= "/UserProfile" element ={<UserProfile/>}/>
       <Route exact path= "/Pet&Date" element ={<HomePage />}/>
       <Route exact path= "/Settings" element ={<Settings/>}/>
