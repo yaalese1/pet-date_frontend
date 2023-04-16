@@ -82,13 +82,13 @@ const displayMyDatesWithOtherPetsBooking = petBookings?.filter((booking)=> {
 return(
        
 <div className='pet-headcontainer'>
-    <h2 className='pet-dateheader'>Your Dates With other Pets and Users are Displayed Below </h2>
+    <h2 className='pet-dateheader'>Click a day to see info on dates with other pets and their owners </h2>
         <div className='bookingpage'>
         
            <div className='calender-contain'>
-                {eachMyDatesWithOtherPetBooking}
                 <Calendar onChange={setPetBookingCalender} value={petBookingcalender} 
                 />
+                {eachMyDatesWithOtherPetBooking}
           </div>
         </div>
         </div>

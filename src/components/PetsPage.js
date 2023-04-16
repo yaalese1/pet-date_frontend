@@ -11,19 +11,19 @@ import PetsCard from './PetsCard'
 
 
 
-function PetsPage () {
-    const [pets, setPets] = useState([])
+function PetsPage ({pets, setPets}) {
+    // const [pets, setPets] = useState([])
     const[newSearch, setNewSearch] = useState("")
 
 
-    useEffect (()=>{
-        fetch('/pets')
-        .then((resp) => resp.json())
-        .then ((petsArray) => setPets(petsArray))
+    // useEffect (()=>{
+    //     fetch('/pets')
+    //     .then((resp) => resp.json())
+    //     .then ((petsArray) => setPets(petsArray))
     
         
-    },[]) 
-
+    // },[]) 
+console.log(pets)
 
 
     const speciesSearch = pets.filter(pet => {

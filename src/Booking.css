@@ -1,6 +1,50 @@
 .calender-contain{
    
 }
+
+.pet-headcontainer{
+    /* display: flex; */
+    justify-content: center;  
+}
+.pet-dateheader{
+    justify-content: center; 
+    padding-top: 40px;
+    padding-left: 25%;
+    font-weight: 300;
+}
+
+
+
+/* .info-sections{
+    justify-content: center; 
+    padding-left: 80px;
+    padding-top: 10px;
+justify-content: space-evenly;
+     /* display: flex; */
+  
+
+.pickup-header{
+    padding-bottom: 10px;
+}
+
+
+.divider {
+    display: inline-block;
+    width: 2px;
+    background-color:  pink;
+    margin: 0 10px;
+    height: 10em;
+
+  }
+
+  .dropoff-header{
+    padding-bottom: 10px;
+  }
+
+  .date-detailhead{
+    padding-top: 20px;
+  }
+
 .bookingpage{
     display: flex;
     justify-content: center;

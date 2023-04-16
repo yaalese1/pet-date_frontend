@@ -54,7 +54,7 @@ const reviewId = pet.pet_reviews.find((pet_review)=>{
   
 //  })
 
-
+console.log(pet)
 
 function handleDeleteReview(deletedReviewId){
   fetch(`/pet_reviews/${deletedReviewId}`,{method:"DELETE",}).then((r)=>{
