@@ -54,6 +54,11 @@
     border-radius: 10px;
     height: 55vw;
 }
+.signup-Form{
+    overflow: scroll;
+}
+
+
    /* padding-left: 5vw; */
    /* padding: 2vw; */
  /* align-items: center;

@@ -8,7 +8,7 @@ import '../Booking.css';
 
 
 
-function BookingPage(){
+function BookingPage({pets}){
 
     const {user, setUser} = useContext(UserContext)
 
@@ -49,7 +49,8 @@ const displayMyDatesWithOtherPetsBooking = petBookings?.filter((booking)=> {
             <BookingCard
             key={booking.id}
             userBooking={booking}
-            id= {booking.id}
+            bookingId= {booking.id}
+            pets={pets}
          />
         )
    

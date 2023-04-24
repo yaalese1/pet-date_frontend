@@ -180,7 +180,7 @@ function handleEndDatePicked(endCalendarDate){
   setFormData({...formData, end_date: endDateDisplay})
   
  }
-
+console.log(userBooking.avatar_for_borrower)
 
  return(
   <div className="bookingcards">         
@@ -245,6 +245,7 @@ function handleEndDatePicked(endCalendarDate){
         </p>
         <Card.Text>Borrowers name: {userBooking.borrower.first_name}</Card.Text> 
         <Card.Text>Pronouns: {userBooking.borrower.pronouns}</Card.Text> 
+        <Card.Img variant="top" src={userBooking.avatar_for_borrower}/>
         </ListGroup>
      
         </Card.Body> 

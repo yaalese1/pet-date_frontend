@@ -58,11 +58,11 @@ function handleSubmit(e){
    
         setIsLoading(false)
         if (r.ok) {
-          r.json().then((newdata) => console.log(newdata));
+          r.json().then((newdata) => setUser(newdata));
    
           navigate("/Welcome")
         } else {
-           r.json().then((err) => (setErrors(err.errors)))
+          r.json().then(newdata=>setErrors(Object.entries(newdata.errors).map(errorArr =>`${errorArr[0]} ${errorArr[1 ]}`)))
         }
         })
 
@@ -84,7 +84,7 @@ function handleSubmit(e){
 
 
    <div className='back-sign'>
-    <Form onSubmit={(e) => handleSubmit(e)}> 
+    <Form className= "signup-Form"onSubmit={(e) => handleSubmit(e)}> 
        <div className='sign_up_errors'>
               {errors ? errors.map((e) =>
                   <Alert severity="error" >{e}</Alert>) : null}

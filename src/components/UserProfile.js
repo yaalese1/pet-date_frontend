@@ -45,6 +45,8 @@ function UserProfile(){
 const navigate = useNavigate() 
 const [editAvatar, setEditAvatar] = useState(user?.avatar_url)
 const [editAboutMe, setEditAboutMe] = useState(user?.about_me)
+const [password, setPassword] = useState(user?.password);
+const [passwordConfirmation, setPasswordConfirmation] = useState(user?.password_confirmation);
 const [isLoading, setIsLoading] = useState(false);
 const [pets, setPets] = useState([])
   
@@ -54,6 +56,8 @@ useEffect(() => {
 setEditAvatar(user?.avatar_url)
 setEditAboutMe(user?.about_me)
 setPets(user?.pets)
+setPassword(user?.password)
+setPasswordConfirmation(user?.password_confirmation)
 },[user])
 
 
@@ -71,9 +75,11 @@ function handleEditPhotoSubmit(e){
   e.preventDefault()
 
   const photo = new FormData();
-  photo.append("user[avatar]", editAvatar)
+  photo.append("user[avatar]",editAvatar);
+  photo.append("user[password]",password);
+  photo.append("user[password_confirmation]",passwordConfirmation);
 
-  fetch(`/users/+${user.id}`, {
+  fetch(`/user/+${user.id}`, {
       method: "PATCH",
       body:photo,
     }).then((r) => {
@@ -92,7 +98,7 @@ function handleEditPhotoSubmit(e){
 
             navigate("/UserProfile")
           } else {
-             r.json().then((err) => (setErrors(err.errors)))
+            //  r.json().then((err) => (setErrors(err.errors)))
           }
           })
 
@@ -134,6 +140,8 @@ function handleAboutSubmit(e){
   e.preventDefault()
   const aboutMeData = new FormData();
   aboutMeData.append("user[about_me]", editAboutMe);
+  aboutMeData.append("user[password]",password);
+  aboutMeData.append("user[passwordConfirmation]",passwordConfirmation)
   fetch(`/users/+${user.id}`, {
     method: "PATCH",
     // headers: {

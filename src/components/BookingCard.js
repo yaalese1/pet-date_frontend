@@ -20,7 +20,7 @@ import Modal from 'react-bootstrap/Modal'
 import { ListItem } from "@mui/material";
 
 
-function BookingCard ({  userBooking, setBookings}){
+function BookingCard ({  userBooking, pets}){
   const [showEditMessage, setShowEditMessage] = useState(false)
   const [showCancelMessage, setShowCancelMessage] = useState(false)
   const {user, setUser} = useContext(UserContext)
@@ -36,6 +36,9 @@ function BookingCard ({  userBooking, setBookings}){
   const userEndView = JSON.stringify(endDate)
   const userEndViewFormat = userEndView.slice(1,11)
   const[petBookings , setPetBookings] = useState()
+  const [booking, setBooking] = useState({})
+
+
 
   useEffect(() =>{
     fetch('/bookings/').then((resp)=>{
@@ -45,6 +48,11 @@ function BookingCard ({  userBooking, setBookings}){
 
     });
 },[])
+
+
+console.log(userBooking.avatar_for_lender)
+
+
 
 
  function handleEditButton (){
@@ -82,18 +90,6 @@ function handleCloseModal(){
 }
 
 
-const [pets, setPets] = useState([])
-
-useEffect (()=>{
-  fetch('/pets')
-  .then((resp) => resp.json())
-  .then ((petsArray) => setPets(petsArray))
-
-  
-},[]) 
-
-
-
 
 function handleDeletBookingClick(){
 
@@ -102,92 +98,93 @@ function handleDeletBookingClick(){
       const cancelBooking = petBookings.filter((petBooking)=> petBooking.id !== userBooking.id)
 
       console.log(cancelBooking)
-      const updatedUser ={...petBookings, bookings: cancelBooking}
+      const updatedUser ={...petBookings,bookings: cancelBooking}
      
    console.log(updatedUser) 
 
- const updateAllPetBookings =petBookings.map((petBooking)=>petBooking.id === updatedUser.id ? updatedUser : petBooking)
+ const updateAllPetBookings = user?.pet_bookings.map((petBooking)=>petBooking.id === updatedUser.id ? updatedUser : petBooking)
       
-    console.log(updateAllPetBookings)
+   
 
 
 setUser(updateAllPetBookings)
 
       }
        alert("Your date has been Canceled ")
-
+       navigate("/Dates")
     })
   
 }
 
 
-// const [formData, setFormData] = useState({
-//   start_data: userBooking.start_date,
-//   end_date: userBooking.end_date,
-//   start_time: userBooking.start_time,
-//   end_time: userBooking.end_time,
-//   pickup_location: userBooking.pickup_location,
-//   dropoff_location: userBooking.dropoff_location,
-//   pet_only: userBooking.pet_only,
+const [formData, setFormData] = useState({
+  start_data: userBooking.start_date,
+  end_date: userBooking.end_date,
+  start_time: userBooking.start_time,
+  end_time: userBooking.end_time,
+  pickup_location: userBooking.pickup_location,
+  dropoff_location: userBooking.dropoff_location,
+  pet_only: userBooking.pet_only,
 
-// })
-// /bookings/${userBooking.id}
-// function handleSubmit(e){
-//   e.preventDefault();
-//   setErrors([])
-//   fetch(`/owner_booking/${user.id}/${userBooking.id}`,{
-//     method: "PATCH",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(formData),
-//   }). then((r)=>{
-//     if (r.ok){
-//       r.json().then((updatedBooking)=>{
-//         const updatedBookingInfo = user.my_bookings?.map((my_booking)=> 
-//         my_booking.id === updatedBooking.id ? updatedBooking: my_booking)
+})
+
+function handleSubmit(e){
+  e.preventDefault();
+  setErrors([])
+  fetch(`/bookings/${userBooking.id}`,{
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  }). then((r)=>{
+    if (r.ok){
+      r.json().then((updatedBooking)=>{
+        const updatedPetBookingInfo = user.pet_bookings?.map((pet_booking)=> 
+        pet_booking.id === updatedBooking.id ? updatedBooking: pet_booking)
        
       
    
         
-//         const updateBookingForUser= {...user,...updatedBooking}
-//         console.log(updateBookingForUser)
-//         setUser( updateBookingForUser)
+        const updateBookingForUser= {...user,pet_bookings:updatedPetBookingInfo }
+        console.log(updateBookingForUser)
+        setUser( updateBookingForUser)
    
         
-//         alert("Your Booking has been updated")
-//         navigate("/Dates")
+        alert("Your Booking has been updated")
+        navigate("/Dates")
         
        
-//       })
-//     }
-//   })
+      })
+    }
+  })
   
-// }
+}
+// useEffect
 
 
 
+function handleEditChange(e){
+  const{name,value,type,checked} = e.target
+  setFormData({...formData, [name]: type === "checkbox" ? checked : value})
+}
+function handleStartDatePicked(startCalendarDate){
+  setStartDate(startCalendarDate)
+  const startDatePickedToString =JSON.stringify(startCalendarDate);
+  const startDateDisplay =  startDatePickedToString.slice(1,11) 
+  setFormData({...formData, start_date: startDateDisplay})
+}
 
-// function handleEditChange(e){
-//   const{name,value,type,checked} = e.target
-//   setFormData({...formData, [name]: type === "checkbox" ? checked : value})
-// }
-// function handleStartDatePicked(startCalendarDate){
-//   setStartDate(startCalendarDate)
-//   const startDatePickedToString =JSON.stringify(startCalendarDate);
-//   const startDateDisplay =  startDatePickedToString.slice(1,11) 
-//   setFormData({...formData, start_date: startDateDisplay})
-// }
-
-// function handleEndDatePicked(endCalendarDate){
-//   setEndDate(endCalendarDate)
-//   const endDatePickedToString =JSON.stringify(endCalendarDate);
-//   const endDateDisplay =  endDatePickedToString.slice(1,11) 
-//   setFormData({...formData, end_date: endDateDisplay})
+function handleEndDatePicked(endCalendarDate){
+  setEndDate(endCalendarDate)
+  const endDatePickedToString =JSON.stringify(endCalendarDate);
+  const endDateDisplay =  endDatePickedToString.slice(1,11) 
+  setFormData({...formData, end_date: endDateDisplay})
   
-//  }
-// MAKE A FORM TO EDIT AND IMPORT THE CALENDER 
-// console.log(userBooking.pet.id == pets.id)
+ }
+
+
+
 const infoForEachPet = pets.filter((pet)=>{
   if (pet.id == userBooking.pet.id )
 
@@ -198,17 +195,60 @@ const infoForEachPet = pets.filter((pet)=>{
 })
 const petImage = infoForEachPet.map((petInfo)=>{
 return petInfo.image_url
+ 
+    
+  
 })
-console.log(petImage)
+
+
+// const ownerImg = infoForEachPet.map((ownerInfo)=>{
+//   return ownerInfo.owner.avatar_url
+// })
+
+
+// useEffect(() =>{
+//   fetch('/users').then((resp)=>{
+//       if(resp.ok){
+//           resp.json().then((userArray)=>{setAllUsers(userArray)})
+//       }
+
+//   });
+// },[])
+// console.log(allUsers)
+
+
+
+// const infoForEachOwner = allUsers.filter((users)=>{
+//   if (users.id == userBooking.borrower_id)
+//   return users
+// })
+
+// const userImg = infoForEachOwner.map((userInfo)=>{
+//   return userInfo.avatar_url
+// })
+
+
+
+// const infoForEachOwner = user?.filter((eachUser)=>{
+//   if (eachUser.id == userBooking.owner_id)
+//   return eachUser
+// })
+console.log(userBooking)
+
  
     return(
-<div className="bookingcards">         
+<div className="bookingcards">   
+<Row> 
+<Col xs>
+{/* <Row xxl={2} md={1} className="g-4">
+       {Array.from({ length: 1}).map((_, idx) => ( 
+       <Row key={idx}>   */}   
   <Table>
       <Card>
         <Card.Body>
         <ListGroup className="list-group-flush">
           <div className="edit-del">
-            {/* <div>
+             <div>
               <button className="tool-button" 
               onMouseEnter ={handleEditButton} 
               onMouseLeave={handleEditButtionExit } 
@@ -220,8 +260,9 @@ console.log(petImage)
                 Click to edit your booking
               </div>
                 )}
-              </div> */}
-                       {/* onMouseEnter={handleCancelButton} onMouseLeave={handleCancelButtonExit}  */}
+              </div> 
+                       {handleCancelButton} 
+                       {handleCancelButtonExit}  
               <button className= 'cancel-button'
                 onMouseOver={changeBackground} 
                 onClick={ handleDeletBookingClick}> 
@@ -233,7 +274,7 @@ console.log(petImage)
               </div>
                   )}
           </div>
-          <Card.Img variant="top" src={petImage} />
+        
           <th className="info-sections">
                 {/* <ListGroup.Item> */}
             <thead>
@@ -254,6 +295,7 @@ console.log(petImage)
           </th>
         <ListGroup.Item>  </ListGroup.Item>
         <h5 className="date-detailhead"> Pet Details</h5>
+        <Card.Img variant="top" src={petImage} />
         <Card.Text>Pet Name: {userBooking.pet.name}</Card.Text> 
         <Card.Text>Species: {userBooking.pet.species}</Card.Text>
         <Card.Text>Size: {userBooking.pet.size}</Card.Text>
@@ -263,20 +305,25 @@ console.log(petImage)
         <Card.Text>Active: {userBooking.pet.active ? <>Yes</> : <>No</>}</Card.Text>
         <Card.Text>Mental Disorders: {userBooking.pet.mental_disorder ? <>{userBooking.pet.mental_disorder}</> : <>No</>}</Card.Text>
            <ListGroup.Item>  </ListGroup.Item>
-           <h5>Date Details</h5>
+           <h5 className="date-detailhead">Date Details</h5>
           <Card.Text>Will the owner be joining you for a date? </Card.Text>     
         <p> 
           {userBooking.pet_only ? <>  Yes </> : <> No this will be a pet only date</>}   
         </p>
            <Card.Text> Pet owners name : {userBooking.lender.first_name}</Card.Text>
            <Card.Text>  Owners pronouns : {userBooking.lender.pronouns}</Card.Text>
+           <Card.Img variant="top" src={userBooking.avatar_for_lender} />
         </ListGroup>
      
         </Card.Body> 
         </Card>
-  </Table>  
+  </Table> 
+  </Col>
+  </Row>
+      {/* ))}
+    </Row>  */}
 
-      {/* <Modal
+      <Modal
       size="lg"
       show={bookingMod}
       onHide={() => setBookingMod(false)}
@@ -405,12 +452,12 @@ console.log(petImage)
       onHide={() => setSmShow(false)}
       aria-labelledby="example-modal-sizes-title-md">  
       <Calendar onChange={handleEndDatePicked} value={endDate}/>
-    </Modal> */}
+    </Modal> 
    
      
    
 
-{/* <Row>
+ <Row>
  
  <Form.Group as={Col} className= "pick-location" >
  <Form.Label>Pickup Location</Form.Label>
@@ -448,14 +495,14 @@ console.log(petImage)
  <Button variant="dark" type="submit">
  Submit
  </Button>
-</Form> */}
+</Form> 
    
-        {/* </div>
+        </div>
         
         </div>
         
         
-      </Modal> */}
+      </Modal> 
 
 
  </div>
@@ -464,5 +511,6 @@ console.log(petImage)
 
 
 export default BookingCard;
+
 
 
