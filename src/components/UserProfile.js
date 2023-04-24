@@ -34,7 +34,7 @@ function UserProfile(){
 
 
  
- const {user, setUser} = useContext(UserContext)
+ const {setUser, user} = useContext(UserContext)
 
 
  const  [smShow, setSmShow] = useState(false)
@@ -71,38 +71,7 @@ function  handleEditAvatarFormClosing(){
 
 
 
-function handleEditPhotoSubmit(e){
-  e.preventDefault()
 
-  const photo = new FormData();
-  photo.append("user[avatar]",editAvatar);
-  photo.append("user[password]",password);
-  photo.append("user[password_confirmation]",passwordConfirmation);
-
-  fetch(`/user/+${user.id}`, {
-      method: "PATCH",
-      body:photo,
-    }).then((r) => {
-          setIsLoading(false)
-          if (r.ok) {
-            r.json().then((newPhotoData) => {
-
-
-
-                const addingNewPhotoinfo = {...user,avatar_url: newPhotoData.avatar_url}
-               
-            setUser(addingNewPhotoinfo)
-        
-        });
-
-
-            navigate("/UserProfile")
-          } else {
-            //  r.json().then((err) => (setErrors(err.errors)))
-          }
-          })
-
-}
 
 
 
@@ -128,10 +97,6 @@ function handleAboutMeDisplayClosed(){
 }
 
 
-
-// const [formData, setFormData] = useState({
-//   about_me: ""
-// })
 
 
 
@@ -173,7 +138,7 @@ function handleAboutSubmit(e){
 
 
 
-console.log(pets)
+
 
 return  (
 
@@ -229,7 +194,9 @@ return  (
             </button>
                 <div className='imageModal'>
                   <Form
-                      onSubmit={handleEditPhotoSubmit}>
+                      // onSubmit
+                      // ={handleEditPhotoSubmit}
+                      >
                     <Form.Group>
                       <Form.Label 
                           className='upload-header'>

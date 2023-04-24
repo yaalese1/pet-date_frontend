@@ -47,7 +47,7 @@ function OwnersPetsBookings(){
     })
     return(
         <div>
-        <h2 className='pet-dateheader'>Click a day to see info on your dates with borrowers  </h2>
+        <h2 className='dateheader'>Click a day to see info on your dates with borrowers  </h2>
         <div className='bookingpage'>
            
             { eachMyPetBooking }

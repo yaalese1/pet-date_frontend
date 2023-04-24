@@ -108,7 +108,7 @@ setUser(otherUserUpdate)
        alert("Your date has been Canceled ")
 
     })
-    navigate("/Calendar")
+    navigate("/PetCalendar")
 }
 
 

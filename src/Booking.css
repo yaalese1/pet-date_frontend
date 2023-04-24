@@ -13,7 +13,12 @@
     font-weight: 300;
 }
 
-
+.dateheader{
+    justify-content: center; 
+    padding-top: 40px;
+    padding-left: 30%;
+    font-weight: 300;
+}
 
 /* .info-sections{
     justify-content: center; 
