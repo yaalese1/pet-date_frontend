@@ -5,15 +5,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
+### `npm install'
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+In your browser bar 
+Open  http://localhost:3000/Pet&Date to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
+For backend capabilites head to [pet & date backend repository](https://github.com/yaalese1/Pet-date_backend)
+To begin - clone down this repo and in the main directory run `bundle install` to get the back end dependencies set up. once that is done.
+once the installs are completed you can start up your servers both with `rails s` frontend server and back end server must be running at the same time for full capability 
+<!--
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
