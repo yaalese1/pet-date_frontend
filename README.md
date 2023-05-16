@@ -21,8 +21,8 @@ To begin - clone down this repo and in the main directory run `bundle install` t
 once the installs are completed you can start up your servers both with `rails s` frontend server and back end server must be running at the same time for full capability 
 #HOW TO USE:
 
-A user will need to ### `signup` with  <li/> vaild email  <li/> full name <li/>age (18+)  <li/> city  <li/> state <li/> zipcode <li/> avatar <li/>
-You can view your ### `user profile` where a user can update their about me avatar
+A user will need to `signup` with  <li/> vaild email  <li/> full name <li/>age (18+)  <li/> city  <li/> state <li/> zipcode <li/> avatar 
+You can view your `user profile` where a user can update their about me avatar
 <!--
 ### `npm test`
 
