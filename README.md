@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# PROJECT TITLE : Pet & Date
+
+#PROJECT DESCRIPTION :
+This application is pet lending and borrowring dating app. 
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -15,6 +19,10 @@ Open  http://localhost:3000/Pet&Date to view it in your browser.
 For backend capabilites head to [pet & date backend repository](https://github.com/yaalese1/Pet-date_backend)
 To begin - clone down this repo and in the main directory run `bundle install` to get the back end dependencies set up. once that is done.
 once the installs are completed you can start up your servers both with `rails s` frontend server and back end server must be running at the same time for full capability 
+#HOW TO USE:
+
+A user will need to ### `signup` with  <li/> vaild email  <li/> full name <li/>age (18+)  <li/> city  <li/> state <li/> zipcode <li/> avatar <li/>
+You can view your ### `user profile` where a user can update their about me avatar
 <!--
 ### `npm test`
 
