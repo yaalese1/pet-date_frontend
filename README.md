@@ -22,7 +22,10 @@ once the installs are completed you can start up your servers both with `rails s
 #HOW TO USE:
 
 A user will need to `signup` with  <li/> vaild email  <li/> full name <li/>age (18+)  <li/> city  <li/> state <li/> zipcode <li/> avatar 
-You can view your `user profile` where a user can update their about me avatar
+
+**You can view your `user profile` where a user can update their <li/> about me <li/> avatar <li/> pets you would like to display for lending
+
+
 <!--
 ### `npm test`
 
