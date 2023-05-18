@@ -51,7 +51,7 @@ You can view your `user profile` where a user can update their <li/> about me <l
 <li/> suggest features to be added
 
 
-# Development 
+# DEVELOPMENT 
 <li/> Project pitch (https://docs.google.com/document/d/1_og1IHSi9YZ21oHjQMLoS8LrRBUyFmStRqCQlGrsxjo/edit)
 <li/> Lenders and borrowers are now able to view each other's profiles, reviews, and photo albums to help establish a sense of trust and transparency.
 <!--
