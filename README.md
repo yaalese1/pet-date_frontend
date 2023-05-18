@@ -23,7 +23,9 @@ once the installs are completed you can start up your servers both with `rails s
 
 A user will need to `signup` with  <li/> vaild email  <li/> full name <li/>age (18+)  <li/> city  <li/> state <li/> zipcode <li/> avatar 
 
-**You can view your `user profile` where a user can update their <li/> about me <li/> avatar <li/> pets you would like to display for lending
+You can view your `user profile` where a user can update their <li/> about me <li/> avatar <li/> pets you would like to display for lending
+
+using the nav bar can be used to navigate to <li/> `Pets page` (where you can view all pets in the pet & date datebase and view Reviews, comments, ratings,pet info, and det up a session for you and a pet or both pet and owner) <li/> `user profile` <li/> `Pets Calendar` (displays the pets you own , upcoming sessions and its info) <li/> `Date Calendar` (displays your dates with other pets or both pet and owner) <li/> `Logout button`
 
 
 <!--
